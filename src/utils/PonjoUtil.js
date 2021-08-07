@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import config from "../resources/config.json";
 
 export default class PonjoUtil {
 
@@ -12,6 +13,14 @@ export default class PonjoUtil {
             .setTimestamp()
 
         return channel.send({embeds: [embed]});
+
+    }
+
+    static sendServerWelcomeMessage(member) {
+
+        const welcomeChannel = member.guild.channels.cache.get(config.ponjo_development["welcome-channel"]);
+        const output = `Welcome to the Ponjo Development Support server, <@${member.id}>!`;
+        return welcomeChannel.send(output);
 
     }
 }
