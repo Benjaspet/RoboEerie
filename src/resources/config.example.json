@@ -1,0 +1,8 @@
+{
+  "token": "",
+  "developer": {
+    "options": {
+      "deploy-guild-slash-commands": true
+    }
+  }
+}
