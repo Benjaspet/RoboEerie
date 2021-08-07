@@ -1,4 +1,3 @@
-import {emojis} from "../resources/config.json";
 import Discord from "discord.js";
 
 module.exports = {
@@ -8,7 +7,7 @@ module.exports = {
 
         if (!interaction.isCommand()) return;
 
-        if (interaction.commandName === "poll") {
+        if (interaction.commandName === "github") {
 
             const content = interaction.options.getString("description");
             const channel = interaction.options.getChannel("channel");

@@ -26,6 +26,18 @@ export default class SlashDataUtil {
                         required: true
                     }
                 ]
+            },
+            {
+                name: "github",
+                description: "View information on a user's GitHub account.",
+                options: [
+                    {
+                        name: "user",
+                        description: "The GitHub username to search for.",
+                        type: "STRING",
+                        required: true
+                    }
+                ]
             }];
     }
 }
