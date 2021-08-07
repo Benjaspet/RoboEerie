@@ -6,7 +6,7 @@ export default class SlashDataUtil {
 
             {
                 name: "deploy",
-                description: "Deploy all slash commands to this guild.",
+                description: "Set all slash commands to the Ponjo Development guild.",
 
             }];
     }

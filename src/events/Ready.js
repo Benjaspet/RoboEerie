@@ -1,5 +1,5 @@
 import {developer} from "../resources/config.json";
-import SlashDataUtil from "../utils/SlashDataUtil";
+import SlashDataUtil from "../utils/slash/SlashDataUtil";
 
 module.exports = {
     name: "ready",
