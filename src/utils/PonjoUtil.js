@@ -23,4 +23,10 @@ export default class PonjoUtil {
         return welcomeChannel.send(output);
 
     }
+
+    static getPonjoSnipeCollector() {
+
+        return new Discord.Collection();
+
+    }
 }
