@@ -1,5 +1,5 @@
 import Discord from "discord.js";
-import {initAllEvents} from "./PonjoHandler";
+import PonjoHandler from "./PonjoHandler";
 
 const client = new Discord.Client({
     allowedMentions: {
@@ -28,7 +28,7 @@ const client = new Discord.Client({
 client.utils = require("./utils/PonjoUtil");
 client.config = require("./resources/config.json");
 
-initAllEvents(client);
+PonjoHandler.initAllEvents(client);
 
 module.exports = client;
 
