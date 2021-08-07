@@ -14,6 +14,19 @@ export default class PonjoHandler {
                 client.on(event.name, (...args) => event.execute(...args, client));
             }
         }
+    }
 
+    static initAllInteractions(client) {
+
+        const interactions = fs.readdirSync(__dirname + "/interactions").filter(file => file.endsWith('.js'));
+
+        for (const file of interactions) {
+            const interaction = require(__dirname + `/interactions/${file}`);
+            if (interaction.once) {
+                client.once(interaction.name, (...args) => interaction.execute(...args, client));
+            } else {
+                client.on(interaction.name, (...args) => interaction.execute(...args, client));
+            }
+        }
     }
 }

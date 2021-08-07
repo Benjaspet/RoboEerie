@@ -29,6 +29,7 @@ client.utils = require("./utils/PonjoUtil");
 client.config = require("./resources/config.json");
 
 PonjoHandler.initAllEvents(client);
+PonjoHandler.initAllInteractions(client);
 
 module.exports = client;
 

@@ -1,8 +1,24 @@
 {
   "token": "",
+
   "developer": {
-    "options": {
-      "deploy-guild-slash-commands": true
-    }
+    "owner": "460177285954142208",
+    "ponjo-test-guild": "828296827882831913",
+    "deploy-guild-slash-commands": false,
+    "register-deploy-command": true
+  },
+
+  "ponjo_development": {
+    "id": "828296827882831913",
+    "verification-role": "828297286873645077",
+    "verification-channel": "828655636157956097",
+    "welcome-channel": "828314532938121297"
+  },
+
+  "emojis": {
+    "success": "<a:acceptedponjo:846192530584240198>",
+    "error": "<a:deniedponjo:846192550091685909>",
+    "loading": "<a:loadingponjo:872654578624135168>"
+
   }
 }
