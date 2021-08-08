@@ -78,6 +78,40 @@ export default class SlashDataUtil {
                         required: true
                     }
                 ]
+            },
+            {
+                name: "query",
+                description: "Query a game server of your choice.",
+                options: [
+                    {
+                        name: "game",
+                        description: "The type of game server you'd like to query.",
+                        type: "STRING",
+                        required: true,
+                        choices: [
+                            {
+                                name: "Minecraft: Bedrock",
+                                value: "query-bedrock"
+                            },
+                            {
+                                name: "Minecraft: Java",
+                                value: "query-java"
+                            }
+                        ]
+                    },
+                    {
+                        name: "host",
+                        description: "The IP address of the host to query.",
+                        type: "STRING",
+                        required: true
+                    },
+                    {
+                        name: "port",
+                        description: "The port of the host to query.",
+                        type: "STRING",
+                        required: false
+                    }
+                ]
             }];
     }
 }

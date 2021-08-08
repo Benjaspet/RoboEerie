@@ -4,7 +4,7 @@ import {log} from "nodemon/lib/utils";
 
 module.exports = {
     name: "interactionCreate",
-    once: true,
+    once: false,
     async execute(interaction, client) {
 
         if (!interaction.isCommand()) return;

@@ -1,11 +1,10 @@
-import {emojis} from "../resources/config.json";
 import Discord from "discord.js";
-import axios from "axios";
 import fetch from "node-fetch";
+import {MemeSnippet} from "../docs/ponjoapi/MemeSnippet";
 
 module.exports = {
     name: "interactionCreate",
-    once: true,
+    once: false,
     async execute(interaction, client) {
 
         if (!interaction.isCommand()) return;
@@ -33,7 +32,22 @@ module.exports = {
                         .setFooter("Discord.js v13 Documentation", client.user.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
 
-                    await interaction.reply({embeds: [embed]})
+                    await interaction.reply({embeds: [embed]});
+
+                    break;
+
+                case "ponjo-api":
+
+                    const embed2 = new Discord.MessageEmbed()
+                        .setTitle("Meme Endpoint")
+                        .setColor("#00e1ff")
+                        .setDescription(MemeSnippet.getEndpointResponseSnippet())
+                        .addField("Example Output", "```js\n" + `This is a string.` + "\n```")
+
+                    await interaction.reply({embeds: [embed2]});
+
+                    break;
+
             }
         }
     }

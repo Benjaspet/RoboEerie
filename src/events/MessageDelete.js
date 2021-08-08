@@ -3,7 +3,7 @@ import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
     name: "messageDelete",
-    once: true,
+    once: false,
     execute(message, client) {
 
         if (message.author.bot || message.embeds[0]) return;

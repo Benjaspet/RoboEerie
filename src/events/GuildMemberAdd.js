@@ -3,7 +3,7 @@ import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
     name: "guildMemberAdd",
-    once: true,
+    once: false,
     execute(member, client) {
 
         if (member.guild.id === config.developer["ponjo-test-guild"]) {

@@ -3,7 +3,7 @@ import Discord from "discord.js";
 
 module.exports = {
     name: "interactionCreate",
-    once: true,
+    once: false,
     async execute(interaction, client) {
 
         if (!interaction.isCommand()) return;

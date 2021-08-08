@@ -19,9 +19,9 @@ export class MemeSnippet {
             }
         }
 
-        const string = JSON.stringify(object);
+        const string = JSON.stringify(object, null, 4);
 
-        return "```js" + `${string}` + "```";
+        return "```js\n" + `${string}` + "\n```";
 
     }
 }
