@@ -112,6 +112,18 @@ export default class SlashDataUtil {
                         required: true
                     }
                 ]
+            },
+            {
+                name: "npm",
+                description: "Look up an NPM package.",
+                options: [
+                    {
+                        name: "package",
+                        description: "The NPM package to search for.",
+                        type: "STRING",
+                        required: true
+                    }
+                ]
             }];
     }
 }

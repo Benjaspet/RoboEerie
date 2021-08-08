@@ -33,4 +33,12 @@ export default class PonjoUtil {
     static trimString(input) {
         return input.length > 1024 ? `${input.slice(0, 1020)} ... ` : input;
     }
+
+    static getErrorMessageEmbed(client, content) {
+
+        return new Discord.MessageEmbed()
+            .setColor("RED")
+            .setDescription(`${config.emojis.error} ${content}`)
+
+    }
 }
