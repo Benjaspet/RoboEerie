@@ -38,6 +38,46 @@ export default class SlashDataUtil {
                         required: true
                     }
                 ]
+            },
+            {
+                name: "docs",
+                description: "View documentation for the specified app or library.",
+                options: [
+                    {
+                        name: "library",
+                        description: "The library you'd like to view the documentation of.",
+                        type: "STRING",
+                        required: true,
+                        choices: [
+                            {
+                                name: "Discord.js v13",
+                                value: "djs-v13"
+                            },
+                            {
+                                name: "Ponjo API",
+                                value: "ponjo-api"
+                            }
+                        ]
+                    },
+                    {
+                        name: "query",
+                        description: "The query to search the documentation for.",
+                        type: "STRING",
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: "avatar",
+                description: "Display the avatar of the specified user.",
+                options: [
+                    {
+                        name: "user",
+                        description: "The user whose avatar you'd like to view.",
+                        type: "USER",
+                        required: true
+                    }
+                ]
             }];
     }
 }

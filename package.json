@@ -1,19 +1,21 @@
 {
   "name": "ponjo-bot",
   "version": "0.1.0",
-  "main": "Main.js",
+  "main": "src/Ponjo.js",
   "description": "The official bot for the Ponjo Development Discord server.",
   "scripts": {
     "start": "nodemon --exec babel-node src/Ponjo.js"
   },
   "dependencies": {
     "discord.js": "^13.0.1",
+    "node": "^16.6.1",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/node": "^7.14.9",
     "@babel/preset-env": "^7.15.0",
+    "axios": "^0.21.1",
     "nodemon": "^2.0.12"
   }
 }

@@ -29,4 +29,8 @@ export default class PonjoUtil {
         return new Discord.Collection();
 
     }
+
+    static trimString(input) {
+        return input.length > 1024 ? `${input.slice(0, 1020)} ... ` : input;
+    }
 }
