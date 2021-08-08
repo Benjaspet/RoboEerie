@@ -16,6 +16,7 @@
     "@babel/node": "^7.14.9",
     "@babel/preset-env": "^7.15.0",
     "axios": "^0.21.1",
+    "minecraft-server-util": "^3.5.2",
     "nodemon": "^2.0.12"
   }
 }
