@@ -1,6 +1,6 @@
 import {emojis} from "../resources/config.json";
 import Discord from "discord.js";
-import fetch from "node-fetch";
+import Gamedig from "gamedig";
 
 module.exports = {
     name: "interactionCreate",
@@ -12,36 +12,81 @@ module.exports = {
         if (interaction.commandName === "query") {
 
             const game = interaction.options.getString("game");
+            const host = interaction.options.getString("host");
 
             switch (game) {
 
-                case "mc-bedrock":
+                case "minecraftbe":
 
-                    const host = interaction.options.getString("host");
-                    const port = interaction.options.getString("port");
+                    await Gamedig.query({
+                        type: "minecraftbe",
+                        host: host
+                    }).then(async (state) => {
 
-                    await fetch(`https://api.mcsrvstat.us/bedrock/2/${host}`)
-                        .then(response => response.json())
-                        .then(async data => {
+                        const connect = state.raw.gamespy.connect;
+                        const motd = state.raw.gamespy.name;
+                        const latency = state.raw.gamespy.ping;
+                        const online = state.raw.bedrock.players;
+                        const maxOnline = state.maxplayers;
+                        const playerList = state.players
+                            .map(e => e.name).join(", ");
 
-                            const onlinePlayers = data.players.online || null;
-                            const maxPlayers = data.players.max || null;
-                            const host = data.hostname || null;
-                            const port = data.port || null;
+                        const embed1 = new Discord.MessageEmbed()
+                            .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
+                            .setColor("#00e1ff")
+                            .setDescription(`MOTD: **${motd}**` + `\n` + `Connection latency: **${latency}ms**`)
+                            .addField(`Online Player Count`, `**${online}**/**${maxOnline}**`)
+                            .addField(`Online Player List`, playerList)
+                            .setFooter(`Connect: ${connect}`, client.user.displayAvatarURL({dynamic: true}))
+                            .setTimestamp()
 
-                            const embed = new Discord.MessageEmbed()
-                                .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
-                                .setColor("#00e1ff")
-                                .addField(`Online Player Count`, `**${onlinePlayers}**/**${maxPlayers}**`)
-                                .addField(`Connect`, `Host: ${host}\nPort: ${port}`)
-                                .setFooter(`Ponjo`, client.user.displayAvatarURL({dynamic: true}))
-                                .setTimestamp()
+                        await interaction.reply({embeds: [embed1]});
 
-                            await interaction.reply({embeds: [embed]});
+                    }).catch(async (error) => {
 
-                        });
+                        const errorEmbed = new Discord.MessageEmbed()
+                            .setColor("RED")
+                            .setDescription(`${emojis.error} Server is offline. Please try again later.`)
+
+                        await interaction.reply({embeds: [errorEmbed]})
+
+                    });
 
                     break;
+
+                case "minecraft":
+
+                    await Gamedig.query({
+                        type: "minecraft",
+                        host: host
+                    }).then(async (state) => {
+
+                        const connect = state.raw.vanilla.connect;
+                        const latency = state.raw.vanilla.ping;
+                        const online = state.players.length;
+                        const maxOnline = state.maxplayers;
+
+                        const embed1 = new Discord.MessageEmbed()
+                            .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
+                            .setColor("#00e1ff")
+                            .setDescription(`Connection latency: **${latency}ms**`)
+                            .addField(`Online Player Count`, `**${online}**/**${maxOnline}**`)
+                            .setFooter(`Connect: ${connect}`, client.user.displayAvatarURL({dynamic: true}))
+                            .setTimestamp()
+
+                        await interaction.reply({embeds: [embed1]});
+
+                    }).catch(async (error) => {
+
+                        console.log(error)
+
+                        const errorEmbed = new Discord.MessageEmbed()
+                            .setColor("RED")
+                            .setDescription(`${emojis.error} Server is offline. Please try again later.`)
+
+                        await interaction.reply({embeds: [errorEmbed]})
+
+                    });
             }
         }
     }

@@ -28,7 +28,7 @@ module.exports = {
                         .setURL(response.author.url)
                         .setColor("#00e1ff")
                         .setDescription(response.description)
-                        .addField("Wanna view source code?", `Simply [click here](${response.author.url}).`)
+                        .addField("Wanna view the source?", `Simply [click here](https://discord.js.org/#/docs/main/stable/general/welcome).`)
                         .setFooter("Discord.js v13 Documentation", client.user.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
 
@@ -38,13 +38,13 @@ module.exports = {
 
                 case "ponjo-api":
 
-                    const embed2 = new Discord.MessageEmbed()
+                    const embed4 = new Discord.MessageEmbed()
                         .setTitle("Meme Endpoint")
                         .setColor("#00e1ff")
                         .setDescription(MemeSnippet.getEndpointResponseSnippet())
                         .addField("Example Output", "```js\n" + `This is a string.` + "\n```")
 
-                    await interaction.reply({embeds: [embed2]});
+                    await interaction.reply({embeds: [embed4]});
 
                     break;
 
