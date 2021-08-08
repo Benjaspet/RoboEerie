@@ -24,7 +24,7 @@ module.exports = {
                     const response = await documentationFetch.json();
 
                     const embed = new Discord.MessageEmbed()
-                        .setAuthor(response.author.name, response.author.icon_url)
+                        .setAuthor(response.author.name, "https://cdn.discordapp.com/emojis/851461487498493952.png?v=1")
                         .setURL(response.author.url)
                         .setColor("#00e1ff")
                         .setDescription(response.description)

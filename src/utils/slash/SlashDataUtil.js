@@ -91,11 +91,11 @@ export default class SlashDataUtil {
                         choices: [
                             {
                                 name: "Minecraft: Bedrock",
-                                value: "query-bedrock"
+                                value: "mc-bedrock"
                             },
                             {
                                 name: "Minecraft: Java",
-                                value: "query-java"
+                                value: "mc-java"
                             }
                         ]
                     },

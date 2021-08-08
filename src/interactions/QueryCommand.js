@@ -15,7 +15,7 @@ module.exports = {
 
             switch (game) {
 
-                case "query-bedrock":
+                case "mc-bedrock":
 
                     const host = interaction.options.getString("host");
                     const port = interaction.options.getString("port");
