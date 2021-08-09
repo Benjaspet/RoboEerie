@@ -19,7 +19,7 @@ module.exports = {
                 .setTitle("Server Poll")
                 .setColor("#00e1ff")
                 .setDescription(content)
-                .setFooter(interaction.user.tag,client.user.displayAvatarURL({dynamic: true}))
+                .setFooter(interaction.user.tag, client.user.displayAvatarURL({dynamic: true}))
                 .setTimestamp()
 
             channel.send({embeds: [embed]})

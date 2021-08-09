@@ -136,6 +136,30 @@ export default class SlashDataUtil {
                         required: true
                     }
                 ]
+            },
+            {
+                name: "send",
+                description: "Send a component to a channel.",
+                options: [
+                    {
+                        name: "component",
+                        description: "The component to send.",
+                        type: "STRING",
+                        required: true,
+                        choices: [
+                            {
+                                name: "Verification Message",
+                                value: "verification-message"
+                            }
+                        ]
+                    },
+                    {
+                        name: "channel",
+                        description: "The channel to send the component to.",
+                        type: "CHANNEL",
+                        required: true
+                    }
+                ]
             }];
     }
 }
