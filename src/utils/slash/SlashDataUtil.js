@@ -124,6 +124,18 @@ export default class SlashDataUtil {
                         required: true
                     }
                 ]
+            },
+            {
+                name: "urban",
+                description: "Search the Urban Dictionary for a word.",
+                options: [
+                    {
+                        name: "query",
+                        description: "The word or phrase to search for.",
+                        type: "STRING",
+                        required: true
+                    }
+                ]
             }];
     }
 }
