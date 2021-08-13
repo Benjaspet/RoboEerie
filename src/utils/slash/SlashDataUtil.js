@@ -160,6 +160,14 @@ export default class SlashDataUtil {
                         required: true
                     }
                 ]
+            },
+            {
+                name: "ping",
+                description: "View the bot's client & websocket latency."
+            },
+            {
+                name: "stats",
+                description: "Display all statistics for the Ponjo bot."
             }];
     }
 }

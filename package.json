@@ -4,9 +4,11 @@
   "main": "src/Ponjo.js",
   "description": "The official bot for the Ponjo Development Discord server.",
   "scripts": {
-    "start": "nodemon --exec babel-node src/Ponjo.js"
+    "start": "nodemon --exec babel-node src/Ponjo.js",
+    "stop": "node src/scripts/StopProcess.js"
   },
   "dependencies": {
+    "cpu-stat": "^2.0.1",
     "discord.js": "^13.0.1",
     "gamedig": "^3.0.7",
     "node": "^16.6.1",
