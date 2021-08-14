@@ -23,7 +23,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setTitle("Ponjo Bot | Statistics")
                     .setColor("#00e1ff")
-                    .setDescription(`Websocket latency: ${client.ws.ping}ms` + `\n` + `Interaction latency: ${interaction.createdTimestamp - Date.now()}ms`)
+                    .setDescription(`Websocket latency: ${client.ws.ping}ms` + `\n` + `Interaction latency: ${Date.now() - interaction.createdTimestamp}ms`)
                     .addField("Host Information", `CPU: ${cpuModel}` + `\n` + `Cores: ${cores}` + `\n` + `CPU Usage: ${cpuUsage}` + `\n` + `Node Version: ${nodeVersion}`)
                     .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
                     .setTimestamp()
