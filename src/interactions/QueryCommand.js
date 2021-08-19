@@ -1,7 +1,6 @@
 import {emojis} from "../resources/config.json";
 import Discord from "discord.js";
 import QueryUtil from "minecraft-server-util";
-import Gamedig from "gamedig";
 
 module.exports = {
     name: "interactionCreate",
@@ -34,7 +33,7 @@ module.exports = {
                             const max = response.maxPlayers;
                             const latency = response.roundTripLatency;
 
-                            const embed1 = new Discord.MessageEmbed()
+                            const embed = new Discord.MessageEmbed()
                                 .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setColor("#00e1ff")
                                 .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Version: **${version}**`)
@@ -44,11 +43,9 @@ module.exports = {
                                 .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
-                            await interaction.reply({embeds: [embed1]});
+                            await interaction.reply({embeds: [embed]});
 
                         }).catch(async(error) => {
-
-                            console.error(error);
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
@@ -60,41 +57,38 @@ module.exports = {
 
                     break;
 
-
-
                 case "minecraft":
 
-                    await Gamedig.query({
-                        type: "minecraft",
-                        host: host
-                    }).then(async (state) => {
+                    await QueryUtil.status(host, {port: parseInt(interaction.options.getInteger("port"))})
 
-                        const connect = state.raw.vanilla.connect;
-                        const latency = state.raw.vanilla.ping;
-                        const online = state.players.length;
-                        const maxOnline = state.maxplayers;
+                        .then(async(response) => {
 
-                        const embed1 = new Discord.MessageEmbed()
-                            .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
-                            .setColor("#00e1ff")
-                            .setDescription(`Connection latency: **${latency}ms**`)
-                            .addField(`Online Player Count`, `**${online}**/**${maxOnline}**`)
-                            .setFooter(`Connect: ${connect}`, client.user.displayAvatarURL({dynamic: true}))
-                            .setTimestamp()
+                            const host = response.host;
+                            const port = response.port;
+                            const protocol = response.protocolVersion;
+                            const online = response.onlinePlayers;
+                            const max = response.maxPlayers;
+                            const latency = response.roundTripLatency;
 
-                        await interaction.reply({embeds: [embed1]});
+                            const embed = new Discord.MessageEmbed()
+                                .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
+                                .setColor("#00e1ff")
+                                .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Protocol: **${protocol}**`)
+                                .addField(`Online Player Count`, `**${online}**/**${max}**`)
+                                .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
+                                .setTimestamp()
 
-                    }).catch(async (error) => {
+                            await interaction.reply({embeds: [embed]});
 
-                        console.log(error)
+                        }).catch(async(error) => {
 
-                        const errorEmbed = new Discord.MessageEmbed()
-                            .setColor("RED")
-                            .setDescription(`${emojis.error} Server is offline. Please try again later.`)
+                            const errorEmbed = new Discord.MessageEmbed()
+                                .setColor("RED")
+                                .setDescription(`${emojis.error} Server is offline. Please try again later.`)
 
-                        await interaction.reply({embeds: [errorEmbed]})
+                            await interaction.reply({embeds: [errorEmbed]});
 
-                    });
+                        });
             }
         }
     }
