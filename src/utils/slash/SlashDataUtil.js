@@ -162,6 +162,38 @@ export default class SlashDataUtil {
                 ]
             },
             {
+                name: "playerinfo",
+                description: "Get information about a Minecraft: Java Edition player.",
+                options: [
+                    {
+                        name: "player",
+                        description: "The player to look up, by name or UUID.",
+                        type: "STRING",
+                        required: true
+                    },
+                    {
+                        name: "query",
+                        description: "The type of information to return.",
+                        type: "STRING",
+                        required: true,
+                        choices: [
+                            {
+                                name: "Name History",
+                                value: "name-history"
+                            },
+                            {
+                                name: "Skin & Cape",
+                                value: "skin"
+                            },
+                            {
+                                name: "Mojang Ban Status",
+                                value: "ban-status"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 name: "ping",
                 description: "View the bot's client & websocket latency."
             },
