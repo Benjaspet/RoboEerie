@@ -190,10 +190,6 @@ export default class SlashDataUtil {
                                 value: "head"
                             },
                             {
-                                name: "Profile",
-                                value: "profile"
-                            },
-                            {
                                 name: "Get UUID",
                                 value: "uuid"
                             }

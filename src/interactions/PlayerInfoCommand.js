@@ -1,5 +1,10 @@
 import * as Discord from "discord.js";
-import Mojang, {getNameHistoryByName, getSkinDataByName, getSkinURLByName} from "mojang-minecraft-api";
+import Mojang, {
+    getNameHistoryByName,
+    getProfileByName,
+    getSkinDataByName,
+    getSkinURLByName, getUUID
+} from "mojang-minecraft-api";
 import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
@@ -24,14 +29,14 @@ module.exports = {
 
                             const names = data.map(e => e.name).join(", ");
 
-                            const embed1 = new Discord.MessageEmbed()
+                            const embed = new Discord.MessageEmbed()
                                 .setTitle(player + "'s Usernames")
                                 .setColor("#00e1ff")
                                 .setDescription(names)
                                 .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
-                            return interaction.reply({embeds: [embed1]})
+                            return interaction.reply({embeds: [embed]});
 
                         }).catch(error => {
 
@@ -50,7 +55,7 @@ module.exports = {
                             const url = data.textures.SKIN.url;
                             const timestamp = Math.round((new Date()).getTime() / 1000);
 
-                            const embed1 = new Discord.MessageEmbed()
+                            const embed = new Discord.MessageEmbed()
                                 .setAuthor(player + "'s Skin", "https://mc-heads.net/head/" + player)
                                 .setThumbnail("https://mc-heads.net/body/" + player)
                                 .setColor("#00e1ff")
@@ -58,7 +63,7 @@ module.exports = {
                                 .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
-                            return interaction.reply({embeds: [embed1]})
+                            return interaction.reply({embeds: [embed]});
 
                         }).catch(error => {
 
@@ -70,18 +75,39 @@ module.exports = {
 
                 case "head":
 
-                    isServerBlocked(player)
+                    const embed = new Discord.MessageEmbed()
+                        .setTitle(player + "'s Head")
+                        .setImage("https://mc-heads.net/head/" + player)
+                        .setColor("#00e1ff")
+                        .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
+                        .setTimestamp()
 
-                    break;
-
-                case "profile":
+                    return interaction.reply({embeds: [embed]});
 
                     break;
 
                 case "uuid":
 
-                    break;
+                    await getUUID(player)
 
+                        .then(data => {
+
+                            const embed = new Discord.MessageEmbed()
+                                .setAuthor(data.name + "'s UUID", "https://mc-heads.net/head/" + player)
+                                .setColor("#00e1ff")
+                                .setDescription("UUID: `" + data.id + "`")
+                                .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
+                                .setTimestamp()
+
+                            return interaction.reply({embeds: [embed]})
+
+                        }).catch(error => {
+
+                            return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(client, "Invalid username. Please try again.")]});
+
+                        });
+
+                    break;
 
             }
         }
