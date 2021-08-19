@@ -108,7 +108,7 @@ export default class SlashDataUtil {
                     {
                         name: "port",
                         description: "The port of the host to query.",
-                        type: "STRING",
+                        type: "INTEGER",
                         required: true
                     }
                 ]

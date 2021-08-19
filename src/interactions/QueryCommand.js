@@ -1,5 +1,6 @@
 import {emojis} from "../resources/config.json";
 import Discord from "discord.js";
+import QueryUtil from "minecraft-server-util";
 import Gamedig from "gamedig";
 
 module.exports = {
@@ -18,41 +19,48 @@ module.exports = {
 
                 case "minecraftbe":
 
-                    await Gamedig.query({
-                        type: "minecraftbe",
-                        host: host
-                    }).then(async (state) => {
+                    await QueryUtil.queryFull(host, {port: parseInt(interaction.options.getInteger("port"))})
 
-                        const connect = state.raw.gamespy.connect;
-                        const motd = state.raw.gamespy.name;
-                        const latency = state.raw.gamespy.ping;
-                        const online = state.raw.bedrock.players;
-                        const maxOnline = state.maxplayers;
-                        const playerList = state.players
-                            .map(e => e.name).join(", ");
+                        .then(async(response) => {
 
-                        const embed1 = new Discord.MessageEmbed()
-                            .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
-                            .setColor("#00e1ff")
-                            .setDescription(`MOTD: **${motd}**` + `\n` + `Connection latency: **${latency}ms**`)
-                            .addField(`Online Player Count`, `**${online}**/**${maxOnline}**`)
-                            .addField(`Online Player List`, playerList)
-                            .setFooter(`Connect: ${connect}`, client.user.displayAvatarURL({dynamic: true}))
-                            .setTimestamp()
+                            const host = response.host || "No response.";
+                            const port = response.port || "No response.";
+                            const gameType = response.gameType || "No response.";
+                            const version = response.version || "No response.";
+                            const software = response.software || "No response.";
+                            const plugins = response.plugins.join(", ") || "No players.";
+                            const players = response.players.join(", ") || "No response."
+                            const online = response.onlinePlayers;
+                            const max = response.maxPlayers;
+                            const latency = response.roundTripLatency;
 
-                        await interaction.reply({embeds: [embed1]});
+                            const embed1 = new Discord.MessageEmbed()
+                                .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
+                                .setColor("#00e1ff")
+                                .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Version: **${version}**`)
+                                .addField(`Online Player Count`, `**${online}**/**${max}**`)
+                                .addField(`Online Player List`, players)
+                                .addField(`Plugins`, plugins)
+                                .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
+                                .setTimestamp()
 
-                    }).catch(async (error) => {
+                            await interaction.reply({embeds: [embed1]});
 
-                        const errorEmbed = new Discord.MessageEmbed()
-                            .setColor("RED")
-                            .setDescription(`${emojis.error} Server is offline. Please try again later.`)
+                        }).catch(async(error) => {
 
-                        await interaction.reply({embeds: [errorEmbed]})
+                            console.error(error);
 
-                    });
+                            const errorEmbed = new Discord.MessageEmbed()
+                                .setColor("RED")
+                                .setDescription(`${emojis.error} Server is offline. Please try again later.`)
+
+                            await interaction.reply({embeds: [errorEmbed]});
+
+                        });
 
                     break;
+
+
 
                 case "minecraft":
 
