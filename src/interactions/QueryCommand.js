@@ -1,6 +1,7 @@
 import {emojis} from "../resources/config.json";
 import Discord from "discord.js";
 import QueryUtil from "minecraft-server-util";
+import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
     name: "interactionCreate",
@@ -18,7 +19,7 @@ module.exports = {
 
                 case "minecraftbe":
 
-                    await QueryUtil.queryFull(host, {port: parseInt(interaction.options.getInteger("port"))})
+                    await QueryUtil.queryFull(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 2000})
 
                         .then(async(response) => {
 
@@ -43,15 +44,17 @@ module.exports = {
                                 .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
+                            await PonjoUtil.sleep(2500);
+
                             await interaction.reply({embeds: [embed]});
 
-                        }).catch(async(error) => {
+                        }).catch(error => {
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(`${emojis.error} Server is offline. Please try again later.`)
 
-                            await interaction.reply({embeds: [errorEmbed]});
+                            interaction.reply({embeds: [errorEmbed]});
 
                         });
 
@@ -59,7 +62,7 @@ module.exports = {
 
                 case "minecraft":
 
-                    await QueryUtil.status(host, {port: parseInt(interaction.options.getInteger("port"))})
+                    await QueryUtil.status(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 2000})
 
                         .then(async(response) => {
 
@@ -78,15 +81,17 @@ module.exports = {
                                 .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
+                            await PonjoUtil.sleep(2500);
+
                             await interaction.reply({embeds: [embed]});
 
-                        }).catch(async(error) => {
+                        }).catch(error => {
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(`${emojis.error} Server is offline. Please try again later.`)
 
-                            await interaction.reply({embeds: [errorEmbed]});
+                            return interaction.reply({embeds: [errorEmbed]});
 
                         });
             }

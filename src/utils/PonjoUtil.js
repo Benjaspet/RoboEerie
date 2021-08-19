@@ -42,4 +42,8 @@ export default class PonjoUtil {
 
     }
 
+    static sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
 }
