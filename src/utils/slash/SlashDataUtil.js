@@ -167,7 +167,7 @@ export default class SlashDataUtil {
                 options: [
                     {
                         name: "player",
-                        description: "The player to look up, by name or UUID.",
+                        description: "The player to look up, by name.",
                         type: "STRING",
                         required: true
                     },
@@ -182,12 +182,20 @@ export default class SlashDataUtil {
                                 value: "name-history"
                             },
                             {
-                                name: "Skin & Cape",
+                                name: "Skin Data",
                                 value: "skin"
                             },
                             {
-                                name: "Mojang Ban Status",
-                                value: "ban-status"
+                                name: "Player Head",
+                                value: "head"
+                            },
+                            {
+                                name: "Profile",
+                                value: "profile"
+                            },
+                            {
+                                name: "Get UUID",
+                                value: "uuid"
                             }
                         ]
                     }

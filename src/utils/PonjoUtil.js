@@ -41,4 +41,5 @@ export default class PonjoUtil {
             .setDescription(`${config.emojis.error} ${content}`)
 
     }
+
 }
