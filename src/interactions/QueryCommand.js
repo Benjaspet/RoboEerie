@@ -19,9 +19,15 @@ module.exports = {
 
                 case "minecraftbe":
 
-                    await QueryUtil.queryFull(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 2000})
+                    const embedPre1 = new Discord.MessageEmbed()
+                        .setDescription(`${emojis.loading2} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
+                        .setColor("#00e1ff")
 
-                        .then(async(response) => {
+                    await interaction.reply({embeds: [embedPre1]});
+
+                    await QueryUtil.queryFull(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 2500})
+
+                        .then(async response => {
 
                             const host = response.host || "No response.";
                             const port = response.port || "No response.";
@@ -34,7 +40,10 @@ module.exports = {
                             const max = response.maxPlayers;
                             const latency = response.roundTripLatency;
 
-                            const embed = new Discord.MessageEmbed()
+                            await PonjoUtil.sleep(1000);
+                            await interaction.deleteReply();
+
+                            const embed2 = new Discord.MessageEmbed()
                                 .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setColor("#00e1ff")
                                 .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Version: **${version}**`)
@@ -44,17 +53,17 @@ module.exports = {
                                 .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
-                            await PonjoUtil.sleep(2500);
+                            return interaction.channel.send({embeds: [embed2]});
 
-                            await interaction.reply({embeds: [embed]});
+                        }).catch(async error => {
 
-                        }).catch(error => {
+                            await interaction.deleteReply();
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(`${emojis.error} Server is offline. Please try again later.`)
 
-                            interaction.reply({embeds: [errorEmbed]});
+                            return interaction.channel.send({embeds: [errorEmbed]});
 
                         });
 
@@ -62,9 +71,15 @@ module.exports = {
 
                 case "minecraft":
 
-                    await QueryUtil.status(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 2000})
+                    const embedPre2 = new Discord.MessageEmbed()
+                        .setDescription(`${emojis.loading2} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
+                        .setColor("#00e1ff")
 
-                        .then(async(response) => {
+                    await interaction.reply({embeds: [embedPre2]});
+
+                    await QueryUtil.status(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 2500})
+
+                        .then(async response => {
 
                             const host = response.host;
                             const port = response.port;
@@ -73,7 +88,10 @@ module.exports = {
                             const max = response.maxPlayers;
                             const latency = response.roundTripLatency;
 
-                            const embed = new Discord.MessageEmbed()
+                            await PonjoUtil.sleep(1000);
+                            await interaction.deleteReply();
+
+                            const embed2 = new Discord.MessageEmbed()
                                 .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setColor("#00e1ff")
                                 .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Protocol: **${protocol}**`)
@@ -81,17 +99,17 @@ module.exports = {
                                 .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
-                            await PonjoUtil.sleep(2500);
+                            return interaction.channel.send({embeds: [embed2]});
 
-                            await interaction.reply({embeds: [embed]});
+                        }).catch(async error => {
 
-                        }).catch(error => {
+                            await interaction.deleteReply();
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(`${emojis.error} Server is offline. Please try again later.`)
 
-                            return interaction.reply({embeds: [errorEmbed]});
+                            return interaction.channel.send({embeds: [errorEmbed]});
 
                         });
             }
