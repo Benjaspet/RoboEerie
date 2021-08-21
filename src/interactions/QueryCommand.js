@@ -25,7 +25,7 @@ module.exports = {
 
                     await interaction.reply({embeds: [embedPre1]});
 
-                    await QueryUtil.queryFull(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 2500})
+                    await QueryUtil.queryFull(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 5000})
 
                         .then(async response => {
 
@@ -35,13 +35,17 @@ module.exports = {
                             const version = response.version || "No response.";
                             const software = response.software || "No response.";
                             const plugins = response.plugins.join(", ") || "No plugins listed.";
-                            const players = response.players.join(", ") || "No response."
+
+                            let players = response.players.join(", ") || "No response."
+                            if (players.length > 1000) {
+                                players = "Too many to list.";
+                            }
+
                             const online = response.onlinePlayers;
                             const max = response.maxPlayers;
                             const latency = response.roundTripLatency;
 
-                            await PonjoUtil.sleep(1000);
-                            await interaction.deleteReply();
+                            await PonjoUtil.sleep(2000);
 
                             const embed2 = new Discord.MessageEmbed()
                                 .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
@@ -53,17 +57,17 @@ module.exports = {
                                 .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
-                            return interaction.channel.send({embeds: [embed2]});
+                            return await interaction.editReply({content: `Query for **${host}** succeeded.`, embeds: [embed2]});
 
                         }).catch(async error => {
 
-                            await interaction.deleteReply();
+                            await PonjoUtil.sleep(2000);
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(`${emojis.error} Server is offline. Please try again later.`)
 
-                            return interaction.channel.send({embeds: [errorEmbed]});
+                            return await interaction.editReply({content: `Query for **${host}** failed.`, embeds: [errorEmbed]});
 
                         });
 
@@ -77,7 +81,7 @@ module.exports = {
 
                     await interaction.reply({embeds: [embedPre2]});
 
-                    await QueryUtil.status(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 2500})
+                    await QueryUtil.status(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 5000})
 
                         .then(async response => {
 
@@ -88,8 +92,7 @@ module.exports = {
                             const max = response.maxPlayers;
                             const latency = response.roundTripLatency;
 
-                            await PonjoUtil.sleep(1000);
-                            await interaction.deleteReply();
+                            await PonjoUtil.sleep(2000);
 
                             const embed2 = new Discord.MessageEmbed()
                                 .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
@@ -99,17 +102,17 @@ module.exports = {
                                 .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
 
-                            return interaction.channel.send({embeds: [embed2]});
+                            return await interaction.editReply({content: `Query for **${host}** succeeded.`, embeds: [embed2]});
 
                         }).catch(async error => {
 
-                            await interaction.deleteReply();
+                            await PonjoUtil.sleep(2000);
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(`${emojis.error} Server is offline. Please try again later.`)
 
-                            return interaction.channel.send({embeds: [errorEmbed]});
+                            return await interaction.editReply({content: `Query for **${host}** failed.`, embeds: [errorEmbed]});
 
                         });
             }
