@@ -5,10 +5,10 @@
 </p>
 
 <p align="center">
-    <a href="https://a.paddle.com/v2/click/16413/119403?link=1227">
+    <a href="https://ponjo.club/discord">
       <img src="https://img.shields.io/badge/Discord-Join%20for%20support!-blue?style=for-the-badge&logo=discord&logoColor=white"/>
     </a>
-    <a href="https://a.paddle.com/v2/click/16413/119403?link=2345">
+    <a href="https://eerie.codes">
       <img src="https://img.shields.io/badge/Supports%20-Node.js%20v16.0+-gray.svg?colorA=61c265&colorB=4CAF50&style=for-the-badge&logo=node.js&logoColor=white"/>
     </a>
  </p>
