@@ -1,4 +1,4 @@
-import config from "../resources/config.json";
+import config from "../resources/Config";
 import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
     once: false,
     execute(member, client) {
 
-        if (member.guild.id === config.developer["ponjo-test-guild"]) {
+        if (member.guild.id === config.developer.ponjoGuild) {
             PonjoUtil.sendServerWelcomeMessage(member);
         }
 

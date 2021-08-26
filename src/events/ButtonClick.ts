@@ -1,5 +1,5 @@
 import PonjoUtil from "../utils/PonjoUtil";
-import config from "../resources/config.json";
+import config from "../resources/Config";
 
 module.exports = {
     name: "interactionCreate",
@@ -10,7 +10,7 @@ module.exports = {
 
         if (interaction.customId === "verify") {
 
-            const role = interaction.guild.roles.cache.get(config.ponjo_development["verification-role"]);
+            const role = interaction.guild.roles.cache.get(config.ponjo_development.verificationRole);
             const member = interaction.member;
             await member.roles.add(role);
 

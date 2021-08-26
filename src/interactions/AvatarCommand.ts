@@ -1,4 +1,4 @@
-import {developer} from "../resources/config.json";
+import config from "../resources/Config";
 import SlashCommandUtil from "../utils/slash/SlashCommandUtil";
 import * as Discord from "discord.js";
 

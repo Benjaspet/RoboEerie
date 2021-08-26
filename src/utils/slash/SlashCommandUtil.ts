@@ -1,4 +1,4 @@
-import {developer} from "../../resources/config.json";
+import config from "../../resources/Config";
 import SlashDataUtil from "../../utils/slash/SlashDataUtil";
 
 export default class SlashCommandUtil {
@@ -7,7 +7,7 @@ export default class SlashCommandUtil {
 
         if (global === false) {
 
-            client.guilds.cache.get(developer["ponjo-test-guild"])?.commands.set(SlashDataUtil.getAllPonjoSlashCommandData())
+            client.guilds.cache.get(config.developer.ponjoGuild)?.commands.set(SlashDataUtil.getAllPonjoSlashCommandData())
                 .then(response => console.log("All slash commands have been deployed to the development guild."));
 
 
@@ -17,10 +17,5 @@ export default class SlashCommandUtil {
                 .then(response => console.log("All slash commands have been globally deployed."));
 
         }
-
     }
-
-
-
-
 }

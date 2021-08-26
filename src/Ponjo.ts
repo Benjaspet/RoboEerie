@@ -1,4 +1,5 @@
-import Discord from "discord.js";
+import* as Discord from "discord.js";
+import config from "./resources/Config";
 import PonjoHandler from "./PonjoHandler";
 
 const client = new Discord.Client({
@@ -25,12 +26,8 @@ const client = new Discord.Client({
     ],
 });
 
-client.utils = require("./utils/PonjoUtil");
-client.config = require("./resources/config.json");
-
 PonjoHandler.initAllEvents(client);
 PonjoHandler.initAllInteractions(client);
 
-module.exports = client;
-
-client.login(client.config.token).then(response => {});
+console.clear();
+client.login(config.token).then(() => {});

@@ -1,10 +1,5 @@
 import * as Discord from "discord.js";
-import Mojang, {
-    getNameHistoryByName,
-    getProfileByName,
-    getSkinDataByName,
-    getSkinURLByName, getUUID
-} from "mojang-minecraft-api";
+import {getNameHistoryByName, getProfileByName, getSkinDataByName, getSkinURLByName, getUUID} from "mojang-minecraft-api";
 import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
@@ -83,8 +78,6 @@ module.exports = {
                         .setTimestamp()
 
                     return interaction.reply({embeds: [embed]});
-
-                    break;
 
                 case "uuid":
 

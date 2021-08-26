@@ -1,6 +1,5 @@
-import Discord from "discord.js";
+import * as Discord from "discord.js";
 import fetch from "node-fetch";
-import {log} from "nodemon/lib/utils";
 
 module.exports = {
     name: "interactionCreate",
@@ -12,6 +11,7 @@ module.exports = {
         if (interaction.commandName === "github") {
 
             const user = interaction.options.getString("user");
+
             // const repository = interaction.options.getString("repository");
 
             await fetch(`https://api.github.com/users/${user}`)

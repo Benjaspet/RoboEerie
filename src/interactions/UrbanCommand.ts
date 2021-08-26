@@ -1,5 +1,5 @@
-import {emojis} from "../resources/config.json";
-import Discord from "discord.js";
+import config from "../resources/Config";
+import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import PonjoUtil from "../utils/PonjoUtil";
 
