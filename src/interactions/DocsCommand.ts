@@ -1,6 +1,5 @@
-import Discord from "discord.js";
+import * as Discord from "discord.js";
 import fetch from "node-fetch";
-import {MemeSnippet} from "../docs/ponjoapi/MemeSnippet";
 
 module.exports = {
     name: "interactionCreate",
@@ -33,19 +32,6 @@ module.exports = {
                         .setTimestamp()
 
                     await interaction.reply({embeds: [embed]});
-
-                    break;
-
-                case "ponjo-api":
-
-                    const embed4 = new Discord.MessageEmbed()
-                        .setTitle("Meme Endpoint")
-                        .setColor("#00e1ff")
-                        .setDescription(MemeSnippet.getEndpointResponseSnippet())
-                        .addField("Example Output", "```js\n" + `This is a string.` + "\n```")
-
-                    await interaction.reply({embeds: [embed4]});
-
                     break;
 
             }

@@ -1,4 +1,4 @@
-import {developer} from "../resources/config.json";
+import config from "../resources/Config";
 import SlashCommandUtil from "../utils/slash/SlashCommandUtil";
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
 
         if (interaction.commandName === "deploy") {
 
-            if (interaction.user.id !== developer.owner) {
+            if (interaction.user.id !== config.developer.owner) {
 
                 return await interaction.reply({content: "You are not the developer of this bot."});
 

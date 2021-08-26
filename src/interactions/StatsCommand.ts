@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import * as stats from "cpu-stat";
-import os from "os";
+import * as os from "os";
 
 module.exports = {
     name: "interactionCreate",
@@ -23,7 +23,8 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setTitle("Ponjo Bot | Statistics")
                     .setColor("#00e1ff")
-                    .setDescription(`Websocket latency: ${client.ws.ping}ms` + `\n` + `Interaction latency: ${Date.now() - interaction.createdTimestamp}ms`)
+                    .setDescription(`Library: Discord.js v13.0.1` + `Websocket latency: ${client.ws.ping}ms` + `\n` + `Interaction latency: ${Date.now() - interaction.createdTimestamp}ms`)
+                    .addField("Bot Information", `Developer: Eerie#6560` + `\n` + `Language: TypeScript` + `\n` + `Library: Discord.js v13.0.1`)
                     .addField("Host Information", `CPU: ${cpuModel}` + `\n` + `Cores: ${cores}` + `\n` + `CPU Usage: ${cpuUsage}` + `\n` + `Node Version: ${nodeVersion}`)
                     .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
                     .setTimestamp()

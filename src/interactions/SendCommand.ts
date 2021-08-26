@@ -1,5 +1,5 @@
-import {emojis} from "../resources/config.json";
-import Discord from "discord.js";
+import config from "../resources/Config";
+import * as Discord from "discord.js";
 
 module.exports = {
     name: "interactionCreate",
@@ -30,7 +30,7 @@ module.exports = {
                                 .setCustomId("verify")
                                 .setLabel("Verify yourself!")
                                 .setStyle("SECONDARY")
-                                .setEmoji(emojis.success)
+                                .setEmoji(config.emojis.success)
                         );
 
                     await interaction.reply({content: "The component has been sent successfully."});

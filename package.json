@@ -1,26 +1,25 @@
 {
   "name": "ponjo-bot",
-  "version": "0.1.0",
+  "author": "Ben Petrillo",
+  "version": "2.0.0",
   "main": "src/Ponjo.js",
   "description": "The official bot for the Ponjo Development Discord server.",
   "scripts": {
-    "start": "nodemon --exec babel-node src/Ponjo.js",
-    "stop": "node src/scripts/StopProcess.js"
+    "start": "ts-node src/Ponjo.ts",
+    "start:dev": "nodemon src/Ponjo.ts",
+    "stop": "node src/scripts/StopProcess.ts"
   },
   "dependencies": {
     "cpu-stat": "^2.0.1",
     "discord.js": "^13.0.1",
     "gamedig": "^3.0.7",
+    "minecraft-server-util": "^3.5.2",
     "mojang-minecraft-api": "^1.0.2",
     "node": "^16.6.1",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "ts-node": "^10.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/node": "^7.14.9",
-    "@babel/preset-env": "^7.15.0",
-    "axios": "^0.21.1",
-    "minecraft-server-util": "^3.5.2",
     "nodemon": "^2.0.12"
   }
 }

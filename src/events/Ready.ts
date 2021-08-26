@@ -1,4 +1,4 @@
-import {developer} from "../resources/config.json";
+import config from "../resources/Config";
 import SlashDataUtil from "../utils/slash/SlashDataUtil";
 
 module.exports = {
@@ -10,9 +10,9 @@ module.exports = {
         console.log(`✔ Logged in as ${client.user.tag}.`);
         client.user.setActivity({type: "WATCHING", name: "over all channels."});
 
-        if (developer["deploy-guild-slash-commands"] === true) {
+        if (config.developer.deploySlashCommands === true) {
 
-            client.guilds.cache.get(developer["ponjo-test-guild"])?.commands.set(SlashDataUtil.getAllPonjoSlashCommandData())
+            client.guilds.cache.get(config.developer.ponjoGuild)?.commands.set(SlashDataUtil.getAllPonjoSlashCommandData())
                 .then(response => console.log("All slash commands have been deployed to the development guild."));
         }
 

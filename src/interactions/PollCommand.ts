@@ -1,5 +1,5 @@
-import {emojis} from "../resources/config.json";
-import Discord from "discord.js";
+import config from "../resources/Config";
+import * as Discord from "discord.js";
 
 module.exports = {
     name: "interactionCreate",
@@ -24,8 +24,8 @@ module.exports = {
 
             channel.send({embeds: [embed]})
                 .then(async msg => {
-                    await msg.react(emojis.success);
-                    await msg.react(emojis.error);
+                    await msg.react(config.emojis.success);
+                    await msg.react(config.emojis.error);
                 });
 
         }

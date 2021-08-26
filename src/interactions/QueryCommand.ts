@@ -1,6 +1,6 @@
-import {emojis} from "../resources/config.json";
-import Discord from "discord.js";
-import QueryUtil from "minecraft-server-util";
+import config from "../resources/Config";
+import * as Discord from "discord.js";
+import * as QueryUtil from "minecraft-server-util";
 import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
                 case "minecraftbe":
 
                     const embedPre1 = new Discord.MessageEmbed()
-                        .setDescription(`${emojis.loading2} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
+                        .setDescription(`${config.emojis.loading} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
                         .setColor("#00e1ff")
 
                     await interaction.reply({embeds: [embedPre1]});
@@ -65,7 +65,7 @@ module.exports = {
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
-                                .setDescription(`${emojis.error} Server is offline. Please try again later.`)
+                                .setDescription(`${config.emojis.error} Server is offline. Please try again later.`)
 
                             return await interaction.editReply({content: `Query for **${host}** failed.`, embeds: [errorEmbed]});
 
@@ -76,7 +76,7 @@ module.exports = {
                 case "minecraft":
 
                     const embedPre2 = new Discord.MessageEmbed()
-                        .setDescription(`${emojis.loading2} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
+                        .setDescription(`${config.emojis.loading} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
                         .setColor("#00e1ff")
 
                     await interaction.reply({embeds: [embedPre2]});
@@ -110,7 +110,7 @@ module.exports = {
 
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
-                                .setDescription(`${emojis.error} Server is offline. Please try again later.`)
+                                .setDescription(`${config.emojis.error} Server is offline. Please try again later.`)
 
                             return await interaction.editReply({content: `Query for **${host}** failed.`, embeds: [errorEmbed]});
 
