@@ -238,6 +238,43 @@ export default class SlashDataUtil {
                         ]
                     }
                 ]
-            }];
+            },
+            {
+                name: "ban",
+                description: "Ban a user from the server.",
+                options: [
+                    {
+                        name: "member",
+                        description: "The guild member to ban.",
+                        type: "USER",
+                        required: true
+                    },
+                    {
+                        name: "reason",
+                        description: "The reason for banning the user.",
+                        type: "STRING",
+                        required: false
+                    }
+                ]
+            },
+            {
+                name: "kick",
+                description: "Kick a user from the server.",
+                options: [
+                    {
+                        name: "member",
+                        description: "The guild member to kick.",
+                        type: "USER",
+                        required: true
+                    },
+                    {
+                        name: "reason",
+                        description: "The reason for kicking the user.",
+                        type: "STRING",
+                        required: false
+                    }
+                ]
+            },
+            ];
     }
 }
