@@ -204,6 +204,44 @@ export default class SlashDataUtil {
             {
                 name: "stats",
                 description: "Display all statistics for the Ponjo bot."
+            },
+            {
+                name: "meme",
+                description: "View a random meme from a subreddit.",
+                options: [
+                    {
+                        name: "subreddit",
+                        description: "The subreddit to send a meme from.",
+                        type: "STRING",
+                        required: false,
+                        choices: [
+                            {
+                                name: "r/wholesomememes",
+                                value: "wholesomememes"
+                            },
+                            {
+                                name: "r/TerribleFacebookMemes",
+                                value: "facebookmemes"
+                            },
+                            {
+                                name: "r/ComedyCemetery",
+                                value: "comedycemetary"
+                            },
+                            {
+                                name: "r/DankMemes",
+                                value: "dankmemes"
+                            },
+                            {
+                                name: "r/MemeEconomy",
+                                value: "memeeconomy"
+                            },
+                            {
+                                name: "r/Memes",
+                                value: "memes"
+                            }
+                        ]
+                    }
+                ]
             }];
     }
 }

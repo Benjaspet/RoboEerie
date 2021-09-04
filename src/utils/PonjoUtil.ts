@@ -5,9 +5,9 @@ export default class PonjoUtil {
 
     static sendServerWelcomeMessage(member) {
 
-        const welcomeChannel = member.guild.channels.cache.get(config.ponjo_development["welcome-channel"]);
+        const welcomeChannel = member.guild.channels.cache.get(config.ponjo_development.welcomeChannel);
         const output = `Welcome to the Ponjo Development Support server, <@${member.id}>!`;
-        return welcomeChannel.send(output);
+        return welcomeChannel.send({content: output});
 
     }
 
