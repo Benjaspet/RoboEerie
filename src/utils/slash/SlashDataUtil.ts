@@ -224,10 +224,6 @@ export default class SlashDataUtil {
                                 value: "facebookmemes"
                             },
                             {
-                                name: "r/ComedyCemetery",
-                                value: "comedycemetary"
-                            },
-                            {
                                 name: "r/DankMemes",
                                 value: "dankmemes"
                             },
