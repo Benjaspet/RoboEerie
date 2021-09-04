@@ -275,6 +275,18 @@ export default class SlashDataUtil {
                     }
                 ]
             },
-            ];
+            {
+                name: "pokemon",
+                description: "View information on a specific Pokémon.",
+                options: [
+                    {
+                        name: "species",
+                        description: "The species of Pokémon to search up.",
+                        type: "STRING",
+                        required: true
+                    }
+                ]
+            },
+        ];
     }
 }

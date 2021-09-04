@@ -21,6 +21,15 @@ export default class PonjoUtil {
         return input.length > 1024 ? `${input.slice(0, 1020)} ... ` : input;
     }
 
+    static capitalize(str): string {
+        str = str.split(' ')
+        for (let i = 0; i < str.length; i++) {
+            const firstChar = str[i].charAt(0)
+            str[i] = firstChar.toUpperCase() + str[i].substr(1)
+        }
+        return str.join(" ");
+    }
+
     static getErrorMessageEmbed(client, content) {
 
         return new Discord.MessageEmbed()
