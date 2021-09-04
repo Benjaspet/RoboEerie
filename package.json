@@ -12,7 +12,6 @@
   "dependencies": {
     "cpu-stat": "^2.0.1",
     "discord.js": "^13.0.1",
-    "gamedig": "^3.0.7",
     "minecraft-server-util": "^3.5.2",
     "mojang-minecraft-api": "^1.0.2",
     "node": "^16.6.1",
