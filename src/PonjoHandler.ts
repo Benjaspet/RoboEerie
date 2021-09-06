@@ -1,8 +1,8 @@
 import * as fs from "fs";
-import {Client, Interaction} from "discord.js";
+import {Client} from "discord.js";
 import AvatarCommand from "./interactions/AvatarCommand";
 import BanCommand from "./interactions/BanCommand";
-import ReadyEvent from "./events/ReadyEvent";
+import DeployCommand from "./interactions/DeployCommand";
 
 export default class PonjoHandler {
 
@@ -22,6 +22,7 @@ export default class PonjoHandler {
         client.on("interactionCreate", (...args) => {
             new AvatarCommand(client).execute(...args, client).then(() => {});
             new BanCommand(client).execute(...args, client).then(() => {});
+            new DeployCommand(client).execute(...args, client).then(() => {});
         });
     }
 

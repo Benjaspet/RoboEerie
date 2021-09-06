@@ -12,7 +12,7 @@ export default class CommandBuilder {
     }
 
     private registerAllCommands(): void {
-        PonjoHandler.initAllEvents();
+        PonjoHandler.initAllEvents(this.client);
         PonjoHandler.initAllSlashCommands(this.client);
     }
 }
