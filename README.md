@@ -1,8 +1,11 @@
 <p align="center">
     <img width="70px" src="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Circle.png" align="center" alt="GitHub Readme Stats" />
     <h2 align="center">Ponjo Bot</h2>
+</p>
+
+<p align="center">
     The official bot for the Ponjo Development Discord server.
-<p>
+</p>
 
 <p align="center">
     <a href="https://ponjo.club/discord">
