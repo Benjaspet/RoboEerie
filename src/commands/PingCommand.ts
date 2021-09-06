@@ -22,7 +22,7 @@ export default class PingCommand implements PonjoCommand {
             const embed = new Discord.MessageEmbed()
                 .setTitle("Ponjo Bot | Latency")
                 .setColor("#00e1ff")
-                .setDescription(`Websocket latency: ${this.client.ws.ping}ms` + `\n` + `Interaction latency: ${interaction.createdTimestamp - Date.now()}ms`)
+                .setDescription(`Websocket latency: ${this.client.ws.ping}ms`)
                 .setFooter("Ponjo", this.client.user.displayAvatarURL({dynamic: true}))
                 .setTimestamp()
             await interaction.reply({embeds: [embed]});
