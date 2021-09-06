@@ -1,19 +1,23 @@
 import config from "../resources/Config";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class PollCommand {
+export default class PollCommand implements PonjoCommand {
 
-    public name: string = <string> "poll";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Create a poll for the guild.";
+    public name: string = "poll";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Create a poll for the guild.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const content = interaction.options.getString("description");
@@ -23,7 +27,7 @@ export default class PollCommand {
                 .setTitle("Server Poll")
                 .setColor("#00e1ff")
                 .setDescription(content)
-                .setFooter(interaction.user.tag, client.user.displayAvatarURL({dynamic: true}))
+                .setFooter(interaction.user.tag, this.client.user.displayAvatarURL({dynamic: true}))
                 .setTimestamp()
             channel.send({embeds: [embed]})
                 .then(async msg => {

@@ -1,4 +1,3 @@
-import config from "../resources/Config";
 import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import PonjoUtil from "../utils/PonjoUtil";
@@ -6,16 +5,19 @@ import {Client} from "discord.js";
 
 export default class UrbanCommand {
 
-    public name: string = <string> "urban";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Search the Urban Dictionary for a word.";
+    public name: string = "urban";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Search the Urban Dictionary for a word.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const query = interaction.options.getString("query");
@@ -29,8 +31,6 @@ export default class UrbanCommand {
                         const permalink = data.list[0].permalink;
                         const upvotes = data.list[0].thumbs_up;
                         const downVotes = data.list[0].thumbs_down;
-                        const writtenDate = data.list[0].written_on;
-                        const example = data.list[0].example.replaceAll("\r", "").replaceAll("[", "").replaceAll("]", "");
                         const embed = new Discord.MessageEmbed()
                             .setAuthor(word)
                             .setColor("#00e1ff")
@@ -39,7 +39,7 @@ export default class UrbanCommand {
                         await interaction.reply({embeds: [embed]});
                     });
             } catch (error) {
-                await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(client, "The specified query could not be found.")]});
+                await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "The specified query could not be found.")]});
             }
         }
     }

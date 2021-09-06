@@ -1,19 +1,23 @@
 import fetch from "node-fetch";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class MemeCommand {
+export default class MemeCommand implements PonjoCommand {
 
-    public name: string = <string> "meme";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "View a random meme from a subreddit.";
+    public name: string = "meme";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "View a random meme from a subreddit.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === "meme") {
             const subreddit: string = <string>interaction.options.getString("subreddit");

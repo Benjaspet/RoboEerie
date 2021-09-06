@@ -18,7 +18,7 @@ import UrbanCommand from "../commands/UrbanCommand";
 
 export default class SlashCommandUtil {
 
-    public static deployAllSlashCommands(client, guild: boolean = true) {
+    public static async deployAllSlashCommands(client, guild: boolean = true) {
         const slashCommandData = [
             new AvatarCommand(client).slashData,
             new BanCommand(client).slashData,
@@ -45,7 +45,7 @@ export default class SlashCommandUtil {
         }
     }
 
-    public static deleteAllSlashCommands(client, guild: boolean = true) {
+    public static async deleteAllSlashCommands(client, guild: boolean = true) {
         if (guild) {
             try {
                 client.guilds.cache.get(config.developer.ponjoGuild)?.commands.set([]);

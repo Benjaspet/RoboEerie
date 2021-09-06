@@ -1,20 +1,24 @@
 import * as Discord from "discord.js";
-import {getNameHistoryByName, getProfileByName, getSkinDataByName, getSkinURLByName, getUUID} from "mojang-minecraft-api";
+import {getNameHistoryByName, getSkinDataByName, getUUID} from "mojang-minecraft-api";
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class PlayerInfoCommand {
+export default class PlayerInfoCommand implements PonjoCommand {
 
-    public name: string = <string> "playerinfo";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Get information about a Minecraft: Java Edition player.";
+    public name: string = "playerinfo";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Get information about a Minecraft: Java Edition player.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const player = interaction.options.getString("player");
@@ -28,11 +32,12 @@ export default class PlayerInfoCommand {
                                 .setTitle(player + "'s Usernames")
                                 .setColor("#00e1ff")
                                 .setDescription(names)
-                                .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
+                                .setFooter("Ponjo", this.client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
                             return interaction.reply({embeds: [embed]});
                         }).catch(error => {
-                            return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(client, "Previous usernames could not be found.")]});
+                            console.error(error);
+                            return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "Previous usernames could not be found.")]});
                         });
                     break;
                 case "skin":
@@ -45,11 +50,12 @@ export default class PlayerInfoCommand {
                                 .setThumbnail("https://mc-heads.net/body/" + player)
                                 .setColor("#00e1ff")
                                 .setDescription(`You are viewing the skin of ${player} currently. If you'd like to download this skin for yourself, you can do so by [clicking here](${url}).` + `\n\n` + `API request sent: <t:${timestamp}>`)
-                                .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
+                                .setFooter("Ponjo", this.client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
                             return interaction.reply({embeds: [embed]});
                         }).catch(error => {
-                            return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(client, "Skin not found for that player.")]});
+                            console.error(error);
+                            return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "Skin not found for that player.")]});
                         });
                     break;
                 case "head":
@@ -57,7 +63,7 @@ export default class PlayerInfoCommand {
                         .setTitle(player + "'s Head")
                         .setImage("https://mc-heads.net/head/" + player)
                         .setColor("#00e1ff")
-                        .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
+                        .setFooter("Ponjo", this.client.user.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
                     return interaction.reply({embeds: [embed]});
                 case "uuid":
@@ -67,11 +73,12 @@ export default class PlayerInfoCommand {
                                 .setAuthor(data.name + "'s UUID", "https://mc-heads.net/head/" + player)
                                 .setColor("#00e1ff")
                                 .setDescription("UUID: `" + data.id + "`")
-                                .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))
+                                .setFooter("Ponjo", this.client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
                             return interaction.reply({embeds: [embed]})
                         }).catch(error => {
-                            return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(client, "Invalid username. Please try again.")]});
+                            console.error(error);
+                            return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "Invalid username. Please try again.")]});
                         });
                     break;
             }

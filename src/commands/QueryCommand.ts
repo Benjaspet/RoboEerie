@@ -3,19 +3,23 @@ import * as Discord from "discord.js";
 import * as QueryUtil from "minecraft-server-util";
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class QueryCommand {
+export default class QueryCommand implements PonjoCommand {
 
-    public name: string = <string> "query";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Query a game server of your choice.";
+    public name: string = "query";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Query a game server of your choice.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const game = interaction.options.getString("game");
@@ -30,9 +34,7 @@ export default class QueryCommand {
                         .then(async response => {
                             const host = response.host || "No response.";
                             const port = response.port || "No response.";
-                            const gameType = response.gameType || "No response.";
                             const version = response.version || "No response.";
-                            const software = response.software || "No response.";
                             const plugins = response.plugins.join(", ") || "No plugins listed.";
                             let players = response.players.join(", ") || "No response."
                             if (players.length > 1000) {
@@ -43,16 +45,17 @@ export default class QueryCommand {
                             const latency = response.roundTripLatency;
                             await PonjoUtil.sleep(2000);
                             const embed2 = new Discord.MessageEmbed()
-                                .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
+                                .setAuthor(`Query for: ${host}`, this.client.user.displayAvatarURL({dynamic: true}))
                                 .setColor("#00e1ff")
                                 .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Version: **${version}**`)
                                 .addField(`Online Player Count`, `**${online}**/**${max}**`)
                                 .addField(`Online Player List`, players)
                                 .addField(`Plugins`, plugins)
-                                .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
+                                .setFooter(`Connect: ${host}:${port}`, this.client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
                             return await interaction.editReply({content: `Query for **${host}** succeeded.`, embeds: [embed2]});
                         }).catch(async error => {
+                            console.error(error);
                             await PonjoUtil.sleep(2000);
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
@@ -75,14 +78,15 @@ export default class QueryCommand {
                             const latency = response.roundTripLatency;
                             await PonjoUtil.sleep(2000);
                             const embed2 = new Discord.MessageEmbed()
-                                .setAuthor(`Query for: ${host}`, client.user.displayAvatarURL({dynamic: true}))
+                                .setAuthor(`Query for: ${host}`, this.client.user.displayAvatarURL({dynamic: true}))
                                 .setColor("#00e1ff")
                                 .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Protocol: **${protocol}**`)
                                 .addField(`Online Player Count`, `**${online}**/**${max}**`)
-                                .setFooter(`Connect: ${host}:${port}`, client.user.displayAvatarURL({dynamic: true}))
+                                .setFooter(`Connect: ${host}:${port}`, this.client.user.displayAvatarURL({dynamic: true}))
                                 .setTimestamp()
                             return await interaction.editReply({content: `Query for **${host}** succeeded.`, embeds: [embed2]});
                         }).catch(async error => {
+                            console.error(error);
                             await PonjoUtil.sleep(2000);
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")

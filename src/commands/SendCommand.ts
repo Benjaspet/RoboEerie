@@ -1,19 +1,23 @@
 import config from "../resources/Config";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class SendCommand {
+export default class SendCommand implements PonjoCommand {
 
-    public name: string = <string> "send";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Send a component to a channel.";
+    public name: string = "send";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Send a component to a channel.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const component = interaction.options.getString("component");
@@ -24,7 +28,7 @@ export default class SendCommand {
                         .setTitle("Welcome to the Ponjo Development server!")
                         .setColor("#00e1ff")
                         .setDescription("In order to join the server fully and gain access to all channels, please react to the message below. By reacting, you are agreeing to the server rules and to abide by Discord's Terms of Service. We hope you enjoy your stay!")
-                        .setFooter("Ponjo Team", client.user.displayAvatarURL({dynamic: true}))
+                        .setFooter("Ponjo Team", this.client.user.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
                     const row = new Discord.MessageActionRow()
                         .addComponents(

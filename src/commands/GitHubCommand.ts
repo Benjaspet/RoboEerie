@@ -1,19 +1,23 @@
 import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class GitHubCommand {
+export default class GitHubCommand implements PonjoCommand {
 
-    public name: string = <string> "github";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "View information on a user's GitHub account.";
+    public name: string = "github";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "View information on a user's GitHub account.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const user = interaction.options.getString("user");

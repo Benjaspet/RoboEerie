@@ -33,22 +33,22 @@ export default class PonjoBuilder {
 
     public static initAllSlashCommands(client: Client) {
         client.on("interactionCreate", (...args) => {
-            new AvatarCommand(client).execute(...args, client).then(() => {});
-            new BanCommand(client).execute(...args, client).then(() => {});
-            new DeployCommand(client).execute(...args, client).then(() => {});
-            new DocsCommand(client).execute(...args, client).then(() => {});
-            new GitHubCommand(client).execute(...args, client).then(() => {});
-            new KickCommand(client).execute(...args, client).then(() => {});
-            new MemeCommand(client).execute(...args, client).then(() => {});
-            new NPMCommand(client).execute(...args, client).then(() => {});
-            new PingCommand(client).execute(...args, client).then(() => {});
-            new PlayerInfoCommand(client).execute(...args, client).then(() => {});
-            new PokemonCommand(client).execute(...args, client).then(() => {});
-            new PollCommand(client).execute(...args, client).then(() => {});
-            new QueryCommand(client).execute(...args, client).then(() => {});
-            new SendCommand(client).execute(...args, client).then(() => {});
+            new AvatarCommand(client).execute(...args).then(() => {});
+            new BanCommand(client).execute(...args).then(() => {});
+            new DeployCommand(client).execute(...args).then(() => {});
+            new DocsCommand(client).execute(...args).then(() => {});
+            new GitHubCommand(client).execute(...args).then(() => {});
+            new KickCommand(client).execute(...args).then(() => {});
+            new MemeCommand(client).execute(...args).then(() => {});
+            new NPMCommand(client).execute(...args).then(() => {});
+            new PingCommand(client).execute(...args).then(() => {});
+            new PlayerInfoCommand(client).execute(...args).then(() => {});
+            new PokemonCommand(client).execute(...args).then(() => {});
+            new PollCommand(client).execute(...args).then(() => {});
+            new QueryCommand(client).execute(...args).then(() => {});
+            new SendCommand(client).execute(...args).then(() => {});
             new StatsCommand(client).execute(...args, client).then(() => {});
-            new UrbanCommand(client).execute(...args, client).then(() => {});
+            new UrbanCommand(client).execute(...args).then(() => {});
         });
     }
 

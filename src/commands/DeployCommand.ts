@@ -2,19 +2,23 @@ import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import config from "../resources/Config";
 import SlashCommandUtil from "../utils/SlashCommandUtil";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class DeployCommand {
+export default class DeployCommand implements PonjoCommand {
 
-    public name: string = <string> "deploy";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Set all slash commands to the Ponjo Development guild.";
+    public name: string = "deploy";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Set all slash commands to the Ponjo Development guild.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client: Client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             if (interaction.user.id !== config.developer.owner) {
@@ -22,9 +26,9 @@ export default class DeployCommand {
             }
             const deleting = interaction.options.getBoolean("delete");
             if (deleting) {
-                await SlashCommandUtil.deleteAllSlashCommands(client, true)
+                await SlashCommandUtil.deleteAllSlashCommands(this.client, true)
             }
-            await SlashCommandUtil.deployAllSlashCommands(client, true);
+            await SlashCommandUtil.deployAllSlashCommands(this.client, true);
             await interaction.reply({content: "Slash commands successfully deployed."});
         }
     }

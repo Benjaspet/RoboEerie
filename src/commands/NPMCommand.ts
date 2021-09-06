@@ -1,23 +1,24 @@
-import config from "../resources/Config";
 import * as Discord from "discord.js";
 import PonjoUtil from "../utils/PonjoUtil";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class NPMCommand {
+export default class NPMCommand implements PonjoCommand {
 
-    public name: string = <string> "npm";
-    private client: Discord.Client;
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Look up an NPM package.";
+    public name: string = "npm";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Look up an NPM package.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
         this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const npmPackage = interaction.options.getString("package");
@@ -36,7 +37,7 @@ export default class NPMCommand {
                         await interaction.reply({embeds: [embed]});
                     });
             } catch (error) {
-                await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(client, "Could not find the specified NPM package.")]});
+                await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "Could not find the specified NPM package.")]});
             }
         }
     }

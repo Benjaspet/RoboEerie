@@ -1,19 +1,23 @@
 import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class DocsCommand {
+export default class DocsCommand implements PonjoCommand {
 
-    public name: string = <string> "docs";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "View documentation for the specified app or library.";
+    public name: string = "docs";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "View documentation for the specified app or library.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const {value: string} = interaction.options.get("library");
@@ -29,7 +33,7 @@ export default class DocsCommand {
                         .setColor("#00e1ff")
                         .setDescription(response.description)
                         .addField("Wanna view the source?", `Simply [click here](https://discord.js.org/#/docs/main/stable/general/welcome).`)
-                        .setFooter("Discord.js v13 Documentation", client.user.displayAvatarURL({dynamic: true}))
+                        .setFooter("Discord.js v13 Documentation", this.client.user.displayAvatarURL({dynamic: true}))
                         .setTimestamp()
                     await interaction.reply({embeds: [embed]});
                     break;
@@ -37,7 +41,7 @@ export default class DocsCommand {
         }
     }
 
-    public slashData: object = <object> {
+    public slashData: object = {
         name: this.name,
         description: this.description,
         options: [

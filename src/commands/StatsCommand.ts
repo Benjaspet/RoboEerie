@@ -2,22 +2,26 @@ import * as Discord from "discord.js";
 import * as stats from "cpu-stat";
 import * as os from "os";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class StatsCommand {
+export default class StatsCommand implements PonjoCommand {
 
-    public name: string = <string> "stats";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Display all statistics for the Ponjo bot.";
+    public name: string = "stats";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Display all statistics for the Ponjo bot.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
     public async execute(interaction, client) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
-            stats.usagePercent(async function (error, percent, seconds) {
+            stats.usagePercent(async function (error, percent) {
                 if (error) return console.error(error);
                 const cores = os.cpus().length;
                 const cpuUsage = percent.toFixed(2);

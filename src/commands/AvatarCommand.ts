@@ -1,18 +1,22 @@
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
+import {PonjoCommand} from "../interfaces/PonjoCommand";
 
-export default class AvatarCommand {
+export default class AvatarCommand implements PonjoCommand {
 
-    public name: string = <string> "avatar";
-    public once: boolean = <boolean> false;
-    public enabled = <boolean> true;
-    public description: string = <string> "Display the avatar of the specified user.";
+    public name: string = "avatar";
+    public once: boolean = false;
+    public enabled: boolean = true;
+    public description: string = "Display the avatar of the specified user.";
+    public aliases: string[] = [];
+    protected client: Discord.Client;
 
     constructor(client: Client) {
         this.enabled = true;
+        this.client = client;
     }
 
-    public async execute(interaction, client: Client) {
+    public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
             const member = interaction.options.getMember("user");
