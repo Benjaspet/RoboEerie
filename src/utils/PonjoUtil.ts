@@ -3,26 +3,18 @@ import config from "../resources/Config";
 
 export default class PonjoUtil {
 
-    static sendServerWelcomeMessage(member) {
-
+    public static sendServerWelcomeMessage(member) {
         const welcomeChannel = member.guild.channels.cache.get(config.ponjo_development.welcomeChannel);
         const output = `Welcome to the Ponjo Development Support server, <@${member.id}>!`;
         return welcomeChannel.send({content: output});
-
     }
 
-    static getPonjoSnipeCollector() {
-
-        return new Discord.Collection();
-
-    }
-
-    static trimString(input) {
+    public static trimString(input: string): string {
         return input.length > 1024 ? `${input.slice(0, 1020)} ... ` : input;
     }
 
-    static capitalize(str): string {
-        str = str.split(' ')
+    static capitalize(string: string): string {
+        let str = string.split(" ");
         for (let i = 0; i < str.length; i++) {
             const firstChar = str[i].charAt(0)
             str[i] = firstChar.toUpperCase() + str[i].substr(1)
@@ -30,15 +22,13 @@ export default class PonjoUtil {
         return str.join(" ");
     }
 
-    static getErrorMessageEmbed(client, content) {
-
+    static getErrorMessageEmbed(client, content): Discord.MessageEmbed {
         return new Discord.MessageEmbed()
             .setColor("RED")
             .setDescription(`${config.emojis.error} ${content}`)
-
     }
 
-    static sleep(ms) {
+    static sleep(ms): Promise<any> {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 

@@ -8,40 +8,6 @@ export default class MemeCommand {
     public once: boolean = <boolean> false;
     public enabled = <boolean> true;
     public description: string = <string> "View a random meme from a subreddit.";
-    public slashData: object = <object> {
-        name: this.name,
-        description: this.description,
-        options: [
-            {
-                name: "subreddit",
-                description: "The subreddit to send a meme from.",
-                type: "STRING",
-                required: false,
-                choices: [
-                    {
-                        name: "r/wholesomememes",
-                        value: "wholesomememes"
-                    },
-                    {
-                        name: "r/TerribleFacebookMemes",
-                        value: "facebookmemes"
-                    },
-                    {
-                        name: "r/DankMemes",
-                        value: "dankmemes"
-                    },
-                    {
-                        name: "r/MemeEconomy",
-                        value: "memeeconomy"
-                    },
-                    {
-                        name: "r/Memes",
-                        value: "memes"
-                    }
-                ]
-            }
-        ]
-    };
 
     constructor(client: Client) {
         this.enabled = true;
@@ -78,4 +44,40 @@ export default class MemeCommand {
             }
         }
     }
+
+    public slashData: object = <object> {
+        name: this.name,
+        description: this.description,
+        options: [
+            {
+                name: "subreddit",
+                description: "The subreddit to send a meme from.",
+                type: "STRING",
+                required: false,
+                choices: [
+                    {
+                        name: "r/wholesomememes",
+                        value: "wholesomememes"
+                    },
+                    {
+                        name: "r/TerribleFacebookMemes",
+                        value: "facebookmemes"
+                    },
+                    {
+                        name: "r/DankMemes",
+                        value: "dankmemes"
+                    },
+                    {
+                        name: "r/MemeEconomy",
+                        value: "memeeconomy"
+                    },
+                    {
+                        name: "r/Memes",
+                        value: "memes"
+                    }
+                ]
+            }
+        ]
+    };
+
 }

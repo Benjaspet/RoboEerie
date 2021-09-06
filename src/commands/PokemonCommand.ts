@@ -1,17 +1,22 @@
 import * as Discord from "discord.js";
 import PonjoUtil from "../utils/PonjoUtil";
 import fetch from "node-fetch";
+import {Client} from "discord.js";
 
-module.exports = {
-    name: "interactionCreate",
-    once: false,
-    slashData: {
+export default class PokemonCommand {
 
-    },
-    async execute(interaction, client) {
+    public name: string = <string> "pokemon";
+    public once: boolean = <boolean> false;
+    public enabled = <boolean> true;
+    public description: string = <string> "View information on a specific Pokémon.";
 
+    constructor(client: Client) {
+        this.enabled = true;
+    }
+
+    public async execute(interaction, client) {
         if (!interaction.isCommand()) return;
-        if (interaction.commandName === "pokemon") {
+        if (interaction.commandName === this.name) {
             const species: string = <string>interaction.options.getString("species");
             try {
                 await fetch("https://pokeapi.co/api/v2/pokemon/" + species)
@@ -45,4 +50,18 @@ module.exports = {
             }
         }
     }
+
+    public slashData: object = <object> {
+        name: this.name,
+        description: this.description,
+        options: [
+            {
+                name: "species",
+                description: "The species of Pokémon to search up.",
+                type: "STRING",
+                required: true
+            }
+        ]
+    };
+
 }

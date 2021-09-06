@@ -1,13 +1,13 @@
 {
   "name": "ponjo-bot",
   "author": "Ben Petrillo",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "main": "src/Ponjo.js",
   "description": "The official bot for the Ponjo Development Discord server.",
   "scripts": {
     "start": "ts-node src/Ponjo.ts",
     "start:dev": "nodemon src/Ponjo.ts",
-    "stop": "node src/scripts/StopProcess.ts"
+    "stop": "ts-node src/scripts/StopProcess.ts"
   },
   "dependencies": {
     "cpu-stat": "^2.0.1",

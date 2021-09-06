@@ -1,18 +1,20 @@
 import * as fs from "fs";
 import {Client} from "discord.js";
-import PonjoHandler from "../PonjoHandler";
+import PonjoBuilder from "./PonjoBuilder";
 
-export default class CommandBuilder {
+export default class CommandBuilder extends PonjoBuilder {
 
     public client;
 
     constructor(client: Client) {
+        super();
         this.client = client;
         this.registerAllCommands();
     }
 
     private registerAllCommands(): void {
-        PonjoHandler.initAllEvents(this.client);
-        PonjoHandler.initAllSlashCommands(this.client);
+        PonjoBuilder.initAllEvents(this.client);
+        PonjoBuilder.initAllSlashCommands(this.client);
     }
+
 }

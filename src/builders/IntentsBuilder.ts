@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
+import PonjoBuilder from "./PonjoBuilder";
 
-export default class IntentsBuilder {
+export default class IntentsBuilder extends PonjoBuilder {
 
     public static getIntents() {
         return [
@@ -20,4 +21,5 @@ export default class IntentsBuilder {
             Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
         ];
     }
+
 }

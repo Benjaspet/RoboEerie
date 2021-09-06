@@ -8,24 +8,6 @@ export default class BanCommand {
     public once: boolean = <boolean> false;
     public enabled: boolean = <boolean> true;
     public description: string = <string> "Ban a user from the server.";
-    public slashData: object = <object> {
-        name: this.name,
-        description: this.name,
-        options: [
-            {
-                name: "member",
-                description: "The guild member to ban.",
-                type: "USER",
-                required: true
-            },
-            {
-                name: "reason",
-                description: "The reason for banning the user.",
-                type: "STRING",
-                required: false
-            }
-        ]
-    };
 
     constructor(client: Client) {
         this.enabled = true;
@@ -79,4 +61,24 @@ export default class BanCommand {
             }
         }
     }
+
+    public slashData: object = <object> {
+        name: this.name,
+        description: this.name,
+        options: [
+            {
+                name: "member",
+                description: "The guild member to ban.",
+                type: "USER",
+                required: true
+            },
+            {
+                name: "reason",
+                description: "The reason for banning the user.",
+                type: "STRING",
+                required: false
+            }
+        ]
+    };
+
 }

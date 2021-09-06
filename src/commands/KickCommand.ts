@@ -8,24 +8,6 @@ export default class KickCommand {
     public once: boolean = <boolean> false;
     public enabled = <boolean> true;
     public description: string = <string> "Kick a user from the server."
-    public slashData: object = <object> {
-        name: this.name,
-        description: this.description,
-        options: [
-            {
-                name: "member",
-                description: "The guild member to kick.",
-                type: "USER",
-                required: true
-            },
-            {
-                name: "reason",
-                description: "The reason for kicking the user.",
-                type: "STRING",
-                required: false
-            }
-        ]
-    };
 
     constructor(client: Client) {
         this.enabled = true;
@@ -79,4 +61,24 @@ export default class KickCommand {
             }
         }
     }
+
+    public slashData: object = <object> {
+        name: this.name,
+        description: this.description,
+        options: [
+            {
+                name: "member",
+                description: "The guild member to kick.",
+                type: "USER",
+                required: true
+            },
+            {
+                name: "reason",
+                description: "The reason for kicking the user.",
+                type: "STRING",
+                required: false
+            }
+        ]
+    };
+
 }

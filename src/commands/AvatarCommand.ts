@@ -1,6 +1,5 @@
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
-import CommandBuilder from "../builders/CommandBuilder";
 
 export default class AvatarCommand {
 
@@ -8,18 +7,6 @@ export default class AvatarCommand {
     public once: boolean = <boolean> false;
     public enabled = <boolean> true;
     public description: string = <string> "Display the avatar of the specified user.";
-    public slashData: object = <object> {
-        name: this.name,
-        description: this.description,
-        options: [
-            {
-                name: "user",
-                description: "The user whose avatar you'd like to view.",
-                type: "USER",
-                required: true
-            }
-        ]
-    };
 
     constructor(client: Client) {
         this.enabled = true;
@@ -36,4 +23,17 @@ export default class AvatarCommand {
             await interaction.reply({embeds: [embed]});
         }
     }
+
+    public slashData: object = <object> {
+        name: this.name,
+        description: this.description,
+        options: [
+            {
+                name: "user",
+                description: "The user whose avatar you'd like to view.",
+                type: "USER",
+                required: true
+            }
+        ]
+    };
 }
