@@ -3,6 +3,8 @@ import {Client} from "discord.js";
 import AvatarCommand from "./interactions/AvatarCommand";
 import BanCommand from "./interactions/BanCommand";
 import DeployCommand from "./interactions/DeployCommand";
+import DocsCommand from "./interactions/DocsCommand";
+import GitHubCommand from "./interactions/GitHubCommand";
 
 export default class PonjoHandler {
 
@@ -23,6 +25,8 @@ export default class PonjoHandler {
             new AvatarCommand(client).execute(...args, client).then(() => {});
             new BanCommand(client).execute(...args, client).then(() => {});
             new DeployCommand(client).execute(...args, client).then(() => {});
+            new DocsCommand(client).execute(...args, client).then(() => {});
+            new GitHubCommand(client).execute(...args, client).then(() => {});
         });
     }
 

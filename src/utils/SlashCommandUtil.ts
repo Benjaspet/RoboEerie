@@ -1,6 +1,7 @@
 import AvatarCommand from "../interactions/AvatarCommand";
 import BanCommand from "../interactions/BanCommand";
 import DeployCommand from "../interactions/DeployCommand";
+import config from "../resources/Config";
 
 export default class SlashCommandUtil {
 
@@ -12,7 +13,7 @@ export default class SlashCommandUtil {
         ];
         if (guild) {
             for (const data of slashCommandData) {
-                client.guilds.cache.get(guild)?.commands.set(data);
+                client.guilds.cache.get(config.developer.ponjoGuild)?.commands.set(data);
             }
         }
         if (!guild) {
@@ -25,7 +26,7 @@ export default class SlashCommandUtil {
     public static deleteAllSlashCommands(client, guild: boolean = true) {
         if (guild) {
             try {
-                client.guilds.cache.get(guild)?.commands.set([]);
+                client.guilds.cache.get(config.developer.ponjoGuild)?.commands.set([]);
             } catch (error) {
                 new Error(error.message);
             }

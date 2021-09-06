@@ -1,41 +1,46 @@
 import * as Discord from "discord.js";
 import fetch from "node-fetch";
+import {Client} from "discord.js";
 
-module.exports = {
-    name: "interactionCreate",
-    once: false,
-    async execute(interaction, client) {
+export default class GitHubCommand {
 
+    public name: string = <string> "github";
+    public once: boolean = <boolean> false;
+    public enabled = <boolean> true;
+    public description: string = <string> "View information on a user's GitHub account.";
+    public slashData: object = <object> {
+        name: this.name,
+        description: this.description,
+        options: [
+            {
+                name: "user",
+                description: "The GitHub username to search for.",
+                type: "STRING",
+                required: true
+            }
+        ]
+    }
+
+    constructor(client: Client) {
+        this.enabled = true;
+    }
+
+    public async execute(interaction, client) {
         if (!interaction.isCommand()) return;
-
-        if (interaction.commandName === "github") {
-
+        if (interaction.commandName === this.name) {
             const user = interaction.options.getString("user");
-
-            // const repository = interaction.options.getString("repository");
-
             await fetch(`https://api.github.com/users/${user}`)
                 .then(res => res.json())
                 .then(async body => {
-
                     if (body.message) {
                         return await interaction.reply({content: "The user was not found.", ephemeral: true});
                     }
-
                     const {
-                        login, // The GitHub username.
-                        avatar_url, // The account avatar URL.
-                        name, // The account name.
-                        html_url, // The link to the account profile.
-                        public_repos, // The count of public repositories owned by the account.
-                        followers, // The amount of followers the account has.
-                        following, // The amount of accounts the user is following.
-                        location,
-                        company, // The information listed in the "company section" of the user's profile.
-                        created_at, // When the account was created.
-                        bio // The account's biography.
+                        login, avatar_url,
+                        html_url, public_repos,
+                        followers, following, location,
+                        company, created_at, bio
                     } = body;
-
                     const embed = new Discord.MessageEmbed()
                         .setTitle(`${login} - GitHub`)
                         .setAuthor(`${login}'s GitHub Profile`, avatar_url)
@@ -59,11 +64,8 @@ module.exports = {
                             }
                         )
                         .setFooter(`Account created: ${created_at}`)
-
                     await interaction.reply({embeds: [embed]})
-
                 });
-
         }
     }
 }

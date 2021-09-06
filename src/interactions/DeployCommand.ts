@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import config from "../resources/Config";
-import SlashCommandUtil from "../utils/slash/SlashCommandUtil";
+import SlashCommandUtil from "../utils/SlashCommandUtil";
 
 export default class DeployCommand {
 
