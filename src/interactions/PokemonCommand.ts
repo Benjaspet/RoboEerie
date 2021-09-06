@@ -5,6 +5,9 @@ import fetch from "node-fetch";
 module.exports = {
     name: "interactionCreate",
     once: false,
+    slashData: {
+
+    },
     async execute(interaction, client) {
 
         if (!interaction.isCommand()) return;

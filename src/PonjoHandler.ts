@@ -1,12 +1,13 @@
 import * as fs from "fs";
-import {Client} from "discord.js";
+import {Client, Interaction} from "discord.js";
+import AvatarCommand from "./interactions/AvatarCommand";
+import BanCommand from "./interactions/BanCommand";
+import ReadyEvent from "./events/ReadyEvent";
 
 export default class PonjoHandler {
 
-    static initAllEvents(client: Client) {
-
+    public static initAllEvents(client: Client) {
         const eventFiles = fs.readdirSync(__dirname + "/events").filter(file => file.endsWith('.ts'));
-
         for (const file of eventFiles) {
             const event = require(__dirname + `/events/${file}`);
             if (event.once) {
@@ -17,18 +18,11 @@ export default class PonjoHandler {
         }
     }
 
-    static initAllInteractions(client: Client) {
-
-        const interactions = fs.readdirSync(__dirname + "/interactions").filter(file => file.endsWith('.ts'));
-
-        for (const file of interactions) {
-            const interaction = require(__dirname + `/interactions/${file}`);
-            if (interaction.once) {
-                client.once(interaction.name, (...args) => interaction.execute(...args, client));
-            } else {
-                client.on(interaction.name, (...args) => interaction.execute(...args, client));
-            }
-        }
+    public static initAllSlashCommands(client: Client) {
+        client.on("interactionCreate", (...args) => {
+            new AvatarCommand(client).execute(...args, client).then(() => {});
+            new BanCommand(client).execute(...args, client).then(() => {});
+        });
     }
 
 }
