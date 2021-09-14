@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class MemeCommand implements PonjoCommand {
 
@@ -56,7 +57,7 @@ export default class MemeCommand implements PonjoCommand {
             {
                 name: "subreddit",
                 description: "The subreddit to send a meme from.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: false,
                 choices: [
                     {

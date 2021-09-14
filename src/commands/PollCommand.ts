@@ -2,6 +2,7 @@ import config from "../resources/Config";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class PollCommand implements PonjoCommand {
 
@@ -44,13 +45,13 @@ export default class PollCommand implements PonjoCommand {
             {
                 name: "channel",
                 description: "The channel to send the poll in.",
-                type: "CHANNEL",
+                type: SlashCommandOptions.CHANNEL,
                 required: true,
             },
             {
                 name: "description",
                 description: "The context/description of the poll.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true
             }
         ]

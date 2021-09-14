@@ -1,10 +1,9 @@
-import PonjoUtil from "../utils/PonjoUtil";
 import config from "../resources/Config";
 
 module.exports = {
     name: "interactionCreate",
     once: false,
-    async execute(interaction, client) {
+    async execute(interaction) {
         if (!interaction.isButton()) return;
         if (interaction.customId === "verify") {
             const role = interaction.guild.roles.cache.get(config.ponjo_development.verificationRole);

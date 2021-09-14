@@ -3,6 +3,7 @@ import {getNameHistoryByName, getSkinDataByName, getUUID} from "mojang-minecraft
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class PlayerInfoCommand implements PonjoCommand {
 
@@ -92,13 +93,13 @@ export default class PlayerInfoCommand implements PonjoCommand {
             {
                 name: "player",
                 description: "The player to look up, by name.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true
             },
             {
                 name: "query",
                 description: "The type of information to return.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true,
                 choices: [
                     {

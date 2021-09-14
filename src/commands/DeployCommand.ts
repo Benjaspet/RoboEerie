@@ -3,6 +3,7 @@ import {Client} from "discord.js";
 import config from "../resources/Config";
 import SlashCommandUtil from "../utils/SlashCommandUtil";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class DeployCommand implements PonjoCommand {
 
@@ -40,7 +41,7 @@ export default class DeployCommand implements PonjoCommand {
             {
                 name: "delete",
                 description: "Delete all slash commands.",
-                type: "BOOLEAN",
+                type: SlashCommandOptions.BOOLEAN,
                 required: true
             }
         ]

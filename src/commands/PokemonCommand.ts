@@ -3,6 +3,7 @@ import PonjoUtil from "../utils/PonjoUtil";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class PokemonCommand implements PonjoCommand {
 
@@ -62,7 +63,7 @@ export default class PokemonCommand implements PonjoCommand {
             {
                 name: "species",
                 description: "The species of Pokémon to search up.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true
             }
         ]

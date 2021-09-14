@@ -13,7 +13,7 @@ export default class PonjoUtil {
         return input.length > 1024 ? `${input.slice(0, 1020)} ... ` : input;
     }
 
-    static capitalize(string: string): string {
+    public static capitalize(string: string): string {
         let str = string.split(" ");
         for (let i = 0; i < str.length; i++) {
             const firstChar = str[i].charAt(0)
@@ -22,14 +22,13 @@ export default class PonjoUtil {
         return str.join(" ");
     }
 
-    static getErrorMessageEmbed(client, content): Discord.MessageEmbed {
+    public static getErrorMessageEmbed(client, content): Discord.MessageEmbed {
         return new Discord.MessageEmbed()
             .setColor("RED")
             .setDescription(`${config.emojis.error} ${content}`)
     }
 
-    static sleep(ms): Promise<any> {
+    public static sleep(ms): Promise<any> {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
 }

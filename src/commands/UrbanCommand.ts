@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class UrbanCommand {
 
@@ -51,7 +52,7 @@ export default class UrbanCommand {
             {
                 name: "query",
                 description: "The word or phrase to search for.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true
             }
         ]

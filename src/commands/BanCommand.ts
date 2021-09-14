@@ -2,6 +2,7 @@ import PonjoUtil from "../utils/PonjoUtil";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class BanCommand implements PonjoCommand {
 
@@ -73,13 +74,13 @@ export default class BanCommand implements PonjoCommand {
             {
                 name: "member",
                 description: "The guild member to ban.",
-                type: "USER",
+                type: SlashCommandOptions.USER,
                 required: true
             },
             {
                 name: "reason",
                 description: "The reason for banning the user.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: false
             }
         ]

@@ -1,9 +1,10 @@
 import * as Discord from "discord.js";
 import PonjoBuilder from "./PonjoBuilder";
+import {MessageMentionTypes, PartialTypes} from "discord.js";
 
 export default class IntentsBuilder extends PonjoBuilder {
 
-    public static getIntents() {
+    public static getIntents(): Discord.BitFieldResolvable<any, number> {
         return [
             Discord.Intents.FLAGS.GUILDS,
             Discord.Intents.FLAGS.GUILD_MEMBERS,
@@ -22,4 +23,11 @@ export default class IntentsBuilder extends PonjoBuilder {
         ];
     }
 
+    public static getPartials(): PartialTypes[] {
+        return ["CHANNEL", "MESSAGE", "REACTION"];
+    }
+
+    public static getParsedMentions(): MessageMentionTypes[] {
+        return ["users", "roles", "everyone"]
+    }
 }

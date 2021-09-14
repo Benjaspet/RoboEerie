@@ -1,4 +1,3 @@
-import * as fs from "fs";
 import {Client} from "discord.js";
 import PonjoBuilder from "./PonjoBuilder";
 

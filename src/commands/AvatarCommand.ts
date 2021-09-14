@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class AvatarCommand implements PonjoCommand {
 
@@ -35,7 +36,7 @@ export default class AvatarCommand implements PonjoCommand {
             {
                 name: "user",
                 description: "The user whose avatar you'd like to view.",
-                type: "USER",
+                type: SlashCommandOptions.USER,
                 required: true
             }
         ]

@@ -3,6 +3,7 @@ import PonjoUtil from "../utils/PonjoUtil";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class NPMCommand implements PonjoCommand {
 
@@ -49,7 +50,7 @@ export default class NPMCommand implements PonjoCommand {
             {
                 name: "package",
                 description: "The NPM package to search for.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true
             }
         ]

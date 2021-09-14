@@ -2,6 +2,7 @@ import config from "../resources/Config";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class SendCommand implements PonjoCommand {
 
@@ -52,7 +53,7 @@ export default class SendCommand implements PonjoCommand {
             {
                 name: "component",
                 description: "The component to send.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true,
                 choices: [
                     {
@@ -64,7 +65,7 @@ export default class SendCommand implements PonjoCommand {
             {
                 name: "channel",
                 description: "The channel to send the component to.",
-                type: "CHANNEL",
+                type: SlashCommandOptions.CHANNEL,
                 required: true
             }
         ]

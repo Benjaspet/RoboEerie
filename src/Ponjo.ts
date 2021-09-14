@@ -5,10 +5,10 @@ import IntentsBuilder from "./builders/IntentsBuilder";
 
 const client = new Discord.Client({
     allowedMentions: {
-        parse: ["users", "roles", "everyone"],
+        parse: IntentsBuilder.getParsedMentions(),
         repliedUser: false,
     },
-    partials: ["CHANNEL", "MESSAGE", "REACTION"],
+    partials: IntentsBuilder.getPartials(),
     intents: IntentsBuilder.getIntents(),
 });
 

@@ -1,7 +1,8 @@
 import * as Discord from "discord.js";
-import fetch from "node-fetch";
 import {Client} from "discord.js";
+import fetch from "node-fetch";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class DocsCommand implements PonjoCommand {
 
@@ -48,7 +49,7 @@ export default class DocsCommand implements PonjoCommand {
             {
                 name: "library",
                 description: "The library you'd like to view the documentation of.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true,
                 choices: [
                     {
@@ -64,7 +65,7 @@ export default class DocsCommand implements PonjoCommand {
             {
                 name: "query",
                 description: "The query to search the documentation for.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true
             }
         ]

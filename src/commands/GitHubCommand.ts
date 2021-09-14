@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class GitHubCommand implements PonjoCommand {
 
@@ -68,7 +69,7 @@ export default class GitHubCommand implements PonjoCommand {
             {
                 name: "user",
                 description: "The GitHub username to search for.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true
             }
         ]

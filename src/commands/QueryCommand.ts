@@ -4,6 +4,7 @@ import * as QueryUtil from "minecraft-server-util";
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {SlashCommandOptions} from "../interfaces/CommandOptions";
 
 export default class QueryCommand implements PonjoCommand {
 
@@ -104,7 +105,7 @@ export default class QueryCommand implements PonjoCommand {
             {
                 name: "game",
                 description: "The type of game server you'd like to query.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true,
                 choices: [
                     {
@@ -120,13 +121,13 @@ export default class QueryCommand implements PonjoCommand {
             {
                 name: "host",
                 description: "The IP address of the host to query.",
-                type: "STRING",
+                type: SlashCommandOptions.STRING,
                 required: true
             },
             {
                 name: "port",
                 description: "The port of the host to query.",
-                type: "INTEGER",
+                type: SlashCommandOptions.STRING,
                 required: true
             }
         ]
