@@ -57,4 +57,9 @@
 We're happy to take in new contributors! If you're interested in contributing to the Ponjo Bot or would like to suggest new features, feel free to make a pull request or create an issue, respectively.
 
 ### License
-Ponjo Bot is licensed under the [MIT License](https://www.mit.edu/~amini/LICENSE.md), and modification is permitted provided that proper credit is given to the original author(s). If you're using any parts of this repository, such credit must be given.
+
+© Copyright 2021-2022 Ben Petrillo. All rights reserved.
+- Unauthorized reproduction or use of this project, via any medium, is strictly prohibitted.
+- This project is to remain proprietary and confidential.
+
+Ponjo Bot is licensed under the [MIT License](https://www.mit.edu/~amini/LICENSE.md), and modification is permitted provided that proper credit is given to the original author(s). 
