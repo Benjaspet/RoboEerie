@@ -1,6 +1,7 @@
 import prohibitedWords from "../resources/json/ProhibitedWords";
 import PonjoUtil from "../utils/PonjoUtil";
 
+const UserMap = new Map();
 
 module.exports = {
     name: "messageCreate",

@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
 import config from "../resources/Config";
+import {Message} from "discord.js";
 
 export default class PonjoUtil {
 
