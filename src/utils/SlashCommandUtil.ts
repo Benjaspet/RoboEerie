@@ -1,7 +1,10 @@
+import PonjoUtil from "./PonjoUtil";
+
+const {REST} = require("@discordjs/rest");
+const {Routes} = require("discord-api-types/v9");
+import config from "../resources/Config";
 import AvatarCommand from "../commands/AvatarCommand";
 import BanCommand from "../commands/BanCommand";
-import DeployCommand from "../commands/DeployCommand";
-import config from "../resources/Config";
 import DocsCommand from "../commands/DocsCommand";
 import GitHubCommand from "../commands/GitHubCommand";
 import KickCommand from "../commands/KickCommand";
@@ -15,14 +18,68 @@ import QueryCommand from "../commands/QueryCommand";
 import SendCommand from "../commands/SendCommand";
 import StatsCommand from "../commands/StatsCommand";
 import UrbanCommand from "../commands/UrbanCommand";
+import {Client} from "discord.js";
+import BannerCommand from "../commands/BannerCommand";
 
 export default class SlashCommandUtil {
 
-    public static async deployAllSlashCommands(client, guild: boolean = true) {
-        const slashCommandData = [
+    public static async setAllSlashCommands(client: Client, guild = true) {
+        const rest = new REST({version: 9}).setToken(config.token);
+        if (guild) {
+            try {
+                console.log("◒ Refreshing all guild slash commands...");
+                await rest.put(Routes.applicationGuildCommands(config.clientId, config.guild), {
+                    body: SlashCommandUtil.getAllSlashCommandData(client)});
+                await PonjoUtil.sleep(1000);
+                console.log("✔ Successfully updated all guild slash commands.");
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            if (!guild) {
+                try {
+                    console.log("◒ Refreshing all global slash commands...");
+                    await rest.put(Routes.applicationCommands(config.clientId), {
+                        body: SlashCommandUtil.getAllSlashCommandData(client)});
+                    await PonjoUtil.sleep(1000);
+                    console.log("✔ Successfully updated all global slash commands.");
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+    }
+
+    public static async deleteAllSlashCommands(client: Client, guild: boolean = true) {
+        const rest = new REST({version: 9}).setToken(config.token);
+        if (guild) {
+            try {
+                console.log("◒ Deleting all guild slash commands...");
+                await rest.put(Routes.applicationGuildCommands(config.clientId, config.guild), {
+                    body: []});
+                console.log("✔ Successfully deleted all guild slash commands.");
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            if (!guild) {
+                try {
+                    console.log("◒ Deleting all global slash commands...");
+                    await rest.put(Routes.applicationCommands(config.clientId), {
+                        body: []});
+                    console.log("✔ Successfully deleted all global slash commands.");
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+    }
+
+    public static getAllSlashCommandData(client: Client): object[] {
+        return [
             new AvatarCommand(client).slashData,
             new BanCommand(client).slashData,
-            new DeployCommand(client).slashData,
+            new BannerCommand(client).slashData,
             new DocsCommand(client).slashData,
             new GitHubCommand(client).slashData,
             new KickCommand(client).slashData,
@@ -37,27 +94,5 @@ export default class SlashCommandUtil {
             new StatsCommand(client).slashData,
             new UrbanCommand(client).slashData
         ];
-        if (guild) {
-            client.guilds.cache.get(config.developer.ponjoGuild)?.commands.set(slashCommandData);
-        }
-        if (!guild) {
-            client.application?.commands.set(slashCommandData);
-        }
-    }
-
-    public static async deleteAllSlashCommands(client, guild: boolean = true) {
-        if (guild) {
-            try {
-                client.guilds.cache.get(config.developer.ponjoGuild)?.commands.set([]);
-            } catch (error) {
-                new Error(error.message);
-            }
-        } else {
-            try {
-                client.application?.commands.set([]);
-            } catch (error) {
-                new Error(error.message);
-            }
-        }
     }
 }

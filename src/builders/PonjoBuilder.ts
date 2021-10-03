@@ -2,7 +2,7 @@ import * as fs from "fs";
 import {Client} from "discord.js";
 import AvatarCommand from "../commands/AvatarCommand";
 import BanCommand from "../commands/BanCommand";
-import DeployCommand from "../commands/DeployCommand";
+import BannerCommand from "../commands/BannerCommand";
 import DocsCommand from "../commands/DocsCommand";
 import GitHubCommand from "../commands/GitHubCommand";
 import KickCommand from "../commands/KickCommand";
@@ -35,7 +35,7 @@ export default class PonjoBuilder {
         client.on("interactionCreate", (...args) => {
             new AvatarCommand(client).execute(...args).then(() => {});
             new BanCommand(client).execute(...args).then(() => {});
-            new DeployCommand(client).execute(...args).then(() => {});
+            new BannerCommand(client).execute(...args).then(() => {});
             new DocsCommand(client).execute(...args).then(() => {});
             new GitHubCommand(client).execute(...args).then(() => {});
             new KickCommand(client).execute(...args).then(() => {});
