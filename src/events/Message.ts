@@ -8,7 +8,7 @@ module.exports = {
         if (message.channel.type == "dm") return;
         try {
             for (let index = 0; index < prohibitedWords.length; index++) {
-                if (message.content.includes(prohibitedWords[index])) {
+                if (message.content.toLowerCase().includes(prohibitedWords[index])) {
                     await PonjoUtil.sleep(250);
                     await message.delete();
                 }
