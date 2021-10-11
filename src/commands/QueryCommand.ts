@@ -127,7 +127,7 @@ export default class QueryCommand implements PonjoCommand {
             {
                 name: "port",
                 description: "The port of the host to query.",
-                type: SlashCommandOptions.STRING,
+                type: SlashCommandOptions.INTEGER,
                 required: true
             }
         ]
