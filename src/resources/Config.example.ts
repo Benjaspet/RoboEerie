@@ -1,11 +1,9 @@
 const config = {
     token: "",
     invite: "",
-    developer: {
-        owner: "",
-        ponjoGuild: "",
-        deploySlashCommands: false
-    },
+    clientId: "",
+    guild: "",
+    owner: "",
     ponjo_development: {
         id: "",
         verificationRole: "",
