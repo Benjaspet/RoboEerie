@@ -2,15 +2,15 @@ import prohibitedWords from "../resources/json/ProhibitedWords";
 import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
-    name: "messageCreate",
+    name: "messageUpdate",
     once: false,
-    async execute(message) {
-        if (message.channel.type == "dm") return;
+    async execute(oldMessage, newMessage) {
+        if (newMessage.channel.type == "dm") return;
         try {
             for (let index = 0; index < prohibitedWords.length; index++) {
-                if (message.content.includes(prohibitedWords[index])) {
+                if (newMessage.content.includes(prohibitedWords[index])) {
                     await PonjoUtil.sleep(250);
-                    await message.delete();
+                    await newMessage.delete();
                 }
             }
         } catch (error) {
