@@ -1,10 +1,10 @@
 <p align="center">
     <img width="70px" src="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/RoboEerie.png" align="center" alt="GitHub Readme Stats" />
-    <h2 align="center">Ponjo Bot</h2>
+    <h2 align="center">RoboEerie</h2>
 </p>
 
 <p align="center">
-    The official bot for the Ponjo Development Discord server.
+    My official Discord utility bot.
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-    This bot is a utility bot made for the Ponjo Development Discord server. It serves a variety of purposes,
+    This bot is a utility bot made for my personal Discord server. It serves a variety of purposes,
     including moderation, entertainment, & more.
 </p>
 
@@ -48,18 +48,14 @@
 - [x] Custom join & leave messages by guild.
 - [x] Complete verification system.
 - [x] Moderation commands (kick, ban, mute). 
-
-### Upcoming Features
 - [x] Anti-raid protection system.
 - [x] Full-tier auto-moderation system.
 
 ### Contributing
-We're happy to take in new contributors! If you're interested in contributing to the Ponjo Bot or would like to suggest new features, feel free to make a pull request or create an issue, respectively.
+I'm happy to take in new contributors! If you're interested in contributing to the Ponjo Bot or would like to suggest new features, feel free to make a pull request or create an issue, respectively.
 
 ### License
 
 © Copyright 2021-2022 Ben Petrillo. All rights reserved.
-- Unauthorized reproduction or use of this project, via any medium, is strictly prohibitted.
-- This project is to remain proprietary and confidential.
-
-Ponjo Bot is licensed under the [MIT License](https://www.mit.edu/~amini/LICENSE.md), and modification is permitted provided that proper credit is given to the original author(s). 
+ 
+RoboEerie is licensed under the [MIT License](https://www.mit.edu/~amini/LICENSE.md), and modification is permitted provided that proper credit is given to the original author(s).
