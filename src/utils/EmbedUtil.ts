@@ -7,7 +7,7 @@ export default class EmbedUtil {
         switch (type) {
             case "default":
                 return new Discord.MessageEmbed()
-                    .setColor("PURPLE")
+                    .setColor("#00e1ff")
                     .setDescription(input)
             case "error":
                 return new Discord.MessageEmbed()

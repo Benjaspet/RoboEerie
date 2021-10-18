@@ -39,12 +39,9 @@ export default class TagCommand implements PonjoCommand {
                     if (exists) {
                         return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "A tag by that name already exists.")]});
                     }
-                    await TagUtil.createTag(uuidv4(), tag, content, interaction.user.id, interaction.guild.id)
+                    await TagUtil.createTag(tag, content, interaction.user.id, interaction.guild.id)
                         .then(async () => {
-                            const embed = new Discord.MessageEmbed()
-                                .setDescription(`Successfully created the \`${tag}\` tag.`)
-                                .setColor("#00e1ff")
-                            return await interaction.reply({embeds: [embed]});
+                            return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "default", `Successfully created the \`${tag}\` tag.`)]});
                         })
                         .catch(async error => {
                             return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", error.msg)]});
@@ -91,6 +88,43 @@ export default class TagCommand implements PonjoCommand {
                                 });
                         });
                     break;
+                case "tag-edit":
+                    const content2 = interaction.options.getString("content");
+                    await TagUtil.searchGlobalTag(tag)
+                        .then(async result => {
+                            if (result.author === interaction.user.id) {
+                                await TagUtil.editTag(tag, content2)
+                                    .then(async res2 => {
+                                        return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "default", `Edited the \`${result.tag}\` tag successfully.`)]});
+                                    }).catch(async error => {
+                                        return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "That tag was not found.")]});
+                                    });
+                            } else {
+                                return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "You don't own that tag.")]});
+                            }
+                        }).catch(async error => {
+                            console.log(error)
+                            return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "That tag was not found.")]});
+                        });
+                    break;
+                case "tag-delete":
+                    await TagUtil.searchGlobalTag(tag)
+                        .then(async result => {
+                            if (result.author === interaction.user.id) {
+                                await TagUtil.deleteTag(result.tag)
+                                    .then(async res3 => {
+                                        return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "default", `Deleted the \`${tag}\` tag successfully.`)]});
+                                    }).catch(async error => {
+                                        return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "That tag was not found.")]});
+                                    });
+                            } else {
+                                return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "You don't own that tag.")]});
+                            }
+                        }).catch(async error => {
+                            console.log(error)
+                            return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "That tag was not found.")]});
+                        });
+                    break;
             }
         }
     }
@@ -106,16 +140,24 @@ export default class TagCommand implements PonjoCommand {
                 required: true,
                 choices: [
                     {
-                        name: "Create a Tag",
+                        name: "Create",
                         value: "tag-create"
                     },
                     {
-                        name: "Search for a Tag",
+                        name: "Search",
                         value: "tag-search"
                     },
                     {
-                        name: "Find a Tag",
+                        name: "Find",
                         value: "tag-find"
+                    },
+                    {
+                        name: "Edit",
+                        value: "tag-edit"
+                    },
+                    {
+                        name: "Delete",
+                        value: "tag-delete"
                     }
                 ]
             },

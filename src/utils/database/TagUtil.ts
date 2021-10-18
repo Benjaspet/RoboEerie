@@ -2,10 +2,9 @@ import Tags from "../../schemas/TagSchema";
 
 export default class TagUtil {
 
-    public static async createTag(tagId: string, tag: string, content: string, author: string, guild: string) {
+    public static async createTag(tag: string, content: string, author: string, guild: string) {
         return new Promise<any>(async (resolve, reject) => {
             await Tags.create({
-                tagId: tagId,
                 tag: tag,
                 content: content,
                 author: author,
@@ -68,7 +67,6 @@ export default class TagUtil {
                       });
                   }
                   resolve({
-                      id: result.id,
                       tag: result.tag,
                       content: result.content,
                       author: result.author,
@@ -80,6 +78,44 @@ export default class TagUtil {
                        error: error
                    });
                });
+        });
+    }
+
+    public static async editTag(tag: string, content: string) {
+        return new Promise<any>(async (resolve, reject) => {
+            await Tags.findOneAndUpdate({tag: tag}, {content: content})
+                .then(async result => {
+                    if (!result) {
+                        reject({
+                            msg: "Tag not found.",
+                        });
+                    }
+                    resolve(result);
+                }).catch(error => {
+                    reject({
+                        msg: "An error occurred in finding the tag.",
+                        error: error
+                    });
+                });
+        });
+    }
+
+    public static async deleteTag(tag: string) {
+        return new Promise<any>(async (resolve, reject) => {
+            await Tags.findOneAndDelete({tag: tag})
+                .then(async result => {
+                    if (!result) {
+                        reject({
+                            msg: "Tag not found.",
+                        });
+                    }
+                    resolve(result);
+                }).catch(error => {
+                    reject({
+                        msg: "An error occurred in finding the tag.",
+                        error: error
+                    });
+                });
         });
     }
 }
