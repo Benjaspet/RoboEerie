@@ -5,14 +5,16 @@ module.exports = {
     once: false,
     async execute(oldMessage, newMessage) {
         if (newMessage.channel.type == "dm") return;
-        try {
-            for (let index = 0; index < prohibitedWords.length; index++) {
-                if (newMessage.content.includes(prohibitedWords[index].toString().toLowerCase())) {
-                    await newMessage.delete();
+        if (process.env["FILTER-ENABLED"] == "true") {
+            try {
+                for (let index = 0; index < prohibitedWords.length; index++) {
+                    if (newMessage.content.toLowerCase().includes(prohibitedWords[index].toString().toLowerCase())) {
+                        await newMessage.delete();
+                    }
                 }
+            } catch (error) {
+                // Pass.
             }
-        } catch (error) {
-            // Pass.
         }
     }
 }

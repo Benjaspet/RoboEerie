@@ -1,6 +1,5 @@
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
-import {v4 as uuidv4} from "uuid";
 import {PonjoCommand} from "../interfaces/PonjoCommand";
 import {SlashCommandOptions} from "../interfaces/CommandOptions";
 import TagUtil from "../utils/database/TagUtil";
@@ -30,11 +29,8 @@ export default class TagCommand implements PonjoCommand {
             const action = interaction.options.getString("action");
             const tag = interaction.options.getString("tag");
             switch (action) {
-                case "tag-create":
+                case "create":
                     const content = interaction.options.getString("content");
-                    if (interaction.user.id != process.env.OWNER) {
-                        return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "Only the bot developer can create tags.")]});
-                    }
                     const exists = await TagUtil.tagExists(tag);
                     if (exists) {
                         return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "A tag by that name already exists.")]});
@@ -47,7 +43,7 @@ export default class TagCommand implements PonjoCommand {
                             return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", error.msg)]});
                         });
                     break;
-                case "tag-search":
+                case "search":
                     await TagUtil.findSimilarTags(tag)
                         .then(async result => {
                             const data = [];
@@ -55,16 +51,16 @@ export default class TagCommand implements PonjoCommand {
                                 data.push(obj.tag);
                             });
                             const embed = new Discord.MessageEmbed();
-                            embed.setTitle("Tag not found. Did you mean...");
+                            embed.setTitle(`Search result for ${tag}:`);
                             embed.setColor("#00e1ff");
                             embed.setDescription("" + data.map(x => `• \`${x}\``).join("\n"));
                             return await interaction.reply({embeds: [embed]});
                         })
-                        .catch(async error => {
+                        .catch(async () => {
                             return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "Could not find that tag.")]});
                         });
                     break;
-                case "tag-find":
+                case "find":
                     await TagUtil.searchGlobalTag(tag)
                         .then(async result => {
                             if (result) {
@@ -83,20 +79,20 @@ export default class TagCommand implements PonjoCommand {
                                     embed.setDescription("" + data.map(x => `• \`${x}\``).join("\n"));
                                     return await interaction.reply({embeds: [embed]});
                                 })
-                                .catch(async error => {
+                                .catch(async () => {
                                     return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "Could not find that tag.")]});
                                 });
                         });
                     break;
-                case "tag-edit":
+                case "edit":
                     const content2 = interaction.options.getString("content");
                     await TagUtil.searchGlobalTag(tag)
                         .then(async result => {
                             if (result.author === interaction.user.id) {
                                 await TagUtil.editTag(tag, content2)
-                                    .then(async res2 => {
+                                    .then(async () => {
                                         return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "default", `Edited the \`${result.tag}\` tag successfully.`)]});
-                                    }).catch(async error => {
+                                    }).catch(async () => {
                                         return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "That tag was not found.")]});
                                     });
                             } else {
@@ -107,14 +103,14 @@ export default class TagCommand implements PonjoCommand {
                             return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "That tag was not found.")]});
                         });
                     break;
-                case "tag-delete":
+                case "delete":
                     await TagUtil.searchGlobalTag(tag)
                         .then(async result => {
                             if (result.author === interaction.user.id) {
                                 await TagUtil.deleteTag(result.tag)
-                                    .then(async res3 => {
+                                    .then(async () => {
                                         return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "default", `Deleted the \`${tag}\` tag successfully.`)]});
-                                    }).catch(async error => {
+                                    }).catch(async () => {
                                         return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "That tag was not found.")]});
                                     });
                             } else {
@@ -141,23 +137,23 @@ export default class TagCommand implements PonjoCommand {
                 choices: [
                     {
                         name: "Create",
-                        value: "tag-create"
+                        value: "create"
                     },
                     {
                         name: "Search",
-                        value: "tag-search"
+                        value: "search"
                     },
                     {
                         name: "Find",
-                        value: "tag-find"
+                        value: "find"
                     },
                     {
                         name: "Edit",
-                        value: "tag-edit"
+                        value: "edit"
                     },
                     {
                         name: "Delete",
-                        value: "tag-delete"
+                        value: "delete"
                     }
                 ]
             },
