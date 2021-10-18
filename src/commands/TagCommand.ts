@@ -39,7 +39,7 @@ export default class TagCommand implements PonjoCommand {
                     if (exists) {
                         return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "A tag by that name already exists.")]});
                     }
-                    await TagUtil.createTag(uuidv4(), tag, content, interaction.user.tag, interaction.guild.id)
+                    await TagUtil.createTag(uuidv4(), tag, content, interaction.user.id, interaction.guild.id)
                         .then(async () => {
                             const embed = new Discord.MessageEmbed()
                                 .setDescription(`Successfully created the \`${tag}\` tag.`)
@@ -51,6 +51,23 @@ export default class TagCommand implements PonjoCommand {
                         });
                     break;
                 case "tag-search":
+                    await TagUtil.findSimilarTags(tag)
+                        .then(async result => {
+                            const data = [];
+                            result.map(obj => {
+                                data.push(obj.tag);
+                            });
+                            const embed = new Discord.MessageEmbed();
+                            embed.setTitle("Tag not found. Did you mean...");
+                            embed.setColor("#00e1ff");
+                            embed.setDescription("" + data.map(x => `• \`${x}\``).join("\n"));
+                            return await interaction.reply({embeds: [embed]});
+                        })
+                        .catch(async error => {
+                            return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "Could not find that tag.")]});
+                        });
+                    break;
+                case "tag-find":
                     await TagUtil.searchGlobalTag(tag)
                         .then(async result => {
                             if (result) {
@@ -73,6 +90,7 @@ export default class TagCommand implements PonjoCommand {
                                     return await interaction.reply({embeds: [EmbedUtil.fetchEmbedByType(this.client, "error", "Could not find that tag.")]});
                                 });
                         });
+                    break;
             }
         }
     }
@@ -94,6 +112,10 @@ export default class TagCommand implements PonjoCommand {
                     {
                         name: "Search for a Tag",
                         value: "tag-search"
+                    },
+                    {
+                        name: "Find a Tag",
+                        value: "tag-find"
                     }
                 ]
             },
