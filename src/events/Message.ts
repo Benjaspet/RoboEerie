@@ -1,5 +1,4 @@
 import prohibitedWords from "../resources/json/ProhibitedWords";
-import PonjoUtil from "../utils/PonjoUtil";
 
 module.exports = {
     name: "messageCreate",
@@ -8,8 +7,7 @@ module.exports = {
         if (message.channel.type == "dm") return;
         try {
             for (let index = 0; index < prohibitedWords.length; index++) {
-                if (message.content.toLowerCase().includes(prohibitedWords[index])) {
-                    await PonjoUtil.sleep(250);
+                if (message.content.toLowerCase().includes(prohibitedWords[index].toString().toLowerCase())) {
                     await message.delete();
                 }
             }

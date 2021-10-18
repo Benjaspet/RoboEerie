@@ -3,7 +3,7 @@ import PonjoBuilder from "./PonjoBuilder";
 
 export default class CommandBuilder extends PonjoBuilder {
 
-    public client;
+    public client: Client;
 
     constructor(client: Client) {
         super();

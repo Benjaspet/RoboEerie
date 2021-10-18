@@ -1,12 +1,12 @@
 {
   "name": "roboeerie",
   "author": "Ben Petrillo",
-  "version": "2.3.0",
-  "main": "src/Ponjo.js",
+  "version": "2.3.2",
+  "main": "src/RoboEerie.ts",
   "description": "Eerie's official Discord bot.",
   "scripts": {
-    "start": "ts-node src/Ponjo.ts",
-    "start:dev": "nodemon src/Ponjo.ts",
+    "start": "ts-node src/RoboEerie.ts",
+    "start:dev": "nodemon src/RoboEerie.ts",
     "stop": "ts-node src/scripts/StopProcess.ts"
   },
   "dependencies": {

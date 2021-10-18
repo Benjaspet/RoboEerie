@@ -1,4 +1,3 @@
-import config from "../resources/Config";
 import {Client} from "discord.js";
 import PonjoBuilder from "./PonjoBuilder";
 import * as environment from "dotenv";
