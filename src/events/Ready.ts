@@ -1,5 +1,4 @@
 import DatabaseUtil from "../utils/database/DatabaseUtil";
-import SlashCommandUtil from "../utils/SlashCommandUtil";
 
 module.exports = {
     name: "ready",
