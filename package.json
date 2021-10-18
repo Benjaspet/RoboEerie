@@ -1,9 +1,9 @@
 {
-  "name": "ponjo-bot",
+  "name": "roboeerie",
   "author": "Ben Petrillo",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "main": "src/Ponjo.js",
-  "description": "The official bot for the Ponjo Development Discord server.",
+  "description": "Eerie's official Discord bot.",
   "scripts": {
     "start": "ts-node src/Ponjo.ts",
     "start:dev": "nodemon src/Ponjo.ts",
@@ -11,15 +11,19 @@
   },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
+    "@types/uuid": "^8.3.1",
     "axios": "^0.22.0",
     "cpu-stat": "^2.0.1",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.0.1",
+    "dotenv": "^10.0.0",
     "minecraft-server-util": "^3.5.2",
     "mojang-minecraft-api": "^1.0.2",
+    "mongoose": "^6.0.10",
     "node": "^16.6.1",
     "node-fetch": "^2.6.1",
-    "ts-node": "^10.2.1"
+    "ts-node": "^10.2.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

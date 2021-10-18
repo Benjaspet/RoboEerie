@@ -16,6 +16,7 @@ import QueryCommand from "../commands/QueryCommand";
 import SendCommand from "../commands/SendCommand";
 import StatsCommand from "../commands/StatsCommand";
 import UrbanCommand from "../commands/UrbanCommand";
+import TagCommand from "../commands/TagCommand";
 
 export default class PonjoBuilder {
 
@@ -48,6 +49,7 @@ export default class PonjoBuilder {
             new QueryCommand(client).execute(...args).then(() => {});
             new SendCommand(client).execute(...args).then(() => {});
             new StatsCommand(client).execute(...args, client).then(() => {});
+            new TagCommand(client).execute(...args).then(() => {});
             new UrbanCommand(client).execute(...args).then(() => {});
         });
     }

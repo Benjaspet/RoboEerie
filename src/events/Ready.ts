@@ -1,4 +1,4 @@
-import SlashCommandUtil from "../utils/SlashCommandUtil";
+import DatabaseUtil from "../utils/database/DatabaseUtil";
 
 module.exports = {
     name: "ready",
@@ -7,5 +7,6 @@ module.exports = {
         console.clear();
         console.log(`✔ Logged in as ${client.user.tag}.`);
         client.user.setActivity({type: "WATCHING", name: "over all channels."});
+        await DatabaseUtil.connectToDatabase();
     },
 };

@@ -5,7 +5,7 @@ module.exports = {
     name: "guildMemberAdd",
     once: false,
     async execute(member) {
-        if (member.guild.id === config.guild) {
+        if (member.guild.id === process.env["GUILD-ID"]) {
             PonjoUtil.sendServerWelcomeMessage(member);
         }
     }

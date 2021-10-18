@@ -1,5 +1,7 @@
 import PonjoUtil from "./PonjoUtil";
 
+import * as environment from "dotenv";
+
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
 import config from "../resources/Config";
@@ -20,15 +22,18 @@ import StatsCommand from "../commands/StatsCommand";
 import UrbanCommand from "../commands/UrbanCommand";
 import {Client} from "discord.js";
 import BannerCommand from "../commands/BannerCommand";
+import TagCommand from "../commands/TagCommand";
+
+environment.config();
 
 export default class SlashCommandUtil {
 
     public static async setAllSlashCommands(client: Client, guild = true) {
-        const rest = new REST({version: 9}).setToken(config.token);
+        const rest = new REST({version: 9}).setToken(process.env.TOKEN);
         if (guild) {
             try {
                 console.log("◒ Refreshing all guild slash commands...");
-                await rest.put(Routes.applicationGuildCommands(config.clientId, config.guild), {
+                await rest.put(Routes.applicationGuildCommands(process.env["CLIENT-ID"], process.env["GUILD-ID"]), {
                     body: SlashCommandUtil.getAllSlashCommandData(client)});
                 await PonjoUtil.sleep(1000);
                 console.log("✔ Successfully updated all guild slash commands.");
@@ -39,7 +44,7 @@ export default class SlashCommandUtil {
             if (!guild) {
                 try {
                     console.log("◒ Refreshing all global slash commands...");
-                    await rest.put(Routes.applicationCommands(config.clientId), {
+                    await rest.put(Routes.applicationCommands(process.env["CLIENT-ID"]), {
                         body: SlashCommandUtil.getAllSlashCommandData(client)});
                     await PonjoUtil.sleep(1000);
                     console.log("✔ Successfully updated all global slash commands.");
@@ -51,11 +56,11 @@ export default class SlashCommandUtil {
     }
 
     public static async deleteAllSlashCommands(client: Client, guild: boolean = true) {
-        const rest = new REST({version: 9}).setToken(config.token);
+        const rest = new REST({version: 9}).setToken(process.env.TOKEN);
         if (guild) {
             try {
                 console.log("◒ Deleting all guild slash commands...");
-                await rest.put(Routes.applicationGuildCommands(config.clientId, config.guild), {
+                await rest.put(Routes.applicationGuildCommands(process.env["CLIENT-ID"], process.env["GUILD-ID"]), {
                     body: []});
                 console.log("✔ Successfully deleted all guild slash commands.");
             } catch (error) {
@@ -65,7 +70,7 @@ export default class SlashCommandUtil {
             if (!guild) {
                 try {
                     console.log("◒ Deleting all global slash commands...");
-                    await rest.put(Routes.applicationCommands(config.clientId), {
+                    await rest.put(Routes.applicationCommands(process.env["CLIENT-ID"]), {
                         body: []});
                     console.log("✔ Successfully deleted all global slash commands.");
                 } catch (error) {
@@ -92,6 +97,7 @@ export default class SlashCommandUtil {
             new QueryCommand(client).slashData,
             new SendCommand(client).slashData,
             new StatsCommand(client).slashData,
+            new TagCommand(client).slashData,
             new UrbanCommand(client).slashData
         ];
     }
