@@ -26,7 +26,7 @@ export default class TagCommand implements PonjoCommand {
     public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
-            const tag = interaction.options.getString("tag");
+            const tag = interaction.options.getString("tag").toLowerCase();
             switch (interaction.options.getSubcommand()) {
                 case "make":
                     const exists = await TagUtil.tagExists(tag);
