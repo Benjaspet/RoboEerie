@@ -17,6 +17,7 @@ import SendCommand from "../commands/SendCommand";
 import StatsCommand from "../commands/StatsCommand";
 import UrbanCommand from "../commands/UrbanCommand";
 import TagCommand from "../commands/TagCommand";
+import ServerInfoCommand from "../commands/ServerInfoCommand";
 
 export default class PonjoBuilder {
 

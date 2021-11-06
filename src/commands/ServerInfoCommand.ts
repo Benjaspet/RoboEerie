@@ -22,14 +22,13 @@ export default class ServerInfoCommand implements PonjoCommand {
             const {guild} = interaction;
             const guildId = guild.id;
             const guildName = guild.name;
-            const guildIcon = guild.iconURL;
-            const guildOwner = guild.owner;
-            const guildOwnerId = guild.owner_id;
-            const guildDescription = guild.description ?? "None.";
-            const textChannels = guild.channels.filter(c => c.type === "text").size;
-            const voiceChannels = guild.channels.filter(c => c.type === "voice").size;
-            const memberCount = guild.members.size;
-            const roleCount = guild.roles.size;
+            const guildIcon = guild.iconURL();
+            const guildOwnerId = guild.ownerId;
+            const guildOwner = this.client.users.cache.get(guildOwnerId).tag;
+            const textChannels = guild.channels.cache.filter(c => c.type === "GUILD_TEXT").size;
+            const voiceChannels = guild.channels.cache.filter(c => c.type === "GUILD_VOICE").size;
+            const memberCount = guild.memberCount;
+            const roleCount = guild.roles.cache.size;
             const boostCount = guild.premiumSubscriptionCount;
             const guildLevel = () => {
                 switch (guild.premiumTier) {
@@ -40,29 +39,37 @@ export default class ServerInfoCommand implements PonjoCommand {
                     default: return "Level 0";
                 }
             }
-            const features = {
-                animatedIcon: guild.features.ANIMATED_ICON ? `${config.emojis.success} Animated Icon` : `${config.emojis.error} Animated Icon`,
-                banner: guild.features.BANNER ? `${config.emojis.success} Banner` : `${config.emojis.error} Banner`,
-                community: guild.features.COMMUNITY ? `${config.emojis.success} Community Server` : `${config.emojis.error} Community Server`,
-                inviteSplash: guild.features.INVITE_SPLASH ? `${config.emojis.success} Invite Splash` : `${config.emojis.error} Invite Splash`,
-                partnered: guild.features.PARTNERED ? `${config.emojis.success} Partnered` : `${config.emojis.error} Partnered`,
-                vanityUrl: guild.features.VANITY_URL ? `${config.emojis.error} Vanity URL (${guild.vanityURLCode}, ${guild.vanityURLUses} uses)` : ` ${config.emojis.success} Vanity URL`,
-                newsChannels: guild.features.NEWS,
-                verified: guild.features.VERIFIED,
-                welcomeScreen: guild.features.WELCOME_SCREEN_ENABLED
-            }
+            const animatedIcon = guild.features.includes("ANIMATED_ICON") ? `${config.emojis.success} Animated Icon` : `${config.emojis.error} Animated Icon`;
+            const banner = guild.features.includes("BANNER") ? `${config.emojis.success} Banner` : `${config.emojis.error} Banner`;
+            const community = guild.features.includes("COMMUNITY") ? `${config.emojis.success} Community Server` : `${config.emojis.error} Community Server`;
+            const inviteSplash = guild.features.includes("INVITE_SPLASH") ? `${config.emojis.success} Invite Splash` : `${config.emojis.error} Invite Splash`;
+            const partnered = guild.features.includes("PARTNERED") ? `${config.emojis.success} Partnered` : `${config.emojis.error} Partnered`;
+            const vanity = guild.features.includes("VANITY_URL") ? `${config.emojis.success} Vanity URL (${guild.vanityURLCode}, ${guild.vanityURLUses} uses)` : ` ${config.emojis.error} Vanity URL`;
+            const news = guild.features.includes("NEWS") ? `${config.emojis.success} News Channels` : `${config.emojis.error} News Channels`;
+            const verified = guild.features.includes("VERIFIED") ? `${config.emojis.success} Verified` : `${config.emojis.error} Verified`;
+            const welcomeScreen = guild.features.includes("WELCOME_SCREEN_ENABLED") ? `${config.emojis.success} Welcome Screen` : `${config.emojis.error} Welcome Screen`;
+            const featureString = `${animatedIcon}\n${banner}\n${community}\n${inviteSplash}\n${partnered}\n${vanity}\n${news}\n${verified}\n${welcomeScreen}`;
             const embed = new Discord.MessageEmbed()
                 .setTitle(guildName)
+                .setColor("#00e1ff")
                 .setThumbnail(guildIcon)
                 .setDescription(`
                 **ID:** ${guildId}
-                **Owner:** ${guildOwner}`)
+                **Owner:** ${guildOwner}
+                **Owner ID:** ${guildOwnerId}`)
                 .addFields([
                     {
                         name: "Features",
-                        value: features.animatedIcon
+                        value: featureString,
+                        inline: false
+                    },
+                    {
+                        name: "Guild Information",
+                        value: `Text Channels: ${textChannels}\nVoice Channels: ${voiceChannels}\nMembers: ${memberCount}\nRoles: ${roleCount}\nBoosts: ${boostCount} (${guildLevel()})`
                     }
                 ])
+                .setFooter(`RoboEerie | ${guildName}`, this.client.user.displayAvatarURL({dynamic: true}))
+            return await interaction.reply({embeds: [embed]});
         }
     }
 

@@ -23,6 +23,7 @@ import UrbanCommand from "../commands/UrbanCommand";
 import {Client} from "discord.js";
 import BannerCommand from "../commands/BannerCommand";
 import TagCommand from "../commands/TagCommand";
+import ServerInfoCommand from "../commands/ServerInfoCommand";
 
 environment.config();
 
