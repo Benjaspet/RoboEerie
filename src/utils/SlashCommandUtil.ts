@@ -96,6 +96,7 @@ export default class SlashCommandUtil {
             new PollCommand(client).slashData,
             new QueryCommand(client).slashData,
             new SendCommand(client).slashData,
+            new ServerInfoCommand(client).slashData,
             new StatsCommand(client).slashData,
             new TagCommand(client).slashData,
             new UrbanCommand(client).slashData

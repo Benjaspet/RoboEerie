@@ -48,6 +48,7 @@ export default class PonjoBuilder {
             new PollCommand(client).execute(...args).then(() => {});
             new QueryCommand(client).execute(...args).then(() => {});
             new SendCommand(client).execute(...args).then(() => {});
+            new ServerInfoCommand(client).execute(...args).then(() => {});
             new StatsCommand(client).execute(...args, client).then(() => {});
             new TagCommand(client).execute(...args).then(() => {});
             new UrbanCommand(client).execute(...args).then(() => {});
