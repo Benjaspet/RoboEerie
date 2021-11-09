@@ -22,7 +22,7 @@ export default class PokemonCommand implements PonjoCommand {
     public async execute(interaction) {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === this.name) {
-            const species: string = <string>interaction.options.getString("species");
+            const species: string = <string> interaction.options.getString("species").toLowerCase();
             try {
                 await fetch("https://pokeapi.co/api/v2/pokemon/" + species)
                     .then(response => response.json())
@@ -51,6 +51,7 @@ export default class PokemonCommand implements PonjoCommand {
                         return interaction.reply({embeds: [embed]});
                     });
             } catch (error) {
+                console.log(error)
                 return await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "That Pokémon was not found.")]});
             }
         }
