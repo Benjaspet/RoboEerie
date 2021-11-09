@@ -173,7 +173,8 @@ export default class TagCommand implements PonjoCommand {
                         name: "tag",
                         description: "The name of the tag to create.",
                         type: SlashCommandOptions.STRING,
-                        required: true
+                        required: true,
+                        autocomplete: true
                     }
                 ]
             },
@@ -186,7 +187,8 @@ export default class TagCommand implements PonjoCommand {
                         name: "tag",
                         description: "The name of the tag to edit.",
                         type: SlashCommandOptions.STRING,
-                        required: true
+                        required: true,
+                        autocomplete: true
                     }
                 ]
             },
@@ -199,7 +201,8 @@ export default class TagCommand implements PonjoCommand {
                         name: "tag",
                         description: "The name of the tag to search for.",
                         type: SlashCommandOptions.STRING,
-                        required: true
+                        required: true,
+                        autocomplete: true
                     }
                 ]
             },
@@ -212,7 +215,8 @@ export default class TagCommand implements PonjoCommand {
                         name: "tag",
                         description: "The name of the tag to find.",
                         type: SlashCommandOptions.STRING,
-                        required: true
+                        required: true,
+                        autocomplete: true
                     }
                 ]
             },
@@ -225,7 +229,8 @@ export default class TagCommand implements PonjoCommand {
                         name: "tag",
                         description: "The name of the tag to delete.",
                         type: SlashCommandOptions.STRING,
-                        required: true
+                        required: true,
+                        autocomplete: true
                     }
                 ]
             }

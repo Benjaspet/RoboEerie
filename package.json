@@ -15,7 +15,7 @@
     "axios": "^0.22.0",
     "cpu-stat": "^2.0.1",
     "discord-api-types": "^0.23.1",
-    "discord.js": "^13.0.1",
+    "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "minecraft-server-util": "^3.5.2",
     "mojang-minecraft-api": "^1.0.2",
