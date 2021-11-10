@@ -40,11 +40,13 @@
 | `/query game ip port` | Query a game server. |
 | `/send component` | Send a message component. |
 | `/stats` | View the bot's statistics. |
+| `/tag <action>` | Manage server tags. |
 | `/urban query` | Search a term [on this site](https://urbandictionary.com).
 
 ### Features
  
 - [x] Fully integrated slash commands.
+- [x] Full autocomplete support with search algorithms.
 - [x] Custom join & leave messages by guild.
 - [x] Complete verification system.
 - [x] Moderation commands (kick, ban, mute). 
@@ -52,7 +54,7 @@
 - [x] Full-tier auto-moderation system.
 
 ### Contributing
-I'm happy to take in new contributors! If you're interested in contributing to the Ponjo Bot or would like to suggest new features, feel free to make a pull request or create an issue, respectively.
+I'm happy to take in new contributors! If you're interested in contributing to RoboEerie or would like to suggest new features, feel free to make a pull request or create an issue, respectively.
 
 ### License
 
