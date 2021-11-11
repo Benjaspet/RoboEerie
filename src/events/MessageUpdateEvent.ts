@@ -1,5 +1,5 @@
 import {IEvent} from "../interfaces/IEvent";
-import {Client, ClientEvents, Message} from "discord.js";
+import {Client, ClientEvents, Message, PartialMessage} from "discord.js";
 import prohibitedWords from "../resources/json/ProhibitedWords";
 import BaseConfig from "../base/BaseConfig";
 
@@ -15,7 +15,7 @@ export default class MessageUpdateEvent implements IEvent {
         this.name = name;
     }
 
-    public async execute(oldMessage: Message, newMessage: Message) {
+    public async execute(oldMessage: Message | PartialMessage, newMessage: Message | PartialMessage) {
         if (newMessage.channel.type == "DM") return;
         if (BaseConfig.get("FILTER_ENABLED") == "true") {
             try {

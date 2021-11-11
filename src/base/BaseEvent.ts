@@ -16,8 +16,8 @@ export default class EventBase {
         this.client.on("ready", () => {
             new ReadyEvent(this.client, "ready", true).execute();
         });
-        this.client.on("messageUpdate", () => {
-            new MessageUpdateEvent(this.client, "messageUpdate", false).execute();
+        this.client.on("messageUpdate", (first, last) => {
+            new MessageUpdateEvent(this.client, "messageUpdate", false).execute(first, last);
         });
     }
 
