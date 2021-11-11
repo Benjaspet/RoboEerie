@@ -4,12 +4,16 @@ import * as environment from "dotenv";
 
 environment.config();
 
-export default class AppBuilder extends PonjoBuilder {
+export default class AppBuilder {
+
+    private client: Client;
 
     constructor(client: Client) {
-        super();
-        console.clear();
-        client.login(process.env.TOKEN).then(() => {});
+        this.client = client;
     }
 
+    public login(): void {
+        console.clear();
+        this.client.login(process.env.TOKEN).then(() => {});
+    }
 }
