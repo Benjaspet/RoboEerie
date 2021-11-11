@@ -1,8 +1,7 @@
 import * as Discord from "discord.js";
-import PonjoBuilder from "./PonjoBuilder";
 import {MessageMentionTypes, PartialTypes} from "discord.js";
 
-export default class IntentsBuilder extends PonjoBuilder {
+export default class IntentUtil {
 
     public static getIntents(): Discord.BitFieldResolvable<any, number> {
         return [

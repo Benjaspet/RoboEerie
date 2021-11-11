@@ -1,8 +1,8 @@
-import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {ICommand} from "../structs/ICommand";
 import * as Discord from "discord.js";
 import config from "../resources/Config";
 
-export default class ServerInfoCommand implements PonjoCommand {
+export default class ServerInfoCommand implements ICommand {
 
     public name: string = "serverinfo";
     public once: boolean = false;

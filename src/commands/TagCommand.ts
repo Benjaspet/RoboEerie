@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
-import {PonjoCommand} from "../interfaces/PonjoCommand";
-import {SlashCommandOptions} from "../interfaces/CommandOptions";
+import {ICommand} from "../structs/ICommand";
+import {SlashCommandOptions} from "../structs/ICommandOptions";
 import TagUtil from "../utils/database/TagUtil";
 import EmbedUtil from "../utils/EmbedUtil";
 
@@ -9,7 +9,7 @@ import * as environment from "dotenv";
 
 environment.config();
 
-export default class TagCommand implements PonjoCommand {
+export default class TagCommand implements ICommand {
 
     public name: string = "tag";
     public once: boolean = false;

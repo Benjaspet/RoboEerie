@@ -2,10 +2,10 @@ import * as Discord from "discord.js";
 import PonjoUtil from "../utils/PonjoUtil";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
-import {PonjoCommand} from "../interfaces/PonjoCommand";
-import {SlashCommandOptions} from "../interfaces/CommandOptions";
+import {ICommand} from "../structs/ICommand";
+import {SlashCommandOptions} from "../structs/ICommandOptions";
 
-export default class PokemonCommand implements PonjoCommand {
+export default class PokemonCommand implements ICommand {
 
     public name: string = "pokemon";
     public once: boolean = false;

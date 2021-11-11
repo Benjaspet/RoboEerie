@@ -2,10 +2,10 @@ import * as Discord from "discord.js";
 import {getNameHistoryByName, getUUID} from "mojang-minecraft-api";
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
-import {PonjoCommand} from "../interfaces/PonjoCommand";
-import {SlashCommandOptions} from "../interfaces/CommandOptions";
+import {ICommand} from "../structs/ICommand";
+import {SlashCommandOptions} from "../structs/ICommandOptions";
 
-export default class PlayerInfoCommand implements PonjoCommand {
+export default class PlayerInfoCommand implements ICommand {
 
     public name: string = "playerinfo";
     public once: boolean = false;

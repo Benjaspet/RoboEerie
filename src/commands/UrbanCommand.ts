@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
-import {SlashCommandOptions} from "../interfaces/CommandOptions";
+import {SlashCommandOptions} from "../structs/ICommandOptions";
 
 export default class UrbanCommand {
 

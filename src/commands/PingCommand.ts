@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
-import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {ICommand} from "../structs/ICommand";
 
-export default class PingCommand implements PonjoCommand {
+export default class PingCommand implements ICommand {
 
     public name: string = "ping";
     public once: boolean = false;

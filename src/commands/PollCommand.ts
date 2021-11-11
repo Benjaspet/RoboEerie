@@ -1,10 +1,10 @@
 import config from "../resources/Config";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
-import {PonjoCommand} from "../interfaces/PonjoCommand";
-import {SlashCommandOptions} from "../interfaces/CommandOptions";
+import {ICommand} from "../structs/ICommand";
+import {SlashCommandOptions} from "../structs/ICommandOptions";
 
-export default class PollCommand implements PonjoCommand {
+export default class PollCommand implements ICommand {
 
     public name: string = "poll";
     public once: boolean = false;

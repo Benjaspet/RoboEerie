@@ -2,9 +2,9 @@ import * as Discord from "discord.js";
 import * as stats from "cpu-stat";
 import * as os from "os";
 import {Client} from "discord.js";
-import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {ICommand} from "../structs/ICommand";
 
-export default class StatsCommand implements PonjoCommand {
+export default class StatsCommand implements ICommand {
 
     public name: string = "stats";
     public once: boolean = false;
@@ -30,7 +30,7 @@ export default class StatsCommand implements PonjoCommand {
                 const embed = new Discord.MessageEmbed()
                     .setTitle("Ponjo Bot | Statistics")
                     .setColor("#00e1ff")
-                    .setDescription(`Library: Discord.js v13.0.1` + `\n` + `Websocket latency: ${client.ws.ping}ms` + `\n` + `Interaction latency: ${Date.now() - interaction.createdTimestamp}ms`)
+                    .setDescription(`Library: Discord.js v${require("discord.js").version}` + `\n` + "Node.js: Version " + process.version + `\n` + `Websocket latency: ${client.ws.ping}ms` + `\n` + `Interaction latency: ${Date.now() - interaction.createdTimestamp}ms`)
                     .addField("Bot Information", `Developer: Eerie#6560` + `\n` + `Language: TypeScript` + `\n` + `Library: Discord.js v13.0.1`)
                     .addField("Host Information", `CPU: ${cpuModel}` + `\n` + `Cores: ${cores}` + `\n` + `CPU Usage: ${cpuUsage}` + `\n` + `Node Version: ${nodeVersion}`)
                     .setFooter("Ponjo", client.user.displayAvatarURL({dynamic: true}))

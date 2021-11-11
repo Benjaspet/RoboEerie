@@ -3,10 +3,10 @@ import * as Discord from "discord.js";
 import * as QueryUtil from "minecraft-server-util";
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
-import {PonjoCommand} from "../interfaces/PonjoCommand";
-import {SlashCommandOptions} from "../interfaces/CommandOptions";
+import {ICommand} from "../structs/ICommand";
+import {SlashCommandOptions} from "../structs/ICommandOptions";
 
-export default class QueryCommand implements PonjoCommand {
+export default class QueryCommand implements ICommand {
 
     public name: string = "query";
     public once: boolean = false;

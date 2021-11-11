@@ -1,10 +1,10 @@
-import {PonjoCommand} from "../interfaces/PonjoCommand";
+import {ICommand} from "../structs/ICommand";
 import {Client, MessageEmbed} from "discord.js";
 import EmbedUtil from "../utils/EmbedUtil";
 import axios from "axios";
-import {SlashCommandOptions} from "../interfaces/CommandOptions";
+import {SlashCommandOptions} from "../structs/ICommandOptions";
 
-export default class BannerCommand implements PonjoCommand {
+export default class BannerCommand implements ICommand {
 
     public name: string = "banner";
     public once: boolean = false;
