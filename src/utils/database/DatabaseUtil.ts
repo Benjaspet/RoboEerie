@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import BaseLogger from "../../base/BaseLogger";
 
 export default class DatabaseUtil {
 
@@ -8,7 +9,7 @@ export default class DatabaseUtil {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        console.log("✔ Connected to database.");
+        BaseLogger.info("Connected to database.");
     }
 
 }

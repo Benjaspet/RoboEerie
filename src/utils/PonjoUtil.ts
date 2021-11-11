@@ -32,4 +32,8 @@ export default class PonjoUtil {
     public static sleep(ms): Promise<any> {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    public static clearConsole(): void {
+        console.clear();
+    }
 }

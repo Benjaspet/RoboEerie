@@ -1,8 +1,6 @@
 import {Client} from "discord.js";
-import PonjoBuilder from "./PonjoBuilder";
-import * as environment from "dotenv";
-
-environment.config();
+import BaseConfig from "../base/BaseConfig";
+import PonjoUtil from "../utils/PonjoUtil";
 
 export default class AppBuilder {
 
@@ -13,7 +11,7 @@ export default class AppBuilder {
     }
 
     public login(): void {
-        console.clear();
-        this.client.login(process.env.TOKEN).then(() => {});
+        PonjoUtil.clearConsole();
+        this.client.login(BaseConfig.get("TOKEN")).then(() => {});
     }
 }
