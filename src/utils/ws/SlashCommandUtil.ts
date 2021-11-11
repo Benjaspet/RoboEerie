@@ -17,6 +17,8 @@ import {Client} from "discord.js";
 import BannerCommand from "../../commands/BannerCommand";
 import TagCommand from "../../commands/TagCommand";
 import ServerInfoCommand from "../../commands/ServerInfoCommand";
+import UserInfoCommand from "../../commands/UserInfoCommand";
+import UserInfoMenu from "../../menu/UserInfoMenu";
 
 export default class SlashCommandUtil {
 
@@ -39,7 +41,9 @@ export default class SlashCommandUtil {
             new ServerInfoCommand(client).slashData,
             new StatsCommand(client).slashData,
             new TagCommand(client).slashData,
-            new UrbanCommand(client).slashData
+            new UrbanCommand(client).slashData,
+            new UserInfoCommand(client).slashData,
+            new UserInfoMenu(client).slashData
         ];
     }
 }

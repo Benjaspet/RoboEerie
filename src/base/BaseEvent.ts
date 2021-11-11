@@ -6,6 +6,7 @@ import GuildMemberAddEvent from "../events/guild/GuildMemberAddEvent";
 import CommandBuilder from "../builders/CommandBuilder";
 import AutocompleteEvent from "../events/interaction/AutocompleteEvent";
 import ButtonClickEvent from "../events/interaction/ButtonClickEvent";
+import UserInfoMenu from "../menu/UserInfoMenu";
 
 export default class EventBase {
 
@@ -39,7 +40,9 @@ export default class EventBase {
                 } else if (interaction.isSelectMenu()) {}
                 else if (interaction.isAutocomplete()) {
                     await new AutocompleteEvent(this.client, "interactionCreate", false).execute(interaction);
-                } else if (interaction.isContextMenu()) {}
+                } else if (interaction.isContextMenu()) {
+                    await new UserInfoMenu(this.client).execute(interaction);
+                }
                 else if (interaction.isMessageComponent()) {}
             });
     }

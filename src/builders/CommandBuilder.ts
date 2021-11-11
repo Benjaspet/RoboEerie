@@ -17,6 +17,7 @@ import StatsCommand from "../commands/StatsCommand";
 import UrbanCommand from "../commands/UrbanCommand";
 import TagCommand from "../commands/TagCommand";
 import ServerInfoCommand from "../commands/ServerInfoCommand";
+import UserInfoCommand from "../commands/UserInfoCommand";
 
 export default class CommandBuilder {
 
@@ -39,6 +40,7 @@ export default class CommandBuilder {
         new StatsCommand(client).execute(interaction, client).then(() => {});
         new TagCommand(client).execute(interaction).then(() => {});
         new UrbanCommand(client).execute(interaction).then(() => {});
+        new UserInfoCommand(client).execute(interaction).then(() => {});
     }
 
 }

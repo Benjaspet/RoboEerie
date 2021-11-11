@@ -1,5 +1,7 @@
 import {ICommand} from "../structs/ICommand";
 import * as Discord from "discord.js";
+import {Interaction, MessageEmbed} from "discord.js";
+import {SlashCommandOptions} from "../structs/ICommandOptions";
 
 export default class UserInfoCommand implements ICommand {
 
@@ -15,10 +17,35 @@ export default class UserInfoCommand implements ICommand {
         this.client = client;
     }
 
-    public async execute(interaction): Promise<boolean> {
+    public async execute(interaction: Interaction): Promise<void> {
         if (!interaction.isCommand()) return;
         if (interaction.commandName == this.name) {
-            return true;
+            const user = await interaction.options.getUser("user");
+            const target = interaction.guild.members.cache.get(user.id);
+            const embed = new MessageEmbed()
+                .setAuthor(target.user.tag, target.displayAvatarURL({dynamic: true, size: 512}))
+                .setColor("#00e1ff")
+                .setThumbnail(target.user.displayAvatarURL({dynamic: true, size: 512}))
+                .addFields([
+                    {
+                        name: "User ID",
+                        value: target.id,
+                        inline: false
+                    },
+                    {
+                        name: "Timestamps",
+                        value: `Joined guild: <t:${parseInt(String(target.joinedTimestamp / 1000))}:R>` + "\n" + `Account created: <t:${parseInt(String(target.user.createdTimestamp / 1000))}:R>`,
+                        inline: false
+                    },
+                    {
+                        name: "Roles",
+                        value: target.roles.cache.map(role => role).join(" ").replace("@everyone", "") || "None.",
+                        inline: false
+                    }
+                ])
+                .setFooter("RoboEerie", this.client.user.displayAvatarURL({dynamic: true}))
+                .setTimestamp();
+            return await interaction.reply({embeds: [embed], ephemeral: true});
         }
     }
 
@@ -29,7 +56,7 @@ export default class UserInfoCommand implements ICommand {
             {
                 name: "user",
                 description: "The user to view.",
-                type: "USER",
+                type: SlashCommandOptions.USER,
                 required: true
             }
         ]
