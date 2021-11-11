@@ -1,6 +1,6 @@
 import {IEvent} from "../../structs/IEvent";
 import {Client, ClientEvents, Message, PartialMessage} from "discord.js";
-import prohibitedWords from "../../resources/json/ProhibitedWords";
+import prohibitedWords from "../../resources/ProhibitedWords";
 import BaseConfig from "../../base/BaseConfig";
 
 export default class MessageUpdateEvent implements IEvent {

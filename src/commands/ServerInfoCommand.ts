@@ -1,6 +1,6 @@
 import {ICommand} from "../structs/ICommand";
 import * as Discord from "discord.js";
-import config from "../resources/Config";
+import emojis from "../resources/Emojis";
 
 export default class ServerInfoCommand implements ICommand {
 
@@ -39,15 +39,15 @@ export default class ServerInfoCommand implements ICommand {
                     default: return "Level 0";
                 }
             }
-            const animatedIcon = guild.features.includes("ANIMATED_ICON") ? `${config.emojis.success} Animated Icon` : `${config.emojis.error} Animated Icon`;
-            const banner = guild.features.includes("BANNER") ? `${config.emojis.success} Banner` : `${config.emojis.error} Banner`;
-            const community = guild.features.includes("COMMUNITY") ? `${config.emojis.success} Community Server` : `${config.emojis.error} Community Server`;
-            const inviteSplash = guild.features.includes("INVITE_SPLASH") ? `${config.emojis.success} Invite Splash` : `${config.emojis.error} Invite Splash`;
-            const partnered = guild.features.includes("PARTNERED") ? `${config.emojis.success} Partnered` : `${config.emojis.error} Partnered`;
-            const vanity = guild.features.includes("VANITY_URL") ? `${config.emojis.success} Vanity URL (${guild.vanityURLCode}, ${guild.vanityURLUses} uses)` : ` ${config.emojis.error} Vanity URL`;
-            const news = guild.features.includes("NEWS") ? `${config.emojis.success} News Channels` : `${config.emojis.error} News Channels`;
-            const verified = guild.features.includes("VERIFIED") ? `${config.emojis.success} Verified` : `${config.emojis.error} Verified`;
-            const welcomeScreen = guild.features.includes("WELCOME_SCREEN_ENABLED") ? `${config.emojis.success} Welcome Screen` : `${config.emojis.error} Welcome Screen`;
+            const animatedIcon = guild.features.includes("ANIMATED_ICON") ? `${emojis.success} Animated Icon` : `${emojis.error} Animated Icon`;
+            const banner = guild.features.includes("BANNER") ? `${emojis.success} Banner` : `${emojis.error} Banner`;
+            const community = guild.features.includes("COMMUNITY") ? `${emojis.success} Community Server` : `${emojis.error} Community Server`;
+            const inviteSplash = guild.features.includes("INVITE_SPLASH") ? `${emojis.success} Invite Splash` : `${emojis.error} Invite Splash`;
+            const partnered = guild.features.includes("PARTNERED") ? `${emojis.success} Partnered` : `${emojis.error} Partnered`;
+            const vanity = guild.features.includes("VANITY_URL") ? `${emojis.success} Vanity URL (${guild.vanityURLCode}, ${guild.vanityURLUses} uses)` : ` ${emojis.error} Vanity URL`;
+            const news = guild.features.includes("NEWS") ? `${emojis.success} News Channels` : `${emojis.error} News Channels`;
+            const verified = guild.features.includes("VERIFIED") ? `${emojis.success} Verified` : `${emojis.error} Verified`;
+            const welcomeScreen = guild.features.includes("WELCOME_SCREEN_ENABLED") ? `${emojis.success} Welcome Screen` : `${emojis.error} Welcome Screen`;
             const featureString = `${animatedIcon}\n${banner}\n${community}\n${inviteSplash}\n${partnered}\n${vanity}\n${news}\n${verified}\n${welcomeScreen}`;
             const embed = new Discord.MessageEmbed()
                 .setTitle(guildName)

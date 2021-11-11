@@ -6,8 +6,7 @@
   "description": "Eerie's official Discord bot.",
   "scripts": {
     "start": "ts-node src/RoboEerie.ts",
-    "start:dev": "nodemon src/RoboEerie.ts",
-    "stop": "ts-node src/scripts/StopProcess.ts"
+    "start:dev": "nodemon src/RoboEerie.ts"
   },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",

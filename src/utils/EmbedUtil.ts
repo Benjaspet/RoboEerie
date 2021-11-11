@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import config from "../resources/Config";
+import emojis from "../resources/Emojis";
 
 export default class EmbedUtil {
 
@@ -11,7 +11,7 @@ export default class EmbedUtil {
                     .setDescription(input)
             case "error":
                 return new Discord.MessageEmbed()
-                    .setDescription(config.emojis.error + " " + input)
+                    .setDescription(emojis.error + " " + input)
                     .setColor("RED")
         }
     }

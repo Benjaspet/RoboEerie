@@ -1,8 +1,8 @@
-import config from "../resources/Config";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import {ICommand} from "../structs/ICommand";
 import {SlashCommandOptions} from "../structs/ICommandOptions";
+import emojis from "../resources/Emojis";
 
 export default class SendCommand implements ICommand {
 
@@ -37,7 +37,7 @@ export default class SendCommand implements ICommand {
                                 .setCustomId("verify")
                                 .setLabel("Verify yourself!")
                                 .setStyle("SECONDARY")
-                                .setEmoji(config.emojis.success)
+                                .setEmoji(emojis.success)
                         );
                     await interaction.reply({content: "The component has been sent successfully."});
                     await channel.send({embeds: [embed], components: [row]});

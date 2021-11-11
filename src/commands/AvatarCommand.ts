@@ -23,7 +23,7 @@ export default class AvatarCommand implements ICommand {
             const member = interaction.options.getMember("user");
             const embed = new Discord.MessageEmbed()
                 .setTitle(`${member.user.tag}'s Avatar`)
-                .setImage(member.user.displayAvatarURL({dynamic: true, size: 512}))
+                .setImage(member.user.displayAvatarURL({dynamic: true, size: 512, format: "png"}))
                 .setColor("#00e1ff")
             await interaction.reply({embeds: [embed]});
         }

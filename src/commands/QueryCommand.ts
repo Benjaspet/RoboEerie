@@ -1,6 +1,6 @@
-import config from "../resources/Config";
 import * as Discord from "discord.js";
 import * as QueryUtil from "minecraft-server-util";
+import emojis from "../resources/Emojis";
 import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
 import {ICommand} from "../structs/ICommand";
@@ -28,7 +28,7 @@ export default class QueryCommand implements ICommand {
             switch (game) {
                 case "minecraftbe":
                     const embedPre1 = new Discord.MessageEmbed()
-                        .setDescription(`${config.emojis.loading} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
+                        .setDescription(`${emojis.loading} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
                         .setColor("#00e1ff")
                     await interaction.reply({embeds: [embedPre1]});
                     await QueryUtil.queryFull(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 5000})
@@ -60,13 +60,13 @@ export default class QueryCommand implements ICommand {
                             await PonjoUtil.sleep(2000);
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
-                                .setDescription(`${config.emojis.error} Server is offline. Please try again later.`)
+                                .setDescription(`${emojis.error} Server is offline. Please try again later.`)
                             return await interaction.editReply({content: `Query for **${host}** failed.`, embeds: [errorEmbed]});
                         });
                     break;
                 case "minecraft":
                     const embedPre2 = new Discord.MessageEmbed()
-                        .setDescription(`${config.emojis.loading} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
+                        .setDescription(`${emojis.loading} Querying ${host} on port ${parseInt(interaction.options.getInteger("port"))}...`)
                         .setColor("#00e1ff")
                     await interaction.reply({embeds: [embedPre2]});
                     await QueryUtil.status(host, {port: parseInt(interaction.options.getInteger("port")), timeout: 5000})
@@ -91,7 +91,7 @@ export default class QueryCommand implements ICommand {
                             await PonjoUtil.sleep(2000);
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
-                                .setDescription(`${config.emojis.error} Server is offline. Please try again later.`)
+                                .setDescription(`${emojis.error} Server is offline. Please try again later.`)
                             return await interaction.editReply({content: `Query for **${host}** failed.`, embeds: [errorEmbed]});
                         });
             }
