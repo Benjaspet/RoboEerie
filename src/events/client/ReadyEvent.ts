@@ -41,30 +41,32 @@ export default class ReadyEvent implements IEvent {
     }
 
     private async handleApplicationCommands() {
-        if (BaseConfig.get("DEPLOY-APPLICATION-COMMANDS-GUILD") == true) {
+        if (JSON.parse(BaseConfig.get("DEPLOY-APPLICATION-COMMANDS-GUILD")) == true) {
             await new BaseSlashCommand(this.client, SlashCommandUtil.getAllSlashCommandData(this.client), {
                 deploy: true,
                 delete: false,
                 guild: true
             });
-        } else if (BaseConfig.get("DEPLOY-APPLICATION-COMMANDS-GLOBAL") == true) {
+        } else if (JSON.parse(BaseConfig.get("DEPLOY-APPLICATION-COMMANDS-GLOBAL")) == true) {
             await new BaseSlashCommand(this.client, SlashCommandUtil.getAllSlashCommandData(this.client), {
                 deploy: true,
                 delete: false,
                 guild: false
             });
-        } else if (BaseConfig.get("DELETE-APPLICATION-COMMANDS-GUILD") == true) {
+        } else if (JSON.parse(BaseConfig.get("DELETE-APPLICATION-COMMANDS-GUILD")) == true) {
             await new BaseSlashCommand(this.client, SlashCommandUtil.getAllSlashCommandData(this.client), {
                 deploy: false,
                 delete: true,
                 guild: true
             });
-        } else if (BaseConfig.get("DELETE-APPLICATION-COMMANDS-GLOBAL") == true) {
+        } else if (JSON.parse(BaseConfig.get("DELETE-APPLICATION-COMMANDS-GLOBAL")) == true) {
             await new BaseSlashCommand(this.client, SlashCommandUtil.getAllSlashCommandData(this.client), {
                 deploy: false,
                 delete: true,
                 guild: false
             });
+        } else {
+            BaseLogger.info("Application commands loaded.");
         }
     }
 }

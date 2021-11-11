@@ -1,11 +1,11 @@
 import * as Discord from "discord.js";
-import config from "../resources/Config";
-import {Message} from "discord.js";
+import BaseConfig from "../base/BaseConfig";
+import emojis from "../resources/Emojis";
 
 export default class PonjoUtil {
 
     public static sendServerWelcomeMessage(member) {
-        const welcomeChannel = member.guild.channels.cache.get(config.ponjo_development.welcomeChannel);
+        const welcomeChannel = member.guild.channels.cache.get(BaseConfig.get("WELCOME-CHANNEL"));
         const output = `Welcome to the Ponjo Development Support server, <@${member.id}>!`;
         return welcomeChannel.send({content: output});
     }
@@ -26,7 +26,7 @@ export default class PonjoUtil {
     public static getErrorMessageEmbed(client, content): Discord.MessageEmbed {
         return new Discord.MessageEmbed()
             .setColor("RED")
-            .setDescription(`${config.emojis.error} ${content}`)
+            .setDescription(`${emojis.error} ${content}`)
     }
 
     public static sleep(ms): Promise<any> {

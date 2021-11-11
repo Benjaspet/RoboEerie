@@ -35,7 +35,7 @@ export default class EventBase {
                 if (interaction.isCommand()) {
                     await CommandBuilder.respondToApplicationCommands(this.client, interaction);
                 } else if (interaction.isButton()) {
-                    await new ButtonClickEvent(this.client, "interactionCreate", false);
+                    await new ButtonClickEvent(this.client, "interactionCreate", false).execute(interaction);
                 } else if (interaction.isSelectMenu()) {}
                 else if (interaction.isAutocomplete()) {
                     await new AutocompleteEvent(this.client, "interactionCreate", false).execute(interaction);

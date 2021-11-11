@@ -1,5 +1,5 @@
-import config from "../resources/Config";
 import * as Discord from "discord.js";
+import emojis from "../resources/Emojis";
 import {Client} from "discord.js";
 import {ICommand} from "../structs/ICommand";
 import {SlashCommandOptions} from "../structs/ICommandOptions";
@@ -32,8 +32,8 @@ export default class PollCommand implements ICommand {
                 .setTimestamp()
             channel.send({embeds: [embed]})
                 .then(async msg => {
-                    await msg.react(config.emojis.success);
-                    await msg.react(config.emojis.error);
+                    await msg.react(emojis.success);
+                    await msg.react(emojis.error);
                 });
         }
     }
