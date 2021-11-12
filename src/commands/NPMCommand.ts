@@ -1,9 +1,9 @@
 import * as Discord from "discord.js";
-import PonjoUtil from "../utils/PonjoUtil";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
 import {ICommand} from "../structs/ICommand";
 import {SlashCommandOptions} from "../structs/ICommandOptions";
+import EmbedUtil from "../utils/EmbedUtil";
 
 export default class NPMCommand implements ICommand {
 
@@ -38,7 +38,7 @@ export default class NPMCommand implements ICommand {
                         await interaction.reply({embeds: [embed]});
                     });
             } catch (error) {
-                await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "Could not find the specified NPM package.")]});
+                await interaction.reply({embeds: [EmbedUtil.getErrorMessageEmbed("Could not find the specified NPM package.")]});
             }
         }
     }

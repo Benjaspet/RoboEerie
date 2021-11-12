@@ -1,11 +1,11 @@
 import {IEvent} from "../../structs/IEvent";
 import {Client, ClientEvents, Presence} from "discord.js";
-import PonjoUtil from "../../utils/PonjoUtil";
 import DatabaseUtil from "../../utils/database/DatabaseUtil";
 import BaseConfig from "../../base/BaseConfig";
 import BaseLogger from "../../base/BaseLogger";
 import BaseSlashCommand from "../../base/BaseSlashCommand";
 import SlashCommandUtil from "../../utils/ws/SlashCommandUtil";
+import Util from "../../utils/Util";
 
 export default class ReadyEvent implements IEvent {
 
@@ -20,7 +20,7 @@ export default class ReadyEvent implements IEvent {
     }
 
     public async execute(): Promise<void> {
-        PonjoUtil.clearConsole();
+        Util.clearConsole();
         this.handlePresence();
         await DatabaseUtil.connectToDatabase();
         BaseLogger.info(`Logged in as ${this.client.user.tag}.`);

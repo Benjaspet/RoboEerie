@@ -1,9 +1,9 @@
 import * as Discord from "discord.js";
 import {getNameHistoryByName, getUUID} from "mojang-minecraft-api";
-import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
 import {ICommand} from "../structs/ICommand";
 import {SlashCommandOptions} from "../structs/ICommandOptions";
+import EmbedUtil from "../utils/EmbedUtil";
 
 export default class PlayerInfoCommand implements ICommand {
 
@@ -30,7 +30,7 @@ export default class PlayerInfoCommand implements ICommand {
                     uuid = data.id;
                 }).catch(error => {
                 console.error(error);
-                return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "Invalid username. Please try again.")]});
+                return interaction.reply({embeds: [EmbedUtil.getErrorMessageEmbed("Invalid username. Please try again.")]});
             });
             switch (query) {
                 case "name-history":
@@ -46,7 +46,7 @@ export default class PlayerInfoCommand implements ICommand {
                             return interaction.reply({embeds: [embed]});
                         }).catch(error => {
                             console.error(error);
-                            return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "Previous usernames could not be found.")]});
+                            return interaction.reply({embeds: [EmbedUtil.getErrorMessageEmbed("Previous usernames could not be found.")]});
                         });
                     break;
                 case "skin":

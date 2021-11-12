@@ -1,8 +1,9 @@
-import PonjoUtil from "../utils/PonjoUtil";
 import * as Discord from "discord.js";
 import {Client} from "discord.js";
 import {ICommand} from "../structs/ICommand";
 import {SlashCommandOptions} from "../structs/ICommandOptions";
+import Util from "../utils/Util";
+import EmbedUtil from "../utils/EmbedUtil";
 
 export default class BanCommand implements ICommand {
 
@@ -25,10 +26,10 @@ export default class BanCommand implements ICommand {
             const user = interaction.options.getUser("member");
             const reason = interaction.options.getString("reason") || undefined;
             if (!permissions.has("ADMINISTRATOR") || !permissions.has("BAN_MEMBERS")) {
-                return await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "You don't have the correct permissions.")]});
+                return await interaction.reply({embeds: [EmbedUtil.getErrorMessageEmbed("You don't have the correct permissions.")]});
             }
             const member = interaction.guild.members.cache.get(user.id);
-            if (!member.bannable) return interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "I cannot kick that member.")]});
+            if (!member.bannable) return interaction.reply({embeds: [EmbedUtil.getErrorMessageEmbed("I cannot kick that member.")]});
             if (!reason) {
                 const embed = new Discord.MessageEmbed()
                     .setTitle("Uh-oh!")
@@ -69,7 +70,7 @@ export default class BanCommand implements ICommand {
 
     public slashData: object = <object> {
         name: this.name,
-        description: this.name,
+        description: this.description,
         options: [
             {
                 name: "member",

@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
 import fetch from "node-fetch";
-import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
 import {SlashCommandOptions} from "../structs/ICommandOptions";
+import EmbedUtil from "../utils/EmbedUtil";
 
 export default class UrbanCommand {
 
@@ -40,7 +40,7 @@ export default class UrbanCommand {
                         await interaction.reply({embeds: [embed]});
                     });
             } catch (error) {
-                await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "The specified query could not be found.")]});
+                await interaction.reply({embeds: [EmbedUtil.getErrorMessageEmbed("The specified query could not be found.")]});
             }
         }
     }

@@ -1,9 +1,11 @@
 import * as Discord from "discord.js";
-import PonjoUtil from "../utils/PonjoUtil";
 import fetch from "node-fetch";
 import {Client} from "discord.js";
 import {ICommand} from "../structs/ICommand";
 import {SlashCommandOptions} from "../structs/ICommandOptions";
+import EmbedUtil from "../utils/EmbedUtil";
+import BaseLogger from "../base/BaseLogger";
+import Util from "../utils/Util";
 
 export default class PokemonCommand implements ICommand {
 
@@ -28,10 +30,10 @@ export default class PokemonCommand implements ICommand {
                     .then(response => response.json())
                     .then(data => {
                         const pokemon = {
-                            name: PonjoUtil.capitalize(data.name),
+                            name: Util.capitalize(data.name),
                             image: data.sprites['front_default'],
                             shinyImage: data.sprites['front_shiny'],
-                            type: data.types.map((type) => PonjoUtil.capitalize(type.type.name)).join(' and '),
+                            type: data.types.map((type) => Util.capitalize(type.type.name)).join(" and "),
                             id: data.id,
                             hp: data.stats[0].base_stat,
                             attack: data.stats[1].base_stat,
@@ -45,14 +47,14 @@ export default class PokemonCommand implements ICommand {
                             .setTitle(pokemon.name)
                             .setColor("#00e1ff")
                             .setThumbnail(pokemon.image)
-                            .setDescription(`**Pokémon Name:** ${PonjoUtil.capitalize(pokemon.name)}\n**Pokédex ID:** ${pokemon.id}\n\n**Type:** ${pokemon.type}\n**Hitpoints:** ${pokemon.hp}\n**Attack:** ${pokemon.attack}\n**Defense:** ${pokemon.defense}\n**Special Attack:** ${pokemon.specialAttack}\n**Special Defense:** ${pokemon.specialDefense}\n\n**Speed:** ${pokemon.speed}\n**Weight:** ${pokemon.weight} kg`)
-                            .setFooter(PonjoUtil.capitalize(pokemon.name), pokemon.shinyImage)
+                            .setDescription(`**Pokémon Name:** ${pokemon.name}\n**Pokédex ID:** ${pokemon.id}\n\n**Type:** ${pokemon.type}\n**Hitpoints:** ${pokemon.hp}\n**Attack:** ${pokemon.attack}\n**Defense:** ${pokemon.defense}\n**Special Attack:** ${pokemon.specialAttack}\n**Special Defense:** ${pokemon.specialDefense}\n\n**Speed:** ${pokemon.speed}\n**Weight:** ${pokemon.weight} kg`)
+                            .setFooter(pokemon.name, pokemon.shinyImage)
                             .setTimestamp()
                         return interaction.reply({embeds: [embed]});
                     });
             } catch (error) {
-                console.log(error)
-                return await interaction.reply({embeds: [PonjoUtil.getErrorMessageEmbed(this.client, "That Pokémon was not found.")]});
+                BaseLogger.error(error);
+                return await interaction.reply({embeds: [EmbedUtil.getErrorMessageEmbed("That Pokémon was not found.")]});
             }
         }
     }

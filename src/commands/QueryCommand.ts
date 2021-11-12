@@ -1,10 +1,11 @@
 import * as Discord from "discord.js";
 import * as QueryUtil from "minecraft-server-util";
 import emojis from "../resources/Emojis";
-import PonjoUtil from "../utils/PonjoUtil";
 import {Client} from "discord.js";
 import {ICommand} from "../structs/ICommand";
 import {SlashCommandOptions} from "../structs/ICommandOptions";
+import Util from "../utils/Util";
+import BaseLogger from "../base/BaseLogger";
 
 export default class QueryCommand implements ICommand {
 
@@ -44,7 +45,7 @@ export default class QueryCommand implements ICommand {
                             const online = response.onlinePlayers;
                             const max = response.maxPlayers;
                             const latency = response.roundTripLatency;
-                            await PonjoUtil.sleep(2000);
+                            await Util.sleep(2000);
                             const embed2 = new Discord.MessageEmbed()
                                 .setAuthor(`Query for: ${host}`, this.client.user.displayAvatarURL({dynamic: true}))
                                 .setColor("#00e1ff")
@@ -56,8 +57,8 @@ export default class QueryCommand implements ICommand {
                                 .setTimestamp()
                             return await interaction.editReply({content: `Query for **${host}** succeeded.`, embeds: [embed2]});
                         }).catch(async error => {
-                            console.error(error);
-                            await PonjoUtil.sleep(2000);
+                            BaseLogger.error(error);
+                            await Util.sleep(2000);
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(`${emojis.error} Server is offline. Please try again later.`)
@@ -77,7 +78,7 @@ export default class QueryCommand implements ICommand {
                             const online = response.onlinePlayers;
                             const max = response.maxPlayers;
                             const latency = response.roundTripLatency;
-                            await PonjoUtil.sleep(2000);
+                            await Util.sleep(2000);
                             const embed2 = new Discord.MessageEmbed()
                                 .setAuthor(`Query for: ${host}`, this.client.user.displayAvatarURL({dynamic: true}))
                                 .setColor("#00e1ff")
@@ -87,8 +88,8 @@ export default class QueryCommand implements ICommand {
                                 .setTimestamp()
                             return await interaction.editReply({content: `Query for **${host}** succeeded.`, embeds: [embed2]});
                         }).catch(async error => {
-                            console.error(error);
-                            await PonjoUtil.sleep(2000);
+                            BaseLogger.error(error);
+                            await Util.sleep(2000);
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(`${emojis.error} Server is offline. Please try again later.`)

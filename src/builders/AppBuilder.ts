@@ -1,6 +1,6 @@
 import {Client} from "discord.js";
 import BaseConfig from "../base/BaseConfig";
-import PonjoUtil from "../utils/PonjoUtil";
+import Util from "../utils/Util";
 
 export default class AppBuilder {
 
@@ -11,7 +11,7 @@ export default class AppBuilder {
     }
 
     public login(): void {
-        PonjoUtil.clearConsole();
+        Util.clearConsole();
         this.client.login(BaseConfig.get("TOKEN")).then(() => {});
     }
 }

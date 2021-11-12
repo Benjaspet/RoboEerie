@@ -1,7 +1,7 @@
 import {IEvent} from "../../structs/IEvent";
 import {Client, ClientEvents, GuildMember} from "discord.js";
 import BaseConfig from "../../base/BaseConfig";
-import PonjoUtil from "../../utils/PonjoUtil";
+import EmbedUtil from "../../utils/EmbedUtil";
 
 export default class GuildMemberAddEvent implements IEvent {
 
@@ -17,7 +17,7 @@ export default class GuildMemberAddEvent implements IEvent {
 
     public async execute(member: GuildMember) {
         if (member.guild.id === BaseConfig.get("GUILD-ID")) {
-            PonjoUtil.sendServerWelcomeMessage(member);
+            await EmbedUtil.sendServerWelcomeMessage(member);
         }
     }
 
