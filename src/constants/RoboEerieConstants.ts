@@ -16,21 +16,17 @@
  * credit is given to the original author(s).
  */
 
-import {MessageEmbed} from "discord.js";
-import Utilities from "./Utilities";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import Config from "../structs/Config";
+import {ColorResolvable} from "discord.js";
 
-export default class EmbedUtil {
+export default class RoboEerieConstants {
 
-    public static getErrorEmbed(content: string): MessageEmbed {
-        return new MessageEmbed()
-            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} ${content}`)
-            .setColor("RED")
-    }
+    public static TOKEN: string = Config.get("TOKEN");
+    public static MONGO_URI: string = Config.get("MONGO-URI");
+    public static DEFAULT_EMBED_COLOR: ColorResolvable = Config.get("DEFAULT-EMBED-COLOR");
 
-    public static getDefaultEmbed(description: string): MessageEmbed {
-        return new MessageEmbed()
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
-            .setDescription(description)
-    }
+    public static EMOJI_SUCCESS: string = Config.get("EMOJI-SUCCESS");
+    public static EMOJI_ERROR: string = Config.get("EMOJI-ERROR");
+    public static EMOJI_LOADING: string = Config.get("EMOJI-LOADING");
+
 }

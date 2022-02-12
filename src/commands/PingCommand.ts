@@ -1,37 +1,53 @@
-import * as Discord from "discord.js";
-import {Client} from "discord.js";
-import {ICommand} from "../structs/ICommand";
+/*
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
+ *
+ * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+ * OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * All portions of this software are available for public use, provided that
+ * credit is given to the original author(s).
+ */
 
-export default class PingCommand implements ICommand {
+import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed} from "discord.js";
+import {ApplicationCommand} from "../types/ApplicationCommand";
+import Command from "../structs/Command";
+import RoboEerieConstants from "../constants/RoboEerieConstants";
 
-    public name: string = "ping";
-    public once: boolean = false;
-    public enabled: boolean = true;
-    public description: string = "View the bot's client & websocket latency.";
-    public aliases: string[] = [];
-    protected client: Discord.Client;
+export default class PingCommand extends Command implements ApplicationCommand {
+
+    private readonly client: Client;
 
     constructor(client: Client) {
-        this.enabled = true;
+        super("ping", {
+            name: "ping",
+            description: "View the bot's client & websocket latency.",
+        })
         this.client = client;
     }
 
-    public async execute(interaction) {
-        if (!interaction.isCommand()) return;
-        if (interaction.commandName === this.name) {
-            const embed = new Discord.MessageEmbed()
-                .setTitle("Ponjo Bot | Latency")
-                .setColor("#00e1ff")
-                .setDescription(`Websocket latency: ${this.client.ws.ping}ms`)
-                .setFooter("Ponjo", this.client.user.displayAvatarURL({dynamic: true}))
-                .setTimestamp()
-            await interaction.reply({embeds: [embed]});
-        }
+    public async execute(interaction: CommandInteraction): Promise<void> {
+        const embed = new MessageEmbed()
+            .setTitle("RoboEerie | Latency")
+            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+            .setDescription(`Websocket latency: ${this.client.ws.ping}ms`)
+            .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+            .setTimestamp()
+        return void await interaction.reply({embeds: [embed]});
     }
 
-    public slashData: object = <object> {
-        name: this.name,
-        description: this.description,
-    };
+    public getName(): string {
+        return this.name;
+    }
 
+    public getCommandData(): ApplicationCommandData {
+        return this.data;
+    }
 }

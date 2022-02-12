@@ -16,21 +16,17 @@
  * credit is given to the original author(s).
  */
 
-import {MessageEmbed} from "discord.js";
-import Utilities from "./Utilities";
+import Logger from "../structs/Logger";
+import * as mongoose from "mongoose";
 import RoboEerieConstants from "../constants/RoboEerieConstants";
 
-export default class EmbedUtil {
+export default class DatabaseManager {
 
-    public static getErrorEmbed(content: string): MessageEmbed {
-        return new MessageEmbed()
-            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} ${content}`)
-            .setColor("RED")
-    }
-
-    public static getDefaultEmbed(description: string): MessageEmbed {
-        return new MessageEmbed()
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
-            .setDescription(description)
+    public static async connect(): Promise<void> {
+        await mongoose.connect(RoboEerieConstants.MONGO_URI);
+        Logger.info("Connected to database.");
+        mongoose.connection.on("error", error => {
+            Logger.error(error);
+        });
     }
 }

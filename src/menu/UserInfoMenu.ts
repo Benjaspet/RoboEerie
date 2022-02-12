@@ -1,5 +1,24 @@
-import {Client, ContextMenuInteraction, MessageEmbed} from "discord.js";
-import BaseLogger from "../base/BaseLogger";
+/*
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
+ *
+ * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+ * OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * All portions of this software are available for public use, provided that
+ * credit is given to the original author(s).
+ */
+
+import {ApplicationCommandData, Client, ContextMenuInteraction, MessageEmbed} from "discord.js";
+import Logger from "../structs/Logger";
+import RoboEerieConstants from "../constants/RoboEerieConstants";
 
 export default class UserInfoMenu {
 
@@ -11,15 +30,15 @@ export default class UserInfoMenu {
         this.client = client;
     }
 
-    public async execute(interaction: ContextMenuInteraction) {
+    public async execute(interaction: ContextMenuInteraction): Promise<void> {
         if (!interaction.isContextMenu()) return;
         if (interaction.commandName == "User Information") {
             try {
                 const target = await interaction.guild.members.fetch(interaction.targetId);
                 await target.user.fetch();
                 const embed = new MessageEmbed()
-                    .setAuthor(target.user.tag, target.user.avatarURL({dynamic: true, size: 512}))
-                    .setColor("#00e1ff")
+                    .setAuthor({name: target.user.tag, iconURL: target.user.avatarURL({dynamic: true, size: 512})})
+                    .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                     .setThumbnail(target.user.avatarURL({dynamic: true, size: 512}))
                     .addFields([
                         {
@@ -38,17 +57,19 @@ export default class UserInfoMenu {
                             inline: false
                         }
                     ])
-                    .setFooter("RoboEerie", this.client.user.displayAvatarURL({dynamic: true}))
+                    .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                     .setTimestamp();
                 return await interaction.reply({embeds: [embed], ephemeral: true});
             } catch (error) {
-                BaseLogger.error(error);
+                Logger.error(error);
             }
         }
     }
 
-    public slashData: object = {
-        name: "User Information",
-        type: 2
+    public getCommandData(): ApplicationCommandData {
+        return {
+            name: "User Information",
+            type: 2
+        }
     }
 }

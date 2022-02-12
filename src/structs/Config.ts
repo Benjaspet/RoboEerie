@@ -16,21 +16,13 @@
  * credit is given to the original author(s).
  */
 
-import {MessageEmbed} from "discord.js";
-import Utilities from "./Utilities";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import {config} from "dotenv";
 
-export default class EmbedUtil {
+config();
 
-    public static getErrorEmbed(content: string): MessageEmbed {
-        return new MessageEmbed()
-            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} ${content}`)
-            .setColor("RED")
-    }
+export default class Config {
 
-    public static getDefaultEmbed(description: string): MessageEmbed {
-        return new MessageEmbed()
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
-            .setDescription(description)
+    public static get(value: string): any {
+        return process.env[value];
     }
 }

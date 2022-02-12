@@ -16,21 +16,17 @@
  * credit is given to the original author(s).
  */
 
-import {MessageEmbed} from "discord.js";
-import Utilities from "./Utilities";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+export default class Logger {
 
-export default class EmbedUtil {
-
-    public static getErrorEmbed(content: string): MessageEmbed {
-        return new MessageEmbed()
-            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} ${content}`)
-            .setColor("RED")
+    public static info(content: string): void {
+        console.log("[ROBOEERIE] " + content);
     }
 
-    public static getDefaultEmbed(description: string): MessageEmbed {
-        return new MessageEmbed()
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
-            .setDescription(description)
+    public static error(content: string): void {
+        console.error("[ROBOEERIE] " + content);
+    }
+
+    public static clear(): void {
+        console.clear();
     }
 }

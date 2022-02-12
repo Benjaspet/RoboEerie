@@ -16,21 +16,18 @@
  * credit is given to the original author(s).
  */
 
-import {MessageEmbed} from "discord.js";
-import Utilities from "./Utilities";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+export default class Utilities {
 
-export default class EmbedUtil {
-
-    public static getErrorEmbed(content: string): MessageEmbed {
-        return new MessageEmbed()
-            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} ${content}`)
-            .setColor("RED")
+    public static sleep(ms): Promise<any> {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    public static getDefaultEmbed(description: string): MessageEmbed {
-        return new MessageEmbed()
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
-            .setDescription(description)
+    public static capitalize(string: string): string {
+        let str = string.split(" ");
+        for (let i = 0; i < str.length; i++) {
+            const firstChar = str[i].charAt(0)
+            str[i] = firstChar.toUpperCase() + str[i].substr(1)
+        }
+        return str.join(" ");
     }
 }
