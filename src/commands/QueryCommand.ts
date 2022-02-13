@@ -100,7 +100,8 @@ export default class QueryCommand extends Command implements ApplicationCommand 
                         Logger.error(error);
                         embed = new MessageEmbed()
                             .setColor("RED")
-                            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} Server is offline. Please try again later.`)
+                            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} Server is offline. Please try again later.`);
+                        return void await interaction.editReply({embeds: [embed]});
                     });
                 break;
             case "minecraft":
