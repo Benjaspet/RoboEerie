@@ -16,16 +16,7 @@
  * credit is given to the original author(s).
  */
 
-import {
-    ButtonInteraction,
-    Client,
-    ClientEvents,
-    CommandInteraction,
-    GuildMember,
-    Interaction,
-    Message,
-    MessageEmbed
-} from "discord.js";
+import {Client, ClientEvents, Message,} from "discord.js";
 import {IEvent} from "../../interfaces/IEvent";
 import axios from "axios";
 import Utilities from "../../utils/Utilities";
@@ -52,6 +43,7 @@ export default class MessageEvent implements IEvent {
                             code = (response.data as string).slice(0, 1900) + "...";
                         } else code = response.data as string;
                         const fileType = MessageEvent.determineFileExtension(message.content);
+                        if (!fileType) return;
                         try {
                             return message.channel.send(`Hey ${message.author.username}, I've made your file easier to read.`
                                  + "\n" + "```" + fileType + "\n" + code.toString() + "```"
@@ -68,12 +60,14 @@ export default class MessageEvent implements IEvent {
         }
     }
 
-    private static determineFileExtension(url: string): string {
+    private static determineFileExtension(url: string): string|boolean {
         const validExtensions = ["js", "ts", "css", "html", "cs", "java", "kt", "go", "py", "sass", "txt", "json"];
         for (let i = 0; i < validExtensions.length; i++) {
             if (url.endsWith(validExtensions[i])) {
+                console.log(validExtensions[i])
                 return validExtensions[i];
             }
         }
+        return false;
     }
 }
