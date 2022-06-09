@@ -55,11 +55,11 @@ export default class DocsCommand extends Command implements ApplicationCommand {
                 .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                 .setDescription(response.description)
                 .addField("Wanna view the source?", `Simply [click here](https://discord.js.org/#/docs/main/stable/general/welcome).`)
-                .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp();
             return void await interaction.reply({embeds: [embed]});
         } catch (error) {
-            return void await interaction.reply({content: "Unable to fetch a response."});
+            return void await interaction.reply({content: "This service is temporarily unavailable."});
         }
     }
 

@@ -19,7 +19,6 @@
 import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed, User} from "discord.js";
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
-import Utilities from "../utils/Utilities";
 import Command from "../structs/Command";
 import RoboEerieConstants from "../constants/RoboEerieConstants";
 

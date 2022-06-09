@@ -16,10 +16,10 @@
  * credit is given to the original author(s).
  */
 
+import {Client} from "discord.js";
 import IntentUtil from "./utils/IntentUtil";
 import ApplicationManager from "./managers/ApplicationManager";
 import EventManager from "./managers/EventManager";
-import {Client} from "discord.js";
 
 const client: Client = new Client({
     allowedMentions: {

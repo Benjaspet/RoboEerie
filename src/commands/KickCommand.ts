@@ -63,7 +63,7 @@ export default class KickCommand extends Command implements ApplicationCommand {
                 .setTitle("Uh-oh!")
                 .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                 .setDescription("You were kicked from " + interaction.guild.name + "." + "\n" + "Reason: none provided.")
-                .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp()
             try {
                 await this.client.users.cache.get(user.id).send({embeds: [embed]});
@@ -80,7 +80,7 @@ export default class KickCommand extends Command implements ApplicationCommand {
                 .setTitle("Uh-oh!")
                 .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                 .setDescription("You were kicked from " + interaction.guild.name + "." + "\n" + "Reason: **" + reason + "**")
-                .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp()
             try {
                 await this.client.users.cache.get(user.id).send({embeds: [embed]});

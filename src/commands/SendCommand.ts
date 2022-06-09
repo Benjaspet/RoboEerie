@@ -60,7 +60,7 @@ export default class SendCommand extends Command implements ApplicationCommand {
             embed = new MessageEmbed()
                 .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                 .setDescription(content)
-                .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp();
             await interaction.reply({content: "The component has been sent successfully.", ephemeral: true});
             return void await channel.send({embeds: [embed]});

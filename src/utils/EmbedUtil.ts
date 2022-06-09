@@ -17,7 +17,6 @@
  */
 
 import {MessageEmbed} from "discord.js";
-import Utilities from "./Utilities";
 import RoboEerieConstants from "../constants/RoboEerieConstants";
 
 export default class EmbedUtil {

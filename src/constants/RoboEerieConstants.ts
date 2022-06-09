@@ -23,6 +23,7 @@ export default class RoboEerieConstants {
 
     public static TOKEN: string = Config.get("TOKEN");
     public static MONGO_URI: string = Config.get("MONGO-URI");
+    public static CLIENT_ID: string = Config.get("CLIENT-ID");
     public static DEFAULT_EMBED_COLOR: ColorResolvable = Config.get("DEFAULT-EMBED-COLOR");
 
     public static EMOJI_SUCCESS: string = Config.get("EMOJI-SUCCESS");

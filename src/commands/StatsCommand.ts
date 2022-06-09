@@ -43,12 +43,12 @@ export default class StatsCommand extends Command implements ApplicationCommand 
             const cpuUsage = percent.toFixed(2);
             const cpuModel = os.cpus()[0].model;
             const embed = new MessageEmbed()
-                .setTitle("RoboEerie | Statistics")
+                .setTitle("R. Eerie | Statistics")
                 .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                 .setDescription("• Node.js: Version " + process.version + `\n` + `• Websocket latency: ${client.ws.ping}ms`)
                 .addField("Bot Information", `• Developer: Eerie#6560` + `\n` + `• Language: TypeScript` + `\n` + `• Library: Discord.js v${require("discord.js").version}`)
                 .addField("Host Information", `• CPU: ${cpuModel}` + `\n` + `• Cores: ${cores}` + `\n` + `• CPU Usage: ${cpuUsage}`)
-                .setFooter({text: "RoboEerie", iconURL: client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: "R. Eerie", iconURL: client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp();
             return void await interaction.editReply({embeds: [embed]});
         });

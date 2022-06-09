@@ -30,4 +30,8 @@ export default class Utilities {
         }
         return str.join(" ");
     }
+
+    public static determineURLValidity(url: string): boolean {
+        return /^[a-z][a-z0-9+.-]*:/.test(url);
+    }
 }

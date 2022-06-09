@@ -21,6 +21,8 @@ import AutocompleteEvent from "../events/interaction/AutocompleteEvent";
 import UserInfoMenu from "../menu/UserInfoMenu";
 import ReadyEvent from "../events/client/ReadyEvent";
 import InteractionEvent from "../events/interaction/InteractionEvent";
+import {ChannelTypes} from "discord.js/typings/enums";
+import MessageEvent from "../events/message/MessageEvent";
 
 export default class EventManager {
 
@@ -44,6 +46,11 @@ export default class EventManager {
                 } else if (interaction.isContextMenu()) {
                     await new UserInfoMenu(this.client).execute(interaction);
                 }
+            })
+            .on("messageCreate", async message => {
+               if (message.channel.isText() && message.channel.type !== "DM") {
+                   await new MessageEvent(this.client, "messageCreate", false).execute(message);
+               }
             });
     }
 }

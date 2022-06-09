@@ -16,7 +16,7 @@
  * credit is given to the original author(s).
  */
 
-import {ApplicationCommandData, Client, CommandInteraction, Interaction, MessageEmbed} from "discord.js";
+import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed} from "discord.js";
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import Command from "../structs/Command";
@@ -66,7 +66,7 @@ export default class UserInfoCommand extends Command implements ApplicationComma
                     inline: false
                 }
             ])
-            .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+            .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
             .setTimestamp();
         return void await interaction.reply({embeds: [embed], ephemeral: true});
     }

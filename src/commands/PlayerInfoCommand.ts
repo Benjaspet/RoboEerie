@@ -92,7 +92,7 @@ export default class PlayerInfoCommand extends Command implements ApplicationCom
                             .setTitle(player + "'s Usernames")
                             .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                             .setDescription(names)
-                            .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                            .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                             .setTimestamp()
                         return interaction.reply({embeds: [embed]});
                     }).catch(async error => {
@@ -107,7 +107,7 @@ export default class PlayerInfoCommand extends Command implements ApplicationCom
                     .setThumbnail("https://crafatar.com/renders/body/" + uuid)
                     .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                     .setDescription(`You are viewing ${player}'s skin currently. This API request was sent: <t:${timestamp}>`)
-                    .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                    .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                     .setTimestamp()
                 return void await interaction.reply({embeds: [embed2]});
             case "raw":
@@ -115,7 +115,7 @@ export default class PlayerInfoCommand extends Command implements ApplicationCom
                     .setAuthor({name: player + "'s Skin", url: "https://crafatar.com/renders/head/" + uuid})
                     .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                     .setImage("https://crafatar.com/skins/" + uuid)
-                    .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                    .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                     .setTimestamp()
                 return void await interaction.reply({embeds: [embed3]});
             case "head":
@@ -123,7 +123,7 @@ export default class PlayerInfoCommand extends Command implements ApplicationCom
                     .setTitle(player + "'s Head")
                     .setImage("https://crafatar.com/renders/head/" + uuid)
                     .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
-                    .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                    .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                     .setTimestamp()
                 return interaction.reply({embeds: [embed]});
             case "uuid":
@@ -131,7 +131,7 @@ export default class PlayerInfoCommand extends Command implements ApplicationCom
                     .setAuthor({name: player + "'s Skin", url: "https://crafatar.com/renders/head/" + uuid})
                     .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                     .setDescription("UUID: `" + uuid + "`")
-                    .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                    .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                     .setTimestamp()
                 return void await interaction.reply({embeds: [embed4]});
         }

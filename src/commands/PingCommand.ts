@@ -38,7 +38,7 @@ export default class PingCommand extends Command implements ApplicationCommand {
             .setTitle("RoboEerie | Latency")
             .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
             .setDescription(`Websocket latency: ${this.client.ws.ping}ms`)
-            .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+            .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
             .setTimestamp()
         return void await interaction.reply({embeds: [embed]});
     }

@@ -21,7 +21,6 @@ import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import Command from "../structs/Command";
 import RoboEerieConstants from "../constants/RoboEerieConstants";
-import Utilities from "../utils/Utilities";
 
 export default class PollCommand extends Command implements ApplicationCommand{
 

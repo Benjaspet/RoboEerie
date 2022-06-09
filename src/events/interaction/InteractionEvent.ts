@@ -36,7 +36,7 @@ export default class InteractionEvent implements IEvent {
         this.client = client;
     }
 
-    public async execute(interaction: Interaction): Promise<void> {
+    public async execute(interaction: Interaction|any): Promise<void> {
         if (interaction.inGuild()) {
             if (interaction.isCommand()) {
                 if (interaction.member instanceof GuildMember) {

@@ -36,7 +36,8 @@ export default class ServerInfoCommand extends Command implements ApplicationCom
     public async execute(interaction: CommandInteraction): Promise<void> {
         const {guild} = interaction; const guildId = guild.id;
         const guildName = guild.name; const guildIcon = guild.iconURL();
-        const guildOwnerId = guild.ownerId; const guildOwner = this.client.users.cache.get(guildOwnerId).tag;
+        const guildOwnerId = guild.ownerId;
+        const guildOwner = `<@${guildOwnerId}>`;
         const textChannels = guild.channels.cache.filter(c => c.type === "GUILD_TEXT").size;
         const voiceChannels = guild.channels.cache.filter(c => c.type === "GUILD_VOICE").size;
         const memberCount = guild.memberCount; const roleCount = guild.roles.cache.size;
@@ -80,7 +81,7 @@ export default class ServerInfoCommand extends Command implements ApplicationCom
                     value: `Text Channels: ${textChannels}\nVoice Channels: ${voiceChannels}\nMembers: ${memberCount}\nRoles: ${roleCount}\nBoosts: ${boostCount} (${guildLevel()})`
                 }
             ])
-            .setFooter({text: `RoboEerie | ${guildName}`, iconURL: this.client.user.displayAvatarURL({dynamic: true})});
+            .setFooter({text: `R. Eerie | ${guildName}`, iconURL: this.client.user.displayAvatarURL({dynamic: true})});
         return void await interaction.reply({embeds: [embed]});
     }
 

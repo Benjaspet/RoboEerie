@@ -20,7 +20,6 @@ import {ApplicationCommandData, Client, CommandInteraction, GuildMember, Message
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import EmbedUtil from "../utils/EmbedUtil";
-import Utilities from "../utils/Utilities";
 import Command from "../structs/Command";
 import RoboEerieConstants from "../constants/RoboEerieConstants";
 
@@ -74,7 +73,7 @@ export default class BanCommand extends Command implements ApplicationCommand {
                 .setTitle("Uh-oh!")
                 .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                 .setDescription("You were banned from " + staff.guild.name + "." + "\n" + "Reason: none provided.")
-                .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp()
             try {
                 await this.client.users.cache.get(memberToBan.id).send({embeds: [embed]});
@@ -91,7 +90,7 @@ export default class BanCommand extends Command implements ApplicationCommand {
                 .setTitle("Uh-oh!")
                 .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
                 .setDescription("You were banned from " + staff.guild.name + "." + "\n" + "Reason: **" + reason + "**")
-                .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp()
             try {
                 await this.client.users.cache.get(userToBan.id).send({embeds: [embed]});
