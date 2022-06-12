@@ -38,7 +38,7 @@ export default class MessageEvent implements IEvent {
         if (message.inGuild()) {
             const userId: string = message.author.id;
             const guildId: string = message.guildId;
-            Users.findOne({userId: userId})
+            await Users.findOne({userId: userId})
                 .then(async result => {
                     if (result) {
                         const cachedGuilds = result.guilds; let found: boolean;
@@ -85,7 +85,17 @@ export default class MessageEvent implements IEvent {
                 })
                 .catch(() => {});
             if (Utilities.determineURLValidity(message.content)) {
-                await axios.get(message.content)
+                await axios.request({
+                    proxy: {
+                        host: "localhost",
+                        port: 5000,
+                    },
+                    headers: {
+                        Host: message.content
+                    },
+                    method: "GET",
+                    url: message.content
+                })
                     .then(response => {
                         let code: string;
                         if ((response.data as string).length > 2000) {
@@ -95,7 +105,7 @@ export default class MessageEvent implements IEvent {
                         if (!fileType) return;
                         try {
                             return message.channel.send(`Hey ${message.author.username}, I've made your file easier to read.`
-                                 + "\n" + "```" + fileType + "\n" + code.toString() + "```"
+                                + "\n" + "```" + fileType + "\n" + code.toString() + "```"
                             );
                         } catch (error: any) {
                             console.log(error);
