@@ -21,7 +21,6 @@ import AutocompleteEvent from "../events/interaction/AutocompleteEvent";
 import UserInfoMenu from "../menu/UserInfoMenu";
 import ReadyEvent from "../events/client/ReadyEvent";
 import InteractionEvent from "../events/interaction/InteractionEvent";
-import {ChannelTypes} from "discord.js/typings/enums";
 import MessageEvent from "../events/message/MessageEvent";
 
 export default class EventManager {

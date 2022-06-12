@@ -21,7 +21,6 @@ import {ApplicationCommand} from "../types/ApplicationCommand";
 import AvatarCommand from "../commands/AvatarCommand";
 import Command from "../structs/Command";
 import BannerCommand from "../commands/BannerCommand";
-import DocsCommand from "../commands/DocsCommand";
 import BanCommand from "../commands/BanCommand";
 import GitHubCommand from "../commands/GitHubCommand";
 import KickCommand from "../commands/KickCommand";
@@ -50,7 +49,6 @@ export default class CommandManager {
             new AvatarCommand(client),
             new BanCommand(client),
             new BannerCommand(client),
-            new DocsCommand(client),
             new GitHubCommand(client),
             new KickCommand(client),
             new MemeCommand(client),

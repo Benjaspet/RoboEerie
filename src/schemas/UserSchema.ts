@@ -16,26 +16,30 @@
  * credit is given to the original author(s).
  */
 
-export default class Utilities {
 
-    public static sleep(ms): Promise<any> {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+import * as mongoose from "mongoose";
+import {Schema} from "mongoose";
 
-    public static capitalize(string: string): string {
-        let str = string.split(" ");
-        for (let i = 0; i < str.length; i++) {
-            const firstChar = str[i].charAt(0)
-            str[i] = firstChar.toUpperCase() + str[i].substr(1)
-        }
-        return str.join(" ");
-    }
-
-    public static determineURLValidity(url: string): boolean {
-        return /^[a-z][a-z0-9+.-]*:/.test(url);
-    }
-
-    public static beautifyNumber(num: number) {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
+const UserData: object = {
+    guild: String,
+    messages: Number,
+    links: Number,
 }
+
+const UserSchema = new Schema(
+    {
+        userId: String,
+        totalMessages: Number,
+        guilds: [
+            UserData
+        ],
+    }, {
+        timestamps: true,
+        versionKey: false
+    }
+);
+
+const Users = mongoose.model("users", UserSchema);
+
+export default Users;
+

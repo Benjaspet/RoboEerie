@@ -19,7 +19,6 @@
 import {Client} from "discord.js";
 import AvatarCommand from "../commands/AvatarCommand";
 import BanCommand from "../commands/BanCommand";
-import DocsCommand from "../commands/DocsCommand";
 import GitHubCommand from "../commands/GitHubCommand";
 import KickCommand from "../commands/KickCommand";
 import MemeCommand from "../commands/MemeCommand";
@@ -45,7 +44,6 @@ export default class SlashCommandUtil {
             new AvatarCommand(client).getCommandData(),
             new BanCommand(client).getCommandData(),
             new BannerCommand(client).getCommandData(),
-            new DocsCommand(client).getCommandData(),
             new GitHubCommand(client).getCommandData(),
             new KickCommand(client).getCommandData(),
             new MemeCommand(client).getCommandData(),

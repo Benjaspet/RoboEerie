@@ -20,6 +20,7 @@ import {Client, ClientEvents, Message,} from "discord.js";
 import {IEvent} from "../../interfaces/IEvent";
 import axios from "axios";
 import Utilities from "../../utils/Utilities";
+import Users from "../../schemas/UserSchema";
 
 export default class MessageEvent implements IEvent {
 
@@ -35,6 +36,54 @@ export default class MessageEvent implements IEvent {
 
     public async execute(message: Message): Promise<void> {
         if (message.inGuild()) {
+            const userId: string = message.author.id;
+            const guildId: string = message.guildId;
+            Users.findOne({userId: userId})
+                .then(async result => {
+                    if (result) {
+                        const cachedGuilds = result.guilds; let found: boolean;
+                        let cachedTotalMessages = result.totalMessages as number;
+                        for (let i = 0; i < cachedGuilds.length; i++) {
+                            if (cachedGuilds[i].guild === guildId) {
+                                cachedGuilds[i].messages++;
+                                cachedTotalMessages++;
+                                if (Utilities.determineURLValidity(message.content)) {
+                                    cachedGuilds[i].links++;
+                                }
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            const data = await Users.findOne({userId: userId});
+                            data.totalMessages = cachedTotalMessages;
+                            data.guilds.push({
+                                guild: guildId,
+                                messages: 1,
+                                links: 0,
+                            });
+                            data.save();
+                        } else {
+                            const data = await Users.findOne({userId: userId});
+                            data.guilds = cachedGuilds;
+                            data.totalMessages = cachedTotalMessages;
+                            data.save();
+                        }
+                    } else {
+                        await Users.create({
+                            userId: userId,
+                            totalMessages: 1,
+                            guilds: [
+                                {
+                                    guild: guildId,
+                                    messages: 1,
+                                    links: 0
+                                }
+                            ]
+                        });
+                    }
+                })
+                .catch(() => {});
             if (Utilities.determineURLValidity(message.content)) {
                 await axios.get(message.content)
                     .then(response => {
