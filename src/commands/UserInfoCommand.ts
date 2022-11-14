@@ -52,11 +52,11 @@ export default class UserInfoCommand extends Command implements ApplicationComma
             .then(async result => {
                 if (result) {
                     totalMessages = Utilities.beautifyNumber(result.totalMessages) || 0;
-                    console.log(totalMessages)
+                    const guilds: any = result.guilds;
                     for (let i = 0; i < result.guilds.length; i++) {
-                        if (result.guilds[i].guild === interaction.guild.id) {
-                            messages = Utilities.beautifyNumber(result.guilds[i].messages);
-                            links = Utilities.beautifyNumber(result.guilds[i].links);
+                        if (guilds[i].guild === interaction.guild.id) {
+                            messages = Utilities.beautifyNumber(guilds[i].messages);
+                            links = Utilities.beautifyNumber(guilds[i].links);
                             found = true;
                             break;
                         } else {

@@ -41,7 +41,7 @@ export default class MessageEvent implements IEvent {
             await Users.findOne({userId: userId})
                 .then(async result => {
                     if (result) {
-                        const cachedGuilds = result.guilds; let found: boolean;
+                        const cachedGuilds: any = result.guilds; let found: boolean;
                         let cachedTotalMessages = result.totalMessages as number;
                         for (let i = 0; i < cachedGuilds.length; i++) {
                             if (cachedGuilds[i].guild === guildId) {
