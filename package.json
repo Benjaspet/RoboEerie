@@ -3,7 +3,7 @@
   "author": "Ben Petrillo",
   "version": "2.3.2",
   "main": "src/RoboEerie.ts",
-  "description": "Eerie's official Discord bot.",
+  "description": "Ben Petrillo's official Discord utility bot.",
   "scripts": {
     "start": "ts-node src/RoboEerie.ts",
     "start:dev": "nodemon src/RoboEerie.ts"
