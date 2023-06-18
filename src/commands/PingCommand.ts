@@ -19,7 +19,7 @@
 import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed} from "discord.js";
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class PingCommand extends Command implements ApplicationCommand {
 
@@ -36,9 +36,9 @@ export default class PingCommand extends Command implements ApplicationCommand {
     public async execute(interaction: CommandInteraction): Promise<void> {
         const embed = new MessageEmbed()
             .setTitle("RoboEerie | Latency")
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+            .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
             .setDescription(`Websocket latency: ${this.client.ws.ping}ms`)
-            .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+            .setFooter({text: "Mr. Code & Watch", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
             .setTimestamp()
         return void await interaction.reply({embeds: [embed]});
     }

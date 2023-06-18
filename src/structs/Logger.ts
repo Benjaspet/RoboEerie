@@ -19,11 +19,11 @@
 export default class Logger {
 
     public static info(content: string): void {
-        console.log("[ROBOEERIE] " + content);
+        console.log("[Mr. Code & Watch] " + content);
     }
 
     public static error(content: string): void {
-        console.error("[ROBOEERIE] " + content);
+        console.error("[Mr. Code & Watch] " + content);
     }
 
     public static clear(): void {

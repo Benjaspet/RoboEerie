@@ -22,7 +22,7 @@ import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import fetch from "node-fetch";
 import EmbedUtil from "../utils/EmbedUtil";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class UrbanCommand extends Command implements ApplicationCommand {
 
@@ -58,7 +58,7 @@ export default class UrbanCommand extends Command implements ApplicationCommand 
                     const downVotes = data.list[0].thumbs_down;
                     const embed = new MessageEmbed()
                         .setAuthor({name: word})
-                        .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                        .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                         .setDescription(`**URL:** [Click here](${permalink}).\n**Definition:** See below.` + `\n\n${definition}`)
                         .setFooter({text: `Ratings: 👍 ${upvotes} 👎 ${downVotes}`})
                     return void await interaction.reply({embeds: [embed]});

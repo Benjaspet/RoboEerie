@@ -20,7 +20,7 @@ import {ApplicationCommandData, Client, CommandInteraction, GuildBasedChannel, M
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class SendCommand extends Command implements ApplicationCommand {
 
@@ -58,9 +58,9 @@ export default class SendCommand extends Command implements ApplicationCommand {
         const content = interaction.options.getString("message"); let embed;
         if (channel instanceof TextChannel) {
             embed = new MessageEmbed()
-                .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                 .setDescription(content)
-                .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: "Mr. Code & Watch", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp();
             await interaction.reply({content: "The component has been sent successfully.", ephemeral: true});
             return void await channel.send({embeds: [embed]});

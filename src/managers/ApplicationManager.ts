@@ -18,7 +18,7 @@
 
 import {Client} from "discord.js";
 import Logger from "../structs/Logger";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class ApplicationManager {
 
@@ -30,6 +30,6 @@ export default class ApplicationManager {
 
     public login(): void {
         Logger.clear();
-        this.client.login(RoboEerieConstants.TOKEN).then(() => {});
+        this.client.login(MrCodeAndWatchConstants.TOKEN).then(() => {});
     }
 }

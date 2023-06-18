@@ -20,7 +20,7 @@ import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed, User} 
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class AvatarCommand extends Command implements ApplicationCommand {
 
@@ -44,14 +44,12 @@ export default class AvatarCommand extends Command implements ApplicationCommand
 
     public async execute(interaction: CommandInteraction): Promise<void> {
         if (!interaction.isCommand()) return;
-        if (interaction.commandName === this.name) {
-            const user: User = interaction.options.getUser("user");
-            const embed: MessageEmbed = new MessageEmbed()
-                .setTitle(`${user.tag}'s Avatar`)
-                .setImage(user.displayAvatarURL({dynamic: true, size: 512, format: "png"}))
-                .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
-            return await interaction.reply({embeds: [embed]});
-        }
+        const user: User = interaction.options.getUser("user");
+        const embed: MessageEmbed = new MessageEmbed()
+            .setTitle(`${user.username}'s Avatar`)
+            .setImage(user.displayAvatarURL({dynamic: true, size: 512, format: "png"}))
+            .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
+        return void await interaction.reply({embeds: [embed]});
     }
 
     public getName(): string {

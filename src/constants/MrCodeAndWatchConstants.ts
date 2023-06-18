@@ -19,7 +19,7 @@
 import Config from "../structs/Config";
 import {ColorResolvable} from "discord.js";
 
-export default class RoboEerieConstants {
+export default class MrCodeAndWatchConstants {
 
     public static TOKEN: string = Config.get("TOKEN");
     public static MONGO_URI: string = Config.get("MONGO-URI");

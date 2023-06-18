@@ -21,8 +21,8 @@ import {ApplicationCommand} from "../types/ApplicationCommand";
 import * as stats from "cpu-stat";
 import * as os from "os";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
-import client from "../RoboEerie";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
+import client from "../MrCodeAndWatch";
 
 export default class StatsCommand extends Command implements ApplicationCommand {
 
@@ -43,12 +43,22 @@ export default class StatsCommand extends Command implements ApplicationCommand 
             const cpuUsage = percent.toFixed(2);
             const cpuModel = os.cpus()[0].model;
             const embed = new MessageEmbed()
-                .setTitle("R. Eerie | Statistics")
-                .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                .setTitle("Mr. Code & Watch | Statistics")
+                .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                 .setDescription("• Node.js: Version " + process.version + `\n` + `• Websocket latency: ${client.ws.ping}ms`)
-                .addField("Bot Information", `• Developer: Eerie#6560` + `\n` + `• Language: TypeScript` + `\n` + `• Library: Discord.js v${require("discord.js").version}`)
-                .addField("Host Information", `• CPU: ${cpuModel}` + `\n` + `• Cores: ${cores}` + `\n` + `• CPU Usage: ${cpuUsage}`)
-                .setFooter({text: "R. Eerie", iconURL: client.user.displayAvatarURL({dynamic: true})})
+                .addFields([
+                    {
+                        name: "Bot Information",
+                        value: `• Developer: benjaspet` + `\n` + `• Language: TypeScript` + `\n` + `• Library: Discord.js v${require("discord.js").version}`,
+                        inline: false
+                    },
+                    {
+                        name: "Host Information",
+                        value: `• CPU: ${cpuModel}` + `\n` + `• Cores: ${cores}` + `\n` + `• CPU Usage: ${cpuUsage}`,
+                        inline: false
+                    }
+                ])
+                .setFooter({text: "Mr. Code & Watch", iconURL: client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp();
             return void await interaction.editReply({embeds: [embed]});
         });

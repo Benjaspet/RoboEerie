@@ -20,7 +20,7 @@ import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed, NewsCh
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class PollCommand extends Command implements ApplicationCommand{
 
@@ -55,14 +55,14 @@ export default class PollCommand extends Command implements ApplicationCommand{
             await interaction.reply({content: "The poll was successfully published."});
             const embed = new MessageEmbed()
                 .setTitle("Server Poll")
-                .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                 .setDescription(content)
-                .setFooter({text: interaction.user.tag, iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+                .setFooter({text: interaction.user.username, iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                 .setTimestamp()
             channel.send({embeds: [embed]})
                 .then(async msg => {
-                    await msg.react(RoboEerieConstants.EMOJI_SUCCESS);
-                    await msg.react(RoboEerieConstants.EMOJI_ERROR);
+                    await msg.react(MrCodeAndWatchConstants.EMOJI_SUCCESS);
+                    await msg.react(MrCodeAndWatchConstants.EMOJI_ERROR);
                 });
         } else {
             return void await interaction.reply({content: "The channel you specified is not a valid channel."});

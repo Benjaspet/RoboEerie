@@ -20,9 +20,9 @@ import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed} from "
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
-import Users from "../schemas/UserSchema";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 import Utilities from "../utils/Utilities";
+import Users from "../schemas/UserSchema";
 
 export default class UserInfoCommand extends Command implements ApplicationCommand {
 
@@ -47,7 +47,7 @@ export default class UserInfoCommand extends Command implements ApplicationComma
     public async execute(interaction: CommandInteraction): Promise<void> {
         const user = await interaction.options.getUser("user");
         const target = interaction.guild.members.cache.get(user.id);
-        let messages, totalMessages, links, found;
+        let messages, totalMessages, found;
         await Users.findOne({userId: user.id})
             .then(async result => {
                 if (result) {
@@ -56,19 +56,17 @@ export default class UserInfoCommand extends Command implements ApplicationComma
                     for (let i = 0; i < result.guilds.length; i++) {
                         if (guilds[i].guild === interaction.guild.id) {
                             messages = Utilities.beautifyNumber(guilds[i].messages);
-                            links = Utilities.beautifyNumber(guilds[i].links);
                             found = true;
                             break;
                         } else {
                             messages = 0;
-                            links = 0;
                         }
                     }
                 }
             });
         const embed = new MessageEmbed()
-            .setAuthor({name: target.user.tag, iconURL: target.displayAvatarURL({dynamic: true, size: 512})})
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+            .setAuthor({name: target.user.username, iconURL: target.displayAvatarURL({dynamic: true, size: 512})})
+            .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
             .setThumbnail(target.user.displayAvatarURL({dynamic: true, size: 512}))
             .addFields([
                 {
@@ -78,7 +76,7 @@ export default class UserInfoCommand extends Command implements ApplicationComma
                 },
                 {
                     name: "Data",
-                    value: `Messages in ${interaction.guild.name}: ${messages || 0}` + "\n" + `Total messages: ${totalMessages || 0}` + "\n" + `Links sent: ${links || 0}`,
+                    value: `Messages in ${interaction.guild.name}: ${messages || 0}` + "\n" + `Total messages: ${totalMessages || 0}`,
                     inline: false
                 },
                 {
@@ -92,7 +90,7 @@ export default class UserInfoCommand extends Command implements ApplicationComma
                     inline: false
                 }
             ])
-            .setFooter({text: "R. Eerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
+            .setFooter({text: "Mr. Code & Watch", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
             .setTimestamp();
         return void await interaction.reply({embeds: [embed], ephemeral: false});
     }

@@ -21,6 +21,7 @@ import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import Command from "../structs/Command";
 import fetch from "node-fetch";
+import EmbedUtil from "../utils/EmbedUtil";
 
 export default class MemeCommand extends Command implements ApplicationCommand{
 
@@ -67,28 +68,32 @@ export default class MemeCommand extends Command implements ApplicationCommand{
     public async execute(interaction: CommandInteraction): Promise<void> {
         const subreddit: string = <string>interaction.options.getString("subreddit");
         await interaction.deferReply();
-        if (!subreddit) {
-            await fetch("https://meme-api.herokuapp.com/gimme")
-                .then(response => response.json())
-                .then(data => {
-                    const embed = new MessageEmbed()
-                        .setTitle(data.title)
-                        .setColor("#00e1ff")
-                        .setImage(data.url)
-                        .setFooter({text: "Upvotes: " + data.ups + " | Posted by: " + data.author})
-                    return void interaction.editReply({embeds: [embed]});
-                });
-        } else {
-            await fetch("https://meme-api.herokuapp.com/gimme/" + subreddit)
-                .then(response => response.json())
-                .then(data => {
-                    const embed: MessageEmbed = new MessageEmbed()
-                        .setTitle(data.title)
-                        .setColor("#00e1ff")
-                        .setImage(data.url)
-                        .setFooter({text: "Upvotes: " + data.ups + " | Posted by: " + data.author})
-                    return void interaction.editReply({embeds: [embed]});
-                });
+        try {
+            if (!subreddit) {
+                await fetch("https://meme-api.com/gimme")
+                    .then(response => response.json())
+                    .then(data => {
+                        const embed = new MessageEmbed()
+                            .setTitle(data.title)
+                            .setColor("#00e1ff")
+                            .setImage(data.url)
+                            .setFooter({text: "Upvotes: " + data.ups + " | Posted by: " + data.author})
+                        return void interaction.editReply({embeds: [embed]});
+                    });
+            } else {
+                await fetch("https://meme-api.com/gimme/" + subreddit)
+                    .then(response => response.json())
+                    .then(data => {
+                        const embed: MessageEmbed = new MessageEmbed()
+                            .setTitle(data.title)
+                            .setColor("#00e1ff")
+                            .setImage(data.url)
+                            .setFooter({text: "Upvotes: " + data.ups + " | Posted by: " + data.author})
+                        return void interaction.editReply({embeds: [embed]});
+                    });
+            }
+        } catch (error) {
+            return void interaction.editReply({embeds: [EmbedUtil.getErrorEmbed("Unable to fetch a meme at this time.")]});
         }
     }
 

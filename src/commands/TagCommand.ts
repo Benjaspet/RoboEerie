@@ -22,7 +22,7 @@ import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import TagUtil from "../utils/database/TagUtil";
 import EmbedUtil from "../utils/EmbedUtil";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class TagCommand extends Command implements ApplicationCommand{
 
@@ -187,7 +187,7 @@ export default class TagCommand extends Command implements ApplicationCommand{
                         }
                         const embed: MessageEmbed = new MessageEmbed();
                         embed.setTitle(`Search results for ${tag}:`);
-                        embed.setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR);
+                        embed.setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR);
                         embed.setDescription("" + data.map(x => `• ${x}`).join("\n"));
                         return void await interaction.editReply({embeds: [embed]});
                     })
@@ -212,7 +212,7 @@ export default class TagCommand extends Command implements ApplicationCommand{
                                 }
                                 const embed = new MessageEmbed()
                                     .setTitle("Tag not found. Did you mean...")
-                                    .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                                    .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                                     .setDescription("" + data.map(x => `• ${x}`).join("\n"));
                                 return void await interaction.editReply({embeds: [embed]});
                             })

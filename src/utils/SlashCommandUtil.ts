@@ -18,13 +18,10 @@
 
 import {Client} from "discord.js";
 import AvatarCommand from "../commands/AvatarCommand";
-import BanCommand from "../commands/BanCommand";
 import GitHubCommand from "../commands/GitHubCommand";
-import KickCommand from "../commands/KickCommand";
 import MemeCommand from "../commands/MemeCommand";
 import NPMCommand from "../commands/NPMCommand";
 import PingCommand from "../commands/PingCommand";
-import PlayerInfoCommand from "../commands/PlayerInfoCommand";
 import PokemonCommand from "../commands/PokemonCommand";
 import PollCommand from "../commands/PollCommand";
 import QueryCommand from "../commands/QueryCommand";
@@ -36,20 +33,20 @@ import TagCommand from "../commands/TagCommand";
 import ServerInfoCommand from "../commands/ServerInfoCommand";
 import UserInfoCommand from "../commands/UserInfoCommand";
 import UserInfoMenu from "../menu/UserInfoMenu";
+import ValorantCommand from "../commands/ValorantCommand";
+import HaloInfiniteCommand from "../commands/HaloInfiniteCommand";
 
 export default class SlashCommandUtil {
 
     public static getAllSlashCommandData(client: Client): object[] {
         return [
             new AvatarCommand(client).getCommandData(),
-            new BanCommand(client).getCommandData(),
             new BannerCommand(client).getCommandData(),
             new GitHubCommand(client).getCommandData(),
-            new KickCommand(client).getCommandData(),
+            new HaloInfiniteCommand(client).getCommandData(),
             new MemeCommand(client).getCommandData(),
             new NPMCommand(client).getCommandData(),
             new PingCommand(client).getCommandData(),
-            new PlayerInfoCommand(client).getCommandData(),
             new PokemonCommand(client).getCommandData(),
             new PollCommand(client).getCommandData(),
             new QueryCommand(client).getCommandData(),
@@ -59,7 +56,8 @@ export default class SlashCommandUtil {
             new TagCommand(client).getCommandData(),
             new UrbanCommand(client).getCommandData(),
             new UserInfoCommand(client).getCommandData(),
-            new UserInfoMenu(client).getCommandData()
+            new UserInfoMenu(client).getCommandData(),
+            new ValorantCommand(client).getCommandData()
         ];
     }
 }

@@ -84,49 +84,6 @@ export default class MessageEvent implements IEvent {
                     }
                 })
                 .catch(() => {});
-            if (Utilities.determineURLValidity(message.content)) {
-                await axios.request({
-                    proxy: {
-                        host: "localhost",
-                        port: 5000,
-                    },
-                    headers: {
-                        Host: message.content
-                    },
-                    method: "GET",
-                    url: message.content
-                })
-                    .then(response => {
-                        let code: string;
-                        if ((response.data as string).length > 2000) {
-                            code = (response.data as string).slice(0, 1900) + "...";
-                        } else code = response.data as string;
-                        const fileType = MessageEvent.determineFileExtension(message.content);
-                        if (!fileType) return;
-                        try {
-                            return message.channel.send(`Hey ${message.author.username}, I've made your file easier to read.`
-                                + "\n" + "```" + fileType + "\n" + code.toString() + "```"
-                            );
-                        } catch (error: any) {
-                            console.log(error);
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        return;
-                    });
-            }
         }
-    }
-
-    private static determineFileExtension(url: string): string|boolean {
-        const validExtensions = ["js", "ts", "css", "html", "cs", "java", "kt", "go", "py", "sass", "txt", "json"];
-        for (let i = 0; i < validExtensions.length; i++) {
-            if (url.endsWith(validExtensions[i])) {
-                console.log(validExtensions[i])
-                return validExtensions[i];
-            }
-        }
-        return false;
     }
 }

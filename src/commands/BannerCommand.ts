@@ -19,8 +19,8 @@
 import {ApplicationCommandData, Client, CommandInteraction, GuildMember, MessageEmbed, User} from "discord.js";
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
-import axios from "axios";
 import Command from "../structs/Command";
+import axios from "axios";
 
 export default class BannerCommand extends Command implements ApplicationCommand {
 
@@ -56,7 +56,7 @@ export default class BannerCommand extends Command implements ApplicationCommand
                 const extension = <any>banner.startsWith("a_") ? ".gif" : ".png";
                 const url = `https://cdn.discordapp.com/banners/${member.id}/${banner}${extension}?size=1024`;
                 const embed = new MessageEmbed()
-                    .setTitle(`${member.user.tag}'s Banner`)
+                    .setTitle(`${member.user.username}'s Banner`)
                     .setColor(accent_color || "#00e1ff")
                     .setImage(url)
                 return void await interaction.editReply({embeds: [embed]});

@@ -19,8 +19,8 @@
 import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed} from "discord.js";
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
-import Command from "../structs/Command";
 import fetch from "node-fetch";
+import Command from "../structs/Command";
 import EmbedUtil from "../utils/EmbedUtil";
 
 export default class NPMCommand extends Command implements ApplicationCommand{

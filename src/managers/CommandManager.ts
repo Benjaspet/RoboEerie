@@ -21,9 +21,7 @@ import {ApplicationCommand} from "../types/ApplicationCommand";
 import AvatarCommand from "../commands/AvatarCommand";
 import Command from "../structs/Command";
 import BannerCommand from "../commands/BannerCommand";
-import BanCommand from "../commands/BanCommand";
 import GitHubCommand from "../commands/GitHubCommand";
-import KickCommand from "../commands/KickCommand";
 import MemeCommand from "../commands/MemeCommand";
 import NPMCommand from "../commands/NPMCommand";
 import PingCommand from "../commands/PingCommand";
@@ -36,7 +34,8 @@ import StatsCommand from "../commands/StatsCommand";
 import TagCommand from "../commands/TagCommand";
 import UrbanCommand from "../commands/UrbanCommand";
 import UserInfoCommand from "../commands/UserInfoCommand";
-import PlayerInfoCommand from "../commands/PlayerInfoCommand";
+import ValorantCommand from "../commands/ValorantCommand";
+import HaloInfiniteCommand from "../commands/HaloInfiniteCommand";
 
 export default class CommandManager {
 
@@ -47,14 +46,12 @@ export default class CommandManager {
         this.client = client;
         CommandManager.registerCommands([
             new AvatarCommand(client),
-            new BanCommand(client),
             new BannerCommand(client),
             new GitHubCommand(client),
-            new KickCommand(client),
+            new HaloInfiniteCommand(client),
             new MemeCommand(client),
             new NPMCommand(client),
             new PingCommand(client),
-            new PlayerInfoCommand(client),
             new PokemonCommand(client),
             new PollCommand(client),
             new QueryCommand(client),
@@ -63,7 +60,8 @@ export default class CommandManager {
             new StatsCommand(client),
             new TagCommand(client),
             new UrbanCommand(client),
-            new UserInfoCommand(client)
+            new UserInfoCommand(client),
+            new ValorantCommand(client),
         ]);
     }
 

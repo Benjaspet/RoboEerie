@@ -17,19 +17,19 @@
  */
 
 import {MessageEmbed} from "discord.js";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class EmbedUtil {
 
     public static getErrorEmbed(content: string): MessageEmbed {
         return new MessageEmbed()
-            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} ${content}`)
+            .setDescription(`${MrCodeAndWatchConstants.EMOJI_ERROR} ${content}`)
             .setColor("RED")
     }
 
     public static getDefaultEmbed(description: string): MessageEmbed {
         return new MessageEmbed()
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+            .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
             .setDescription(description)
     }
 }

@@ -18,7 +18,7 @@
 
 import {ApplicationCommandData, Client, ContextMenuInteraction, MessageEmbed} from "discord.js";
 import Logger from "../structs/Logger";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class UserInfoMenu {
 
@@ -38,7 +38,7 @@ export default class UserInfoMenu {
                 await target.user.fetch();
                 const embed = new MessageEmbed()
                     .setAuthor({name: target.user.tag, iconURL: target.user.avatarURL({dynamic: true, size: 512})})
-                    .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                    .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                     .setThumbnail(target.user.avatarURL({dynamic: true, size: 512}))
                     .addFields([
                         {
@@ -59,7 +59,7 @@ export default class UserInfoMenu {
                     ])
                     .setFooter({text: "RoboEerie", iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                     .setTimestamp();
-                return await interaction.reply({embeds: [embed], ephemeral: true});
+                return void await interaction.reply({embeds: [embed], ephemeral: true});
             } catch (error) {
                 Logger.error(error);
             }

@@ -22,7 +22,7 @@ import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
 import * as QueryUtil from "minecraft-server-util";
 import Utilities from "../utils/Utilities";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 import Logger from "../structs/Logger";
 
 export default class QueryCommand extends Command implements ApplicationCommand {
@@ -76,23 +76,37 @@ export default class QueryCommand extends Command implements ApplicationCommand 
             case "minecraftbe":
                 await QueryUtil.queryFull(host, {port: interaction.options.getInteger("port"), timeout: 5000})
                     .then(async response => {
-                        const host = response.host || "No response.";
-                        const port = response.port || "No response.";
-                        const version = response.version || "No response.";
-                        const plugins = response.plugins.join(", ") || "No plugins listed.";
-                        let players = response.players.join(", ") || "No response."
+                        const host: string = response.host || "No response.";
+                        const port: number|string = response.port || "No response.";
+                        const version: string = response.version || "No response.";
+                        const plugins: string = response.plugins.join(", ") || "No plugins listed.";
+                        let players: string = response.players.join(", ") || "No response."
                         if (players.length > 1000) players = "Too many to list.";
-                        const online = response.onlinePlayers;
-                        const max = response.maxPlayers;
-                        const latency = response.roundTripLatency;
+                        const online: number = response.onlinePlayers;
+                        const max: number = response.maxPlayers;
+                        const latency: number = response.roundTripLatency;
                         await Utilities.sleep(2000);
                         embed = new MessageEmbed()
                             .setAuthor({name: `Query for: ${host}`, iconURL: this.client.user.displayAvatarURL({dynamic: true})})
-                            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                            .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                             .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Version: **${version}**`)
-                            .addField(`Online Player Count`, `**${online}**/**${max}**`)
-                            .addField(`Online Player List`, players)
-                            .addField(`Plugins`, plugins)
+                            .addFields([
+                                {
+                                    name: "Online Player Count",
+                                    value: `**${online}/${max}**`,
+                                    inline: false
+                                },
+                                {
+                                    name: "Online Player List",
+                                    value: players,
+                                    inline: false
+                                },
+                                {
+                                    name: "Plugins",
+                                    value: plugins,
+                                    inline: false
+                                }
+                            ])
                             .setFooter({text: `Connect: ${host}:${port}`, iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                             .setTimestamp();
                         return void await interaction.editReply({embeds: [embed]});
@@ -100,7 +114,7 @@ export default class QueryCommand extends Command implements ApplicationCommand 
                         Logger.error(error);
                         embed = new MessageEmbed()
                             .setColor("RED")
-                            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} Server is offline. Please try again later.`);
+                            .setDescription(`${MrCodeAndWatchConstants.EMOJI_ERROR} Server is offline. Please try again later.`);
                         return void await interaction.editReply({embeds: [embed]});
                     });
                 break;
@@ -115,9 +129,13 @@ export default class QueryCommand extends Command implements ApplicationCommand 
                         const latency = response.roundTripLatency;
                         const embed = new MessageEmbed()
                             .setAuthor({name: `Query for: ${host}`, iconURL: this.client.user.displayAvatarURL({dynamic: true})})
-                            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                            .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                             .setDescription(`Host: **${host}**` + `\n` + `Connection latency: **${latency}ms**` + `\n` + `Protocol: **${protocol}**`)
-                            .addField(`Online Player Count`, `**${online}**/**${max}**`)
+                            .addFields([{
+                                name: `Online Player Count`,
+                                value: `**${online}**/**${max}**`,
+                                inline: false
+                            }])
                             .setFooter({text: `Connect: ${host}:${port}`, iconURL: this.client.user.displayAvatarURL({dynamic: true})})
                             .setTimestamp();
                         return void await interaction.editReply({embeds: [embed]});
@@ -125,7 +143,7 @@ export default class QueryCommand extends Command implements ApplicationCommand 
                         Logger.error(error);
                         embed = new MessageEmbed()
                             .setColor("RED")
-                            .setDescription(`${RoboEerieConstants.EMOJI_ERROR} Server is offline. Please try again later.`)
+                            .setDescription(`${MrCodeAndWatchConstants.EMOJI_ERROR} Server is offline. Please try again later.`)
                         return void await interaction.editReply({content: `Query for **${host}** failed.`, embeds: [embed]});
                     });
         }

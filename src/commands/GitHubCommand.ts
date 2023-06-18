@@ -19,9 +19,9 @@
 import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed} from "discord.js";
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import {ApplicationCommandOptionTypes} from "discord.js/typings/enums";
-import fetch from "node-fetch";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
+import fetch from "node-fetch";
 
 export default class GitHubCommand extends Command implements ApplicationCommand {
 
@@ -62,7 +62,7 @@ export default class GitHubCommand extends Command implements ApplicationCommand
                     .setAuthor({name: `${login}'s GitHub Profile`, iconURL: avatar_url})
                     .setURL(html_url)
                     .setThumbnail(avatar_url)
-                    .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+                    .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
                     .setDescription(`‣ ${bio}` +
                         `\n‣ Public Repositories: ${public_repos}` +
                         `\n‣ Followers: ${followers}` +

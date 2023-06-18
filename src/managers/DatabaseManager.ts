@@ -18,12 +18,12 @@
 
 import Logger from "../structs/Logger";
 import * as mongoose from "mongoose";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class DatabaseManager {
 
     public static async connect(): Promise<void> {
-        await mongoose.connect(RoboEerieConstants.MONGO_URI);
+        await mongoose.connect(MrCodeAndWatchConstants.MONGO_URI);
         Logger.info("Connected to database.");
         mongoose.connection.on("error", error => {
             Logger.error(error);

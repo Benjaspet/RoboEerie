@@ -2,11 +2,11 @@
   "name": "roboeerie",
   "author": "Ben Petrillo",
   "version": "2.3.2",
-  "main": "src/RoboEerie.ts",
+  "main": "src/MrCodeAndWatch.ts",
   "description": "Ben Petrillo's official Discord utility bot.",
   "scripts": {
-    "start": "ts-node src/RoboEerie.ts",
-    "start:dev": "nodemon src/RoboEerie.ts"
+    "start": "ts-node src/MrCodeAndWatch.ts",
+    "start:dev": "nodemon src/MrCodeAndWatch.ts"
   },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
@@ -16,7 +16,7 @@
     "cpu-stat": "^2.0.1",
     "discord-api-types": "^0.23.1",
     "discord-rpc": "^4.0.1",
-    "discord.js": "^13.8.0",
+    "discord.js": "^13.15.1",
     "dotenv": "^10.0.0",
     "minecraft-server-util": "^3.5.2",
     "mojang-minecraft-api": "^1.0.2",

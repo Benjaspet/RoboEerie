@@ -19,7 +19,7 @@
 import {ApplicationCommandData, Client, CommandInteraction, MessageEmbed} from "discord.js";
 import {ApplicationCommand} from "../types/ApplicationCommand";
 import Command from "../structs/Command";
-import RoboEerieConstants from "../constants/RoboEerieConstants";
+import MrCodeAndWatchConstants from "../constants/MrCodeAndWatchConstants";
 
 export default class ServerInfoCommand extends Command implements ApplicationCommand{
 
@@ -51,7 +51,7 @@ export default class ServerInfoCommand extends Command implements ApplicationCom
                 default: return "Level 0";
             }
         }
-        const success: string = RoboEerieConstants.EMOJI_SUCCESS; const error: string = RoboEerieConstants.EMOJI_ERROR;
+        const success: string = MrCodeAndWatchConstants.EMOJI_SUCCESS; const error: string = MrCodeAndWatchConstants.EMOJI_ERROR;
         const animatedIcon = guild.features.includes("ANIMATED_ICON") ? `${success} Animated Icon` : `${error} Animated Icon`;
         const banner = guild.features.includes("BANNER") ? `${success} Banner` : `${error} Banner`;
         const community = guild.features.includes("COMMUNITY") ? `${success} Community Server` : `${error} Community Server`;
@@ -64,7 +64,7 @@ export default class ServerInfoCommand extends Command implements ApplicationCom
         const featureString = `${animatedIcon}\n${banner}\n${community}\n${inviteSplash}\n${partnered}\n${vanity}\n${news}\n${verified}\n${welcomeScreen}`;
         const embed = new MessageEmbed()
             .setTitle(guildName)
-            .setColor(RoboEerieConstants.DEFAULT_EMBED_COLOR)
+            .setColor(MrCodeAndWatchConstants.DEFAULT_EMBED_COLOR)
             .setThumbnail(guildIcon)
             .setDescription(`
                 **ID:** ${guildId}
@@ -81,7 +81,7 @@ export default class ServerInfoCommand extends Command implements ApplicationCom
                     value: `Text Channels: ${textChannels}\nVoice Channels: ${voiceChannels}\nMembers: ${memberCount}\nRoles: ${roleCount}\nBoosts: ${boostCount} (${guildLevel()})`
                 }
             ])
-            .setFooter({text: `R. Eerie | ${guildName}`, iconURL: this.client.user.displayAvatarURL({dynamic: true})});
+            .setFooter({text: `Mr. Code & Watch | ${guildName}`, iconURL: this.client.user.displayAvatarURL({dynamic: true})});
         return void await interaction.reply({embeds: [embed]});
     }
 
