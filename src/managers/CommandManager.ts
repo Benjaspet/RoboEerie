@@ -34,7 +34,6 @@ import StatsCommand from "../commands/StatsCommand";
 import TagCommand from "../commands/TagCommand";
 import UrbanCommand from "../commands/UrbanCommand";
 import UserInfoCommand from "../commands/UserInfoCommand";
-import ValorantCommand from "../commands/ValorantCommand";
 import HaloInfiniteCommand from "../commands/HaloInfiniteCommand";
 
 export default class CommandManager {
@@ -60,8 +59,7 @@ export default class CommandManager {
             new StatsCommand(client),
             new TagCommand(client),
             new UrbanCommand(client),
-            new UserInfoCommand(client),
-            new ValorantCommand(client),
+            new UserInfoCommand(client)
         ]);
     }
 

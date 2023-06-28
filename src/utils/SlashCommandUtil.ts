@@ -33,7 +33,6 @@ import TagCommand from "../commands/TagCommand";
 import ServerInfoCommand from "../commands/ServerInfoCommand";
 import UserInfoCommand from "../commands/UserInfoCommand";
 import UserInfoMenu from "../menu/UserInfoMenu";
-import ValorantCommand from "../commands/ValorantCommand";
 import HaloInfiniteCommand from "../commands/HaloInfiniteCommand";
 
 export default class SlashCommandUtil {
@@ -56,8 +55,7 @@ export default class SlashCommandUtil {
             new TagCommand(client).getCommandData(),
             new UrbanCommand(client).getCommandData(),
             new UserInfoCommand(client).getCommandData(),
-            new UserInfoMenu(client).getCommandData(),
-            new ValorantCommand(client).getCommandData()
+            new UserInfoMenu(client).getCommandData()
         ];
     }
 }
